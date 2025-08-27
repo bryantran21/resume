@@ -1,0 +1,544 @@
+@import "tailwindcss";
+/* In your globals.css file */
+@import 'bootstrap/dist/css/bootstrap.min.css';
+src/globals.css
+
+
+:root {
+  --background: #0a0a0a;  /* dark background */
+  --foreground: #ededed;  /* light foreground */
+  --hover-color: #9147ff;
+  --darkBackground: #030617;  /* dark navy blue */
+  --cardBackground: #0f172a;  /* very dark blue for form box */
+  --purpleAccent: #8a2be2;    /* vivid purple used for buttons and links */
+}
+
+/* Remove the media queries since you want dark mode always */
+
+body {
+  background-color: #1a1a1a; /* Softer dark background */
+  color: #ededed;
+  font-family: Arial, Helvetica, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 80px 20px 20px 20px; /* Allows for navbar */
+  text-align: center;
+}
+
+/* Main Content */
+.main-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  width: 100%;
+  max-width: 800px;
+  padding: 20px;
+}
+
+/* Header */
+.header h1 {
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+.header h2 {
+  font-size: 1.2rem;
+  font-weight: normal;
+  opacity: 0.8;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px; /* Space between text and image */
+}
+
+/* Ensures images are properly aligned */
+.inline-image img {
+  width: 80px;  /* Adjusted for consistency */
+  height: 80px; /* Ensures uniformity */
+  object-fit: contain; /* Keeps aspect ratio */
+  vertical-align: middle; /* Aligns with text */
+}
+
+/* Description */
+.description {
+  text-align: center;
+  max-width: 600px;
+}
+
+.description img {
+  display: inline;
+  vertical-align: middle;
+}
+
+/* Social Icons */
+.social-links {
+  display: flex;
+  gap: 16px;
+  margin-top: 10px;
+}
+
+.social-links a {
+  color: var(--foreground);
+  transition: color 0.3s ease-in-out;
+}
+
+.social-links a:hover {
+  color: var(--hover-color);
+}
+
+/* Make navbar stretch full width and stay at the top */
+.navbar {
+  position: fixed; /* Keeps it at the top even when scrolling */
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(20, 20, 20, 0.9); /* Dark semi-transparent background */
+  padding: 1px 1px; /* Adds padding for better spacing */
+  z-index: 1000; /* Ensures it's always above other content */
+}
+
+/* Center items and ensure proper spacing */
+.navbar-links {
+  display: flex;
+  justify-content: center; /* Centers the nav links */
+  align-items: center;
+  width: 100%;
+}
+
+/* Add custom spacing to the navbar links */
+.navbar-links .nav-link {
+  margin: 0 20px; /* Even spacing on both sides */
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+/* Adjust link hover effect */
+.navbar-links .nav-link:hover {
+  color: #9147ff; /* Purple hover effect */
+}
+
+/* styles/globals.css */
+
+/* Project Cards */
+.projects-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.project-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
+}
+
+.project-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.project-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+  opacity: 0;
+  padding: 20px;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.project-card:hover {
+  transform: scale(1.05);
+}
+
+.project-card:hover .project-overlay {
+  opacity: 1;
+}
+
+.skills-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.skill-card {
+  flex: 1 1 calc(50% - 20px); /* Each skill-card takes up half the width minus the gap */
+  box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+  .skill-card {
+      flex: 1 1 100%; /* On smaller screens, each skill-card takes full width */
+  }
+}
+
+
+.skill-card {
+  background-color: #f4f4f4;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+/* Skills Section - Ensure h3 and skill span text is black */
+.skill-card h3 {
+  color: #171717; /* Dark color for the title */
+}
+
+.skill span {
+  color: #171717; /* Dark color for the span text */
+  font-weight: bold;
+}
+
+.skills-row {
+  color: black;
+}
+
+.skills {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.skill {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+/* Add some responsiveness */
+@media (max-width: 768px) {
+  .skills-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Cards container */
+.cards-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Each card should take 1/4 of the page */
+.card {
+    position: relative;
+    width: 40vw;
+    height: 50vh;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+/* Make sure images fit well without stretching */
+.card img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* Ensures full image is visible without cropping */
+}
+
+/* Overlay with job descriptions */
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    text-align: center;
+}
+
+.card:hover .overlay {
+    opacity: 1;
+}
+
+/* Ensure the text inside overlay fills properly */
+.overlay ul {
+    list-style-type: disc;
+    padding: 10px;
+    text-align: left;
+    max-width: 90%;
+}
+
+.overlay li {
+    word-wrap: break-word;
+    white-space: normal;
+    margin-bottom: 10px;
+}
+
+/* Ensure list items and icons are on the same line */
+.skills-container .skills ul {
+  list-style: none; /* Remove default bullet points */
+  padding: 0;
+  margin: 0;
+}
+
+.skills-container .skills ul li {
+  display: flex;
+  align-items: center; /* Aligns text and icon in the same line */
+  gap: 10px; /* Adjust spacing between text and icon */
+  font-size: 1rem; /* Standard font size */
+}
+
+/* Set uniform size for icons */
+.skills-container .skills ul li svg {
+  width: 30px;  /* Adjust width */
+  height: 30px; /* Adjust height */
+  font-size: 30px; /* Ensure consistency */
+}
+
+/* Full page styling */
+.auth-page {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Centers the login box */
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 600px; /* Limits width on large screens */
+  padding: 20px;
+}
+
+/* Box design */
+.auth-box {
+  background: #242424	;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+  text-align: center;
+  width: 100%;
+  max-width: 400px; /* Prevents it from getting too wide */
+}
+
+/* Text styling */
+.auth-box h2 {
+  margin-bottom: 1rem;
+  color: #fff;
+}
+
+/* Input fields */
+.auth-box form input {
+  display: block;
+  width: 100%;
+  margin: 10px 0;
+  padding: 12px;
+  border: none;
+  border-radius: 5px;
+  background: #333;
+  color: #fff;
+}
+
+/* Buttons */
+.auth-box button {
+  width: 100%;
+  padding: 12px;
+  background: purple;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+  font-size: 1rem;
+}
+
+.auth-box .google-login {
+  background: #db4437;
+}
+
+/* Sign-up toggle text */
+.auth-box p {
+  color: #bbb;
+  cursor: pointer;
+  margin-top: 10px;
+  font-size: 0.9rem;
+}
+
+.auth-box p:hover {
+  color: white;
+}
+
+/* Responsive tweaks */
+@media (max-width: 768px) {
+  .auth-container {
+    max-width: 90%;
+  }
+}
+
+/* Vertical stack for all hobbies */
+.hobbies > * {
+  margin-bottom: 48px; /* space between each hobby section */
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center; /* or left if you prefer */
+}
+
+.hobbies > * h2 {
+  margin-bottom: 16px;
+}
+
+/* Grid container for music and steam games */
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr 600px 1fr; /* fixed middle column */
+  gap: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+  align-items: start;
+}
+
+/* Music centered in middle column */
+.grid-container > .music {
+  grid-column: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  height: fit-content;
+  min-width: 600px;
+}
+
+/* Steam games span all 3 columns below music */
+.grid-container > .steam-games {
+  grid-column: 1 / 4;
+  margin-top: 40px;
+}
+
+/* Game grid for steam games */
+.game-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 24px;
+}
+
+/* Game card styling */
+.game-card {
+  background-color: #242424	;
+  padding: 16px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s;
+}
+
+.game-card:hover {
+  transform: translateY(-4px);
+}
+
+.game-info {
+  margin-top: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.game-name {
+  font-weight: bold;
+  color: #fff;
+  font-size: 1rem;
+}
+
+.badge {
+  background-color: #6a0dad;
+  color: #fff;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.glow-button-wrapper {
+  display: flex;
+  gap: 10rem;
+  margin-top: 2rem;
+}
+
+.glow-button {
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(145deg, #8a2be2, #5a189a);
+  color: white;
+  margin-right: 20px;
+  font-weight: bold;
+  box-shadow: 0 0 12px #8a2be2;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.glow-button:hover {
+  transform: scale(1.05);
+}
+
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(30, 30, 30, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.modal-content {
+  background: #1a1a1a;
+  padding: 2rem;
+  border-radius: 12px;
+  color: white;
+  box-shadow: 0 0 20px #8a2be2;
+  width: 90%;
+  max-width: 400px;
+  text-align: center;
+}
+
+.modal-btn {
+  margin: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background-color: #8a2be2;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
