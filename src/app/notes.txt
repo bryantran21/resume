@@ -1,0 +1,23 @@
+List of apis
+- https://gist.github.com/akeaswaran/b48b02f1c94f873c6655e7129910fc3b
+- https://gist.github.com/nntrn/ee26cb2a0716de0947a0a4e9a157bc1c/b99b9e0d2df72470fa622e2f76cecb0362111e9a
+
+Features
+
+gym
+- make sure to make sure user's are logged in 
+	- reroute users to login if not. flag with error maybe?
+- put workouts in live DB
+- gym DB structure
+	- ID pk
+	- coach/athlete Boolean
+	- enrolled Boolean
+	- need to figure out how to structure and save the workouts in the DB...
+- track workouts, athletes can follow coach lifts
+-- track lifts progress
+
+sports
+- sec + 25 is the scope of the betting project.
+	- need to figure out the api for this and the matchmaking shit
+- bet providers we're using is caesars, bet365, and numberfire 
+-- expand to other sports (nba? soccer? idk...)
