@@ -8,16 +8,20 @@ import "../globals.css";
 export default function About() {
   const [games, setGames] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
   useEffect(() => {
-    fetch("/api/steam")
-      .then((res) => res.json())
+    fetch("/steam.json")
+      .then((res) => {
+        if (!res.ok) throw new Error("Failed to fetch Steam data");
+        return res.json();
+      })
       .then((data) => {
         setGames(data.response?.games || []);
         setLoading(false);
       })
       .catch((err) => {
-        console.error("Failed to load Steam games", err);
+        setError(err.message);
         setLoading(false);
       });
   }, []);
@@ -49,7 +53,6 @@ export default function About() {
       </h1>
 
       <div className="hobbies">
-        {/* Grid container for Music and Steam Games */}
         <div className="grid-container">
           <section className="music">
             <h2>Top 50 Songs (in my opinion)</h2>
@@ -66,6 +69,7 @@ export default function About() {
           <section className="steam-games">
             <h2>Steam Games (100% Completed)</h2>
             {loading && <p>Loading...</p>}
+            {error && <p style={{ color: "red" }}>{error}</p>}
             <div className="game-grid">
               {games
                 .filter((game) => game.playtime_forever >= 100)
@@ -78,7 +82,9 @@ export default function About() {
                     />
                     <div className="game-info">
                       <span className="game-name">{game.name}</span>
-                      <span className="badge">{Math.round(game.playtime_forever / 60)} hrs</span>
+                      <span className="badge">
+                        {Math.round(game.playtime_forever / 60)} hrs
+                      </span>
                     </div>
                   </div>
                 ))}
