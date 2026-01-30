@@ -1,0 +1,600 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const experiences = [
+  {
+    company: 'IBM',
+    logo: '/logos/ibm.jpg',
+    role: 'Application Developer',
+    location: 'Baton Rouge, LA',
+    period: 'June 2023 - Present',
+    achievements: [
+      'Managed Help Desk tickets using Jira, streamlining issue tracking and communication between developers and end users',
+      'Spearheaded the integration of Zephyr for Jira to standardize and document QA test cases for new ADE features',
+      'Initiated migration from IL2 to IL4, helping leadership align on long-term security and compliance goals',
+      'Built a Helpdesk Documentation tab within the internal "Helpdesk Toolbox" to centralize SOPs, troubleshooting steps, and triage workflows',
+      'Developed Angular pages with TypeScript featuring role-based access control and reusable UI components',
+      'Created detailed wireframes of legacy applications to guide modernization efforts',
+      'Developed backend services in Java with 90%+ code coverage using Mockito'
+    ]
+  },
+  {
+    company: 'LSU Information Technology Services',
+    logo: '/logos/lsu.jpg',
+    role: 'Student Web Developer',
+    location: 'Baton Rouge, LA',
+    period: 'May 2022 - May 2023',
+    achievements: [
+        "Diagnose, fix errors, and application crashes through log files, code walkthroughs, and error logs using different DevOps tools through a System Admin",
+        "Remodeled LSU's applications using WAVE, HTML, and CSS, making it more accessible for users with screen readers and updating the Bootstrap packages",
+        "Migrated LSU's Java applications to the most current version of Spring by updating Maven repositories and resolving dependency conflicts"
+    ]
+  },
+  {
+    company: 'TAG Data Solutions',
+    logo: '/logos/tag.jpg',
+    role: 'Full Stack Web Developer',
+    location: 'Remote',
+    period: 'January 2022 - May 2022',
+    achievements: [
+      'Conceptualizing design for application/functionality of custom software for laboratory animal clinics',
+      'Creating site layout/user interfaces from provided design concepts by using standard HTML/CSS/PHP/Javascript practices for web applications',
+      'Designed and creation of relational database schemas, using BackboneJS to apply front end user requirements'
+    ]
+  },
+  {
+    company: 'MAPP',
+    logo: '/logos/mapp.jpg',
+    role: 'IT Intern',
+    location: 'Baton Rouge, LA',
+    period: 'March 2021 - Dec 2021',
+    achievements: [
+      'Provided technical support for all departments within the company through video calls and remote access, on-site debugging, and setting up hardware for new/current users',
+      "Gathered bid data on Power BI and made tables displaying the company's growth and progress on contracts",
+      'Helped build internal application using PowerApps to improve workflows',
+      'Managed user data as an IT Admin, making sure new employees were provided Microsoft accounts, and terminated employees were logged onto OneDrive for company security'
+    ]
+  }
+];
+
+const skills = {
+  'Frontend': ['React.js', 'Angular', 'Next.js', 'TypeScript', 'Tailwind', 'HTML/CSS'],
+  'Backend': ['Java', 'Spring Boot', 'Node.js', 'PHP', 'MySQL', 'RESTful APIs'],
+  'Tools & DevOps': ['Git/Gitlab', 'AWS', 'Jira', 'Azure', 'Docker', 'Webpack'],
+  'Other': ['Python', 'Power BI', 'C#', 'Apache Tomcat']
+};
+
+const education = [
+  {
+    school: 'Georgia Tech',
+    logo: '/logos/gatech.png',
+    degree: 'MS Computer Science',
+    period: 'Aug 2026 - Present',
+    gpa: 'n/a'
+  },
+  {
+    school: 'Louisiana State University',
+    logo: '/logos/lsu.jpg',
+    degree: 'BS Computer Science',
+    period: 'Aug 2019 - May 2023',
+    gpa: '3.4'
+  }
+];
+
+const certificates = [
+  { name: 'AWS Cloud Practitioner', issuer: 'Amazon', icon: 'fab fa-aws' },
+  { name: 'Azure Fundamentals', issuer: 'Microsoft', icon: 'fab fa-microsoft' },
+  { name: 'Security Clearance: Secret', issuer: 'US Navy', icon: 'fas fa-shield-alt' },
+  { name: 'Foundational C#', issuer: 'Microsoft', icon: 'fab fa-microsoft' },
+];
+---
+
+<Layout title="Bryan Tran - Resume" description="Software Developer specializing in Full Stack Development">
+  <div class="resume-page">
+    <!-- Navbar -->
+    <nav class="navbar">
+      <a href="/" class="logo">BRYAN</a>
+      <div class="nav-links">
+        <a href="/about" class="nav-link">About</a>
+        <a href="/resume" class="nav-link active">Resume</a>
+        <a href="#" class="nav-link">Sign In</a>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="resume-hero">
+      <h1>Resume</h1>
+      <p class="subtitle">Full Stack Developer & Problem Solver</p>
+      <a href="/resume.pdf" download class="download-btn">
+        <i class="fas fa-download"></i>
+        Download PDF
+      </a>
+    </div>
+
+    <!-- Experience Section -->
+    <section class="section">
+      <h2 class="section-title">
+        <i class="fas fa-briefcase"></i>
+        Experience
+      </h2>
+      
+      <div class="timeline">
+        {experiences.map(exp => (
+          <div class="experience-card">
+            <div class="card-header">
+              <div class="company-info">
+                <img src={exp.logo} alt={exp.company} class="company-logo" />
+                <div>
+                  <h3>{exp.company}</h3>
+                  <p class="role">{exp.role}</p>
+                </div>
+              </div>
+              <div class="meta">
+                <p class="location">{exp.location}</p>
+                <p class="period">{exp.period}</p>
+              </div>
+            </div>
+            <ul class="achievements">
+              {exp.achievements.map(achievement => (
+                <li>{achievement}</li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Education Section -->
+    <section class="section">
+      <h2 class="section-title">
+        <i class="fas fa-graduation-cap"></i>
+        Education
+      </h2>
+      
+      <div class="education-grid">
+        {education.map(edu => (
+          <div class="education-card">
+            <img src={edu.logo} alt={edu.school} class="school-logo" />
+            <h3>{edu.school}</h3>
+            <p class="degree">{edu.degree} (GPA: {edu.gpa})</p>
+            <p class="period">{edu.period}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="section">
+      <h2 class="section-title">
+        <i class="fas fa-code"></i>
+        Skills
+      </h2>
+      
+      <div class="skills-grid">
+        {Object.entries(skills).map(([category, skillList]) => (
+          <div class="skill-card">
+            <h3>{category}</h3>
+            <div class="skill-tags">
+              {skillList.map(skill => (
+                <span class="skill-tag">{skill}</span>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Certificates Section -->
+    <section class="section">
+      <h2 class="section-title">
+        <i class="fas fa-certificate"></i>
+        Certifications
+      </h2>
+      
+      <div class="certs-grid">
+        {certificates.map(cert => (
+          <div class="cert-card">
+            <i class={cert.icon}></i>
+            <div>
+              <h4>{cert.name}</h4>
+              <p>{cert.issuer}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+  </div>
+</Layout>
+
+<style>
+    .resume-page {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    color: white;
+    padding: 0 0 4rem 0; /* Add bottom padding */
+    }
+
+    /* Add padding to the last section */
+    .section:last-of-type {
+    margin-bottom: 0;
+    padding-bottom: 4rem;
+    }
+
+  /* Navbar */
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 3rem;
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    border: none;
+    outline: none;
+  }
+
+  .logo {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: white;
+    letter-spacing: 0.05em;
+    outline: none;
+  }
+
+  .logo:hover {
+    opacity: 0.8;
+  }
+
+  .logo:focus {
+    outline: none;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+  }
+
+  .nav-link {
+    color: white;
+    font-size: 0.95rem;
+    font-weight: 400;
+    opacity: 0.9;
+    transition: opacity 0.2s;
+    outline: none;
+  }
+
+  .nav-link:hover {
+    opacity: 1;
+  }
+
+  .nav-link:focus {
+    outline: none;
+  }
+
+  .nav-link.active {
+    opacity: 1;
+    border-bottom: 2px solid #60a5fa;
+    padding-bottom: 0.25rem;
+  }
+
+  /* Hero */
+  .resume-hero {
+    text-align: center;
+    padding: 3rem 2rem 4rem;
+    max-width: 50rem;
+    margin: 0 auto;
+  }
+
+  .resume-hero h1 {
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+  }
+
+  .resume-hero .subtitle {
+    font-size: 1.25rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 2rem;
+  }
+
+  .download-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.875rem 2rem;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 2rem;
+    color: white;
+    font-weight: 500;
+    backdrop-filter: blur(10px);
+    transition: all 0.2s;
+  }
+
+  .download-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+    text-decoration: none;
+  }
+
+  /* Sections */
+  .section {
+    max-width: 60rem;
+    margin: 0 auto 4rem;
+    padding: 0 2rem;
+  }
+
+  .section-title {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .section-title i {
+    font-size: 1.5rem;
+    color: #60a5fa;
+  }
+
+  /* Experience Cards */
+  .timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .experience-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 1rem;
+    padding: 2rem;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s;
+  }
+
+  .experience-card:hover {
+    background: rgba(255, 255, 255, 0.08);
+    transform: translateY(-4px);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+  }
+
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .company-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .company-logo {
+    width: 60px;
+    height: 60px;
+    border-radius: 0.75rem;
+    object-fit: contain;
+    background: white;
+    padding: 0.5rem;
+  }
+
+  .company-info h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+  }
+
+  .role {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 1.1rem;
+  }
+
+  .meta {
+    text-align: right;
+  }
+
+  .location {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.95rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .period {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.9rem;
+    font-style: italic;
+  }
+
+  .achievements {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .achievements li {
+    padding-left: 1.5rem;
+    position: relative;
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.6;
+  }
+
+  .achievements li::before {
+    content: '▹';
+    position: absolute;
+    left: 0;
+    color: #60a5fa;
+    font-size: 1.2rem;
+  }
+
+  /* Education Grid */
+  .education-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+  }
+
+  .education-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 1rem;
+    padding: 2rem;
+    text-align: center;
+    transition: all 0.3s;
+  }
+
+  .education-card:hover {
+    background: rgba(255, 255, 255, 0.08);
+    transform: translateY(-4px);
+  }
+
+  .school-logo {
+    width: 80px;
+    height: 80px;
+    border-radius: 1rem;
+    object-fit: contain;
+    background: white;
+    padding: 0.75rem;
+    margin: 0 auto 1rem;
+  }
+
+  .education-card h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+
+  .degree {
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 0.5rem;
+  }
+
+  .education-card .period {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.9rem;
+  }
+
+  /* Skills Grid */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .skill-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 1rem;
+    padding: 1.5rem;
+  }
+
+  .skill-card h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: #60a5fa;
+  }
+
+  .skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .skill-tag {
+    padding: 0.5rem 1rem;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 2rem;
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.9);
+    transition: all 0.2s;
+  }
+
+  .skill-tag:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-2px);
+  }
+
+  /* Certificates Grid */
+  .certs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .cert-card {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    transition: all 0.3s;
+  }
+
+  .cert-card:hover {
+    background: rgba(255, 255, 255, 0.08);
+    transform: translateY(-2px);
+  }
+
+  .cert-card i {
+    font-size: 2rem;
+    color: #60a5fa;
+  }
+
+  .cert-card h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+  }
+
+  .cert-card p {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  /* Mobile */
+  @media (max-width: 768px) {
+    .navbar {
+      padding: 1rem 1.5rem;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .nav-links {
+      gap: 1rem;
+      font-size: 0.85rem;
+    }
+
+    .section {
+      padding: 0 1.5rem;
+    }
+
+    .card-header {
+      flex-direction: column;
+    }
+
+    .meta {
+      text-align: left;
+    }
+
+    .company-logo {
+      width: 50px;
+      height: 50px;
+    }
+
+    .skills-grid,
+    .education-grid,
+    .certs-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

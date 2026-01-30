@@ -1,0 +1,857 @@
+---
+import Layout from '../layouts/Layout.astro';
+import MangaCarousel from '../components/MangaCarousel.astro';
+
+// Bio
+const bio = {
+  intro: "Hey! I'm Bryan, a full-stack developer from Louisiana who loves building things and breaking things (in a good way). When I'm not debugging code at IBM, you'll find me on the golf course, grinding achievements in games, or pulling cards hoping for that rainbow rare.",
+  quickFacts: [
+    "🐯 LSU & ⚜️ Saints Football Fan ",
+    "🏌️ Golf enthusiast with a PB of 101",
+    "🎬 Movie/Anime & 📖 Manga Enjoyer",
+    "🎴 TCG collector (One Piece & Pokémon)",
+    "🏋️ Avid lifter & 💪 future bodybuilder",
+    "✈️ Traveler &  🍽️ a foodie" 
+    ]
+};
+
+// Gym Stats
+const gymStats = {
+  currentGoal: "Lean Bulk",
+  frequency: "5-6x per week",
+};
+
+const currentProgram = {
+  name: "PPL (Push/Pull/Legs)",
+  focus: "Hypertrophy & Strength"
+};
+
+// Golf Stats
+const golfStats = {
+  personalBest: 101,
+  favoriteCourse: 'Webb Memorial',
+};
+
+const golfClubs = [
+  { type: 'Driver & Woods', brand: 'Adams', model: 'Speedline F11', specs: 'DR-5W'},
+  { type: 'Irons', brand: 'Callaway', model: '2013 X Hot', specs: '5-GW'},
+  { type: 'Wedges', brand: 'Ping', model: 'Zing', specs: 'SW'},
+  { type: 'Putter', brand: 'Pinemeadow', model: 'M-4 Xeon', specs: 'Putter'}
+];
+
+
+// TCG Collection
+const tcgPulls = {
+  onePiece: [
+    { 
+      name: 'Ace & Sabo & Luffy', 
+      set: 'Carrying on His Will', 
+      value: 'PSA 10: $175',
+      image: '/cards/acesaboluffy.jpg'
+    },
+    { 
+      name: 'Charlotte Katakuri', 
+      set: 'Fist of Divine Speed', 
+      value: 'PSA 10: $36',
+      image: '/cards/katakuri.jpg'
+    },
+    { 
+      name: 'Sabo', 
+      set: 'Kingdom of Intrigue', 
+      value: 'PSA 10: $480',
+      image: '/cards/sabo.jpg'
+    },
+    { 
+      name: 'Monkey D. Luffy', 
+      set: 'Fist of Divine Speed', 
+      value: 'PSA 10: $90',
+      image: '/cards/luffy.jpg'
+    },
+  ],
+  pokemon: [
+    { 
+      name: 'Charizard MAX', 
+      set: 'Paldean Fates', 
+      value: 'PSA 10: $630',
+      image: '/cards/shinycharizard.jpg'
+      
+    },
+    {
+      name: 'N\'s Reshiram',
+      set: 'Journey Together',
+      value: 'PSA 10: $128',
+      image: '/cards/reshiram.jpg'
+    },
+    {
+      name: 'Meowth',
+      set: 'Phantasmal Flames',
+      value: 'PSA 10: $120',
+      image: '/cards/meowth.jpg'
+    },
+    {
+      name: 'Applin',
+      set: 'Twilight Masquerade',
+      value: 'PSA 10: $70',
+      image: '/cards/applin.jpg'
+    }
+    // Add more...
+  ]
+};
+
+// Manga
+const myMangas = [
+  { title: 'One Piece', author: 'Eiichiro Oda', volumes: 113, chapters: 1150, coverImage: '/mangas/onepiece.webp' },
+  { title: 'Katekyo Hitman Reborn', author: 'Akira Amano', volumes: 42, chapters: 409, coverImage: '/mangas/hitman.jpeg' },
+  { title: 'Welcome to Demon School! Iruma-kun', author: 'Osamu Nishi', volumes: 30, chapters: 279, coverImage: '/mangas/iruma2.webp' },
+  { title: 'JoJo\'s Bizarre Adventure: Part 5 - Vento Aureo', author: 'Hirohiko Araki', volumes: 17, chapters: 155, coverImage: '/mangas/jojos.jpg' },
+  { title: 'Jujutsu Kaisen', author: 'Gege Akutami', volumes: 30, chapters: 272, coverImage: '/mangas/jjk.webp' },
+];
+
+
+---
+
+<Layout title="About Me - Bryan Tran" description="Learn more about my interests, hobbies, and what I'm into">
+  <div class="about-page">
+    <!-- Navbar -->
+    <nav class="navbar">
+      <a href="/" class="logo">BRYAN</a>
+      <div class="nav-links">
+        <a href="/about" class="nav-link active">About</a>
+        <a href="/resume" class="nav-link">Resume</a>
+        <a href="#" class="nav-link">Sign In</a>
+      </div>
+    </nav>
+
+    <!-- Hero -->
+    <div class="about-hero">
+      <h1>About Me</h1>
+      <p class="subtitle">More than just code — here's what makes me tick</p>
+    </div>
+
+    <!-- Bio Section -->
+    <section class="section bio-section">
+      <div class="bio-card">
+        <p class="bio-intro">{bio.intro}</p>
+        <div class="quick-facts">
+          {bio.quickFacts.map(fact => (
+            <div class="fact-item">{fact}</div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Gym Section -->
+    <section class="section gym-section">
+      <h2 class="section-title">
+        <i class="fas fa-dumbbell"></i>
+        Fitness & Lifting
+      </h2>
+      
+      <div class="gym-overview">
+        <div class="gym-stat-card">
+          <div class="gym-stat-label">Current Goal</div>
+          <div class="gym-stat-value">{gymStats.currentGoal}</div>
+        </div>
+        <div class="gym-stat-card">
+          <div class="gym-stat-label">Training Frequency</div>
+          <div class="gym-stat-value">{gymStats.frequency}</div>
+        </div>
+        <div class="gym-stat-card">
+          <div class="gym-stat-label">Current Program</div>
+          <div class="gym-stat-value">{currentProgram.name}</div>
+          <div class="gym-stat-sub">{currentProgram.focus}</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Golf Section -->
+    <section class="section golf-section">
+      <h2 class="section-title">
+        <i class="fas fa-golf-ball"></i>
+        Golf
+      </h2>
+      
+      <!-- Golf Stats -->
+      <div class="golf-stats-grid">
+        <div class="stat-card">
+          <div class="stat-value">{golfStats.personalBest}</div>
+          <div class="stat-label">Personal Best</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">{golfStats.favoriteCourse}</div>
+          <div class="stat-label">Favorite Course</div>
+        </div>
+      </div>
+
+      <!-- Golf Bag -->
+      <h3 class="subsection-title">My Bag</h3>
+      <div class="clubs-grid">
+        {golfClubs.map(club => (
+          <div class="club-card">
+            <div class="club-type">{club.type}</div>
+            <div class="club-details">
+              <p class="club-brand">{club.brand} {club.model}</p>
+              <p class="club-specs">{club.loft || club.specs}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+    </section>
+
+
+    <!-- TCG Section -->
+    <section class="section tcg-section">
+      <h2 class="section-title">
+        <i class="fas fa-cards"></i>
+        Trading Card Game Collection
+      </h2>
+      <p class="section-description">My favorite pulls from One Piece and Pokémon TCG. Still very new to the hobby!</p>
+      
+      <!-- Top Pulls -->
+      <h3 class="subsection-title">Top Pulls</h3>
+           <div class="tcg-game-section">
+        <h4 class="tcg-game-title">
+          <i class="fas fa-bolt"></i>
+          Pokémon TCG
+        </h4>
+        <div class="tcg-grid">
+          {tcgPulls.pokemon.slice(0, 5).map(card => (
+            <div class="tcg-card">
+              <div class="tcg-image-container">
+                <img src={card.image} alt={card.name} class="tcg-image" />
+              </div>
+              <div class="tcg-info">
+                <h5>{card.name}</h5>
+                <div class="tcg-meta">
+                  <span class="tcg-set">{card.set}</span>
+                </div>
+                <div class="tcg-bottom">
+                  <span class="tcg-value">{card.value}</span>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div> 
+
+      <div class="tcg-game-section">
+        <h4 class="tcg-game-title">
+          <i class="fas fa-anchor"></i>
+          One Piece TCG
+        </h4>
+        <div class="tcg-grid">
+          {tcgPulls.onePiece.slice(0, 5).map(card => (
+            <div class="tcg-card">
+              <div class="tcg-image-container">
+                <img src={card.image} alt={card.name} class="tcg-image" />
+              </div>
+              <div class="tcg-info">
+                <h5>{card.name}</h5>
+                <div class="tcg-meta">
+                  <span class="tcg-set">{card.set}</span>
+                </div>
+                <div class="tcg-bottom">
+                  <span class="tcg-value">{card.value}</span>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="section manga-section">
+        <h2 class="section-title">
+        <i class="fas fa-book-open"></i>
+        Manga Section
+      </h2>
+      <p class="section-description">These are just some of my favorite mangas! I will continue to add as I read more and new ones stand out.</p>
+        <MangaCarousel mangas={myMangas} />
+    </section>
+  </div>
+</Layout>
+
+<style>
+  .about-page {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    color: white;
+    padding-bottom: 4rem;
+  }
+
+  /* Bio Section */
+  .bio-section {
+    margin-bottom: 4rem;
+  }
+
+  .bio-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 1.5rem;
+    padding: 2.5rem;
+    backdrop-filter: blur(10px);
+  }
+
+  .bio-intro {
+    font-size: 1.15rem;
+    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 2rem;
+  }
+
+  .quick-facts {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+  }
+
+  .fact-item {
+    padding: 1rem 1.25rem;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 0.75rem;
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.85);
+    border-left: 3px solid #60a5fa;
+  }
+
+  /* Gym Section */
+  .gym-overview {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+  }
+
+  .gym-stat-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    text-align: center;
+    transition: all 0.3s;
+  }
+
+  .gym-stat-card:hover {
+    background: rgba(255, 255, 255, 0.08);
+    transform: translateY(-4px);
+  }
+
+  .gym-stat-label {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.6);
+    margin-bottom: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .gym-stat-value {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #60a5fa;
+  }
+
+  .gym-stat-sub {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin-top: 0.5rem;
+  }
+
+  .pr-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+  }
+
+  .pr-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .pr-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(180deg, #60a5fa 0%, #3b82f6 100%);
+  }
+
+  .pr-card:hover {
+    background: rgba(255, 255, 255, 0.08);
+    transform: translateY(-4px);
+    box-shadow: 0 10px 30px rgba(96, 165, 250, 0.2);
+  }
+
+  .pr-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+
+  .pr-card h4 {
+    font-size: 1.1rem;
+    font-weight: 600;
+  }
+
+  .pr-date {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  .pr-details {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+  }
+
+  .pr-weight {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #60a5fa;
+  }
+
+  .pr-reps {
+    font-size: 1.25rem;
+    color: rgba(255, 255, 255, 0.7);
+    font-weight: 600;
+  }
+
+  .favorite-lifts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .favorite-lift-tag {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    border-radius: 2rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #ef4444;
+    transition: all 0.3s;
+  }
+
+  .favorite-lift-tag:hover {
+    background: rgba(239, 68, 68, 0.2);
+    transform: scale(1.05);
+  }
+
+  .favorite-lift-tag i {
+    font-size: 1.1rem;
+  }
+
+  /* Mobile adjustments */
+  @media (max-width: 768px) {
+    .bio-card {
+      padding: 1.5rem;
+    }
+
+    .quick-facts {
+      grid-template-columns: 1fr;
+    }
+
+    .gym-overview {
+      grid-template-columns: 1fr;
+    }
+
+    .pr-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* Navbar */
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 3rem;
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    border: none;
+    outline: none;
+  }
+
+  .logo {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: white;
+    letter-spacing: 0.05em;
+    outline: none;
+  }
+
+  .logo:hover {
+    opacity: 0.8;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+  }
+
+  .nav-link {
+    color: white;
+    font-size: 0.95rem;
+    font-weight: 400;
+    opacity: 0.9;
+    transition: opacity 0.2s;
+    outline: none;
+  }
+
+  .nav-link:hover {
+    opacity: 1;
+  }
+
+  .nav-link.active {
+    opacity: 1;
+    border-bottom: 2px solid #60a5fa;
+    padding-bottom: 0.25rem;
+  }
+
+  /* Hero */
+  .about-hero {
+    text-align: center;
+    padding: 3rem 2rem 4rem;
+    max-width: 50rem;
+    margin: 0 auto;
+  }
+
+  .about-hero h1 {
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+  }
+
+  .about-hero .subtitle {
+    font-size: 1.25rem;
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  /* Sections */
+  .section {
+    max-width: 70rem;
+    margin: 0 auto 5rem;
+    padding: 0 2rem;
+  }
+
+  .section-title {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .section-title i {
+    font-size: 1.5rem;
+    color: #60a5fa;
+  }
+
+  .section-description {
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 2rem;
+  }
+
+  .subsection-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 3rem 0 1.5rem;
+    color: #60a5fa;
+  }
+
+  /* Golf Section */
+  .golf-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+  }
+
+  .stat-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 1rem;
+    padding: 2rem 1.5rem;
+    text-align: center;
+    transition: all 0.3s;
+  }
+
+  .stat-card:hover {
+    background: rgba(255, 255, 255, 0.08);
+    transform: translateY(-4px);
+  }
+
+  .stat-value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #60a5fa;
+    margin-bottom: 0.5rem;
+  }
+
+  .stat-label {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.9rem;
+  }
+
+  .clubs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-bottom: 3rem;
+  }
+
+  .club-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 0.75rem;
+    padding: 1.25rem;
+    transition: all 0.3s;
+  }
+
+  .club-card:hover {
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  .club-type {
+    font-size: 0.85rem;
+    color: #60a5fa;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+  }
+
+  .club-brand {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+  }
+
+  .club-specs {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  .courses-list {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .course-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    transition: all 0.3s;
+  }
+
+  .course-card:hover {
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  .course-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 0.75rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .course-card h4 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+  }
+
+  .course-location {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.9rem;
+  }
+
+  .course-meta {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+  }
+
+  .course-rating {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    color: #fbbf24;
+    font-weight: 600;
+  }
+
+  .course-score {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.9rem;
+  }
+
+  .course-date {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.85rem;
+  }
+
+  /* TCG Section */
+  .tcg-game-section {
+    margin-bottom: 3rem;
+  }
+
+  .tcg-game-title {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #60a5fa;
+    margin-bottom: 1.5rem;
+  }
+
+  .tcg-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+.tcg-card {
+  background: #1e293b; /* Darker so it matches */
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 1rem;
+  overflow: hidden;
+  transition: all 0.3s;
+  position: relative;
+}
+
+.tcg-image-container {
+  aspect-ratio: 2.5/3.5;
+  overflow: visible; /* Change this */
+  padding: 1rem; /* Space around card */
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tcg-image {
+  width: 90%;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4); /* Card shadow */
+}
+
+  .tcg-card:hover {
+    background: rgba(255, 255, 255, 0.08);
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 12px 40px rgba(96, 165, 250, 0.3);
+  }
+
+
+  .tcg-info {
+    padding: 1rem;
+  }
+
+  .tcg-info h5 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    min-height: 2.5rem;
+  }
+
+  .tcg-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .tcg-set {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  .tcg-rarity {
+    padding: 0.25rem 0.75rem;
+    background: rgba(251, 191, 36, 0.2);
+    border-radius: 1rem;
+    font-size: 0.75rem;
+    color: #fbbf24;
+    font-weight: 600;
+    width: fit-content;
+  }
+
+  .tcg-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 0.75rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .tcg-value {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #10b981;
+  }
+
+  .tcg-date {
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+
+  /* Mobile adjustments */
+  @media (max-width: 768px) {
+    .tcg-grid {
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    }
+  }
+
+  /* Mobile */
+  @media (max-width: 768px) {
+    .navbar {
+      padding: 1rem 1.5rem;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .nav-links {
+      gap: 1rem;
+      font-size: 0.85rem;
+    }
+
+    .section {
+      padding: 0 1.5rem;
+    }
+
+    .golf-stats-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .course-header {
+      flex-direction: column;
+    }
+
+    .games-grid, .anime-grid, .manga-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
