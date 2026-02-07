@@ -5,7 +5,6 @@ interface Manga {
   volumes: number;
   chapters: number;
   coverImage: string;
-  completed: boolean;
 }
 
 interface Props {
@@ -128,10 +127,6 @@ const { mangas = [] } = Astro.props;
   background: #fbbf24;
 }
 
-.manga-badge.completed {
-  background: #10b981;
-}
-
 .manga-stats {
   display: flex;
   flex-direction: column;
@@ -222,22 +217,22 @@ const totalItems = items.length;
 
 function updateCarousel() {
   items.forEach((item, index) => {
-    item.classList.remove('active');
+    const htmlItem = item as HTMLElement;
+    htmlItem.classList.remove('active');
 
     const distance = 300; // distance from center
     const offset = index - currentIndex;
 
     if (index === currentIndex) {
-      item.style.transform = `translate(-50%, -50%) translateZ(150px) scale(1)`;
-      item.style.opacity = '1';
-      item.style.zIndex = '10';
-      item.classList.add('active');
+      htmlItem.style.transform = `translate(-50%, -50%) translateZ(150px) scale(1)`;
+      htmlItem.style.opacity = '1';
+      htmlItem.style.zIndex = '10';
+      htmlItem.classList.add('active');
     } else {
       const x = Math.sin((offset * 360 / totalItems) * Math.PI / 180) * distance;
       const z = Math.cos((offset * 360 / totalItems) * Math.PI / 180) * distance - 150;
-      item.style.transform = `translate(-50%, -50%) translateX(${x}px) translateZ(${z}px) scale(0.7)`;
-      item.style.opacity = z > -300 ? '0.5' : '0';
-      item.style.zIndex = Math.round(z);
+      htmlItem.style.transform = `translate(-50%, -50%) translateX(${x}px) translateZ(${z}px) scale(0.7)`;
+      htmlItem.style.opacity = z > -300 ? '0.5' : '0';
     }
   });
 

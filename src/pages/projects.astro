@@ -1,0 +1,518 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const projects = [
+  {
+    title: 'Portfolio Optimization Lab',
+    description: 'A full-stack quantitative finance application that implements Modern Portfolio Theory for optimal asset allocation. Features real-time market data, mean-variance optimization, and interactive efficient frontier visualization.',
+    image: '/projects/portfolio-optimizer.png', // Add screenshot later
+    tech: ['React', 'FastAPI', 'Python', 'Plotly', 'NumPy', 'SciPy'],
+    category: 'Full Stack',
+    liveUrl: 'https://portfolio-optimizer.vercel.app',
+    githubUrl: 'https://github.com/bryantran21/portfolio-optimizer',
+    featured: true,
+    highlights: [
+      'Real-time Yahoo Finance data integration',
+      'Sharpe ratio maximization algorithm',
+      'Interactive efficient frontier charts',
+      'Monte Carlo simulation for portfolio analysis'
+    ]
+  },
+  {
+    title: 'Personal Resume Website',
+    description: 'Modern, interactive portfolio website built with Astro and plain CSS. Features dynamic carousels, responsive design, and smooth animations showcasing my work experience, projects, and interests.',
+    image: '/projects/resume-website.png',
+    tech: ['Astro', 'TypeScript', 'CSS', 'JavaScript'],
+    category: 'Frontend',
+    liveUrl: 'https://bhtran.com',
+    githubUrl: 'https://github.com/bryantran21/resume',
+    featured: true,
+    highlights: [
+      'Custom 3D carousel components',
+      'Server-side rendering with Astro',
+      'Fully responsive mobile-first design',
+      'No CSS frameworks - pure custom styling'
+    ]
+  },
+  {
+    title: 'Finance Health Score',
+    description: 'AI-powered financial health assessment tool that analyzes spending patterns, income stability, and savings behavior to generate personalized financial wellness scores and actionable recommendations.',
+    image: '/projects/finance-health.png',
+    tech: ['Next.js', 'OpenAI API', 'Plaid', 'PostgreSQL', 'Tailwind'],
+    category: 'Full Stack',
+    liveUrl: null, // Set to null if not deployed yet
+    githubUrl: 'https://github.com/bryantran21/finance-health-score',
+    featured: true,
+    highlights: [
+      'Plaid API integration for bank connections',
+      'OpenAI GPT-4 for financial insights',
+      'Personalized spending category analysis',
+      'Goal tracking and budgeting recommendations'
+    ]
+  }
+];
+
+// You can filter featured projects if you want
+const featuredProjects = projects.filter(p => p.featured);
+---
+
+<Layout title="Projects - Bryan Tran" description="Portfolio of software projects and applications">
+  <div class="projects-page">
+    <!-- Navbar -->
+    <nav class="navbar">
+      <a href="/" class="logo">BRYAN</a>
+      <div class="nav-links">
+        <a href="/about" class="nav-link">About</a>
+        <a href="/resume" class="nav-link">Resume</a>
+        <a href="/projects" class="nav-link active">Projects</a>
+        <a href="#" class="nav-link">Sign In</a>
+      </div>
+    </nav>
+
+    <!-- Hero -->
+    <div class="projects-hero">
+      <h1>Projects</h1>
+      <p class="subtitle">🚧IN PROGRESS🚧 </p>
+    </div>
+
+    <!-- Projects Grid -->
+    <section class="section">
+      <div class="projects-grid">
+        {projects.map(project => (
+          <div class="project-card">
+            {/* Project Image/Thumbnail */}
+            <div class="project-image">
+              {project.image ? (
+                <img src={project.image} alt={project.title} />
+              ) : (
+                <div class="image-placeholder">
+                  <i class="fas fa-code"></i>
+                </div>
+              )}
+              <div class="project-category">{project.category}</div>
+            </div>
+
+            {/* Project Info */}
+            <div class="project-content">
+              <h3>{project.title}</h3>
+              <p class="project-description">{project.description}</p>
+
+              {/* Tech Stack */}
+              <div class="tech-stack">
+                {project.tech.map(tech => (
+                  <span class="tech-badge">{tech}</span>
+                ))}
+              </div>
+
+              {/* Highlights */}
+              {project.highlights && (
+                <ul class="project-highlights">
+                  {project.highlights.slice(0, 3).map(highlight => (
+                    <li>{highlight}</li>
+                  ))}
+                </ul>
+              )}
+
+              {/* Links */}
+              <div class="project-links">
+                {project.liveUrl && (
+                  <a href={project.liveUrl} target="_blank" class="project-btn primary">
+                    <i class="fas fa-external-link-alt"></i>
+                    Live Demo
+                  </a>
+                )}
+                {project.githubUrl && (
+                  <a href={project.githubUrl} target="_blank" class="project-btn secondary">
+                    <i class="fab fa-github"></i>
+                    Code
+                  </a>
+                )}
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    {/* Call to Action */}
+    <section class="cta-section">
+      <h2>Want to collaborate?</h2>
+      <p>I'm always open to discussing new projects and opportunities.</p>
+      <div class="cta-buttons">
+        <a href="mailto:bryantran21@gmail.com" class="cta-btn">
+          <i class="fas fa-envelope"></i>
+          Get in Touch
+        </a>
+        <a href="https://github.com/bryantran21" target="_blank" class="cta-btn secondary">
+          <i class="fab fa-github"></i>
+          View GitHub
+        </a>
+      </div>
+    </section>
+  </div>
+</Layout>
+
+<style>
+  .projects-page {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    color: white;
+    padding-bottom: 4rem;
+  }
+
+  /* Navbar */
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 3rem;
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    border: none;
+    outline: none;
+  }
+
+  .logo {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: white;
+    letter-spacing: 0.05em;
+    outline: none;
+  }
+
+  .logo:hover {
+    opacity: 0.8;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+  }
+
+  .nav-link {
+    color: white;
+    font-size: 0.95rem;
+    font-weight: 400;
+    opacity: 0.9;
+    transition: opacity 0.2s;
+    outline: none;
+  }
+
+  .nav-link:hover {
+    opacity: 1;
+  }
+
+  .nav-link.active {
+    opacity: 1;
+    border-bottom: 2px solid #60a5fa;
+    padding-bottom: 0.25rem;
+  }
+
+  /* Hero */
+  .projects-hero {
+    text-align: center;
+    padding: 3rem 2rem 4rem;
+    max-width: 50rem;
+    margin: 0 auto;
+  }
+
+  .projects-hero h1 {
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+  }
+
+  .subtitle {
+    font-size: 1.25rem;
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  /* Section */
+  .section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  /* Projects Grid */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 2.5rem;
+    margin-bottom: 4rem;
+  }
+
+  .project-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 1.25rem;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .project-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 60px rgba(96, 165, 250, 0.3);
+    border-color: rgba(96, 165, 250, 0.4);
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  /* Project Image */
+  .project-image {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16/9;
+    overflow: hidden;
+    background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+  }
+
+  .project-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s;
+  }
+
+  .project-card:hover .project-image img {
+    transform: scale(1.05);
+  }
+
+  .image-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%);
+  }
+
+  .image-placeholder i {
+    font-size: 4rem;
+    color: rgba(255, 255, 255, 0.4);
+  }
+
+  .project-category {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    padding: 0.5rem 1rem;
+    background: rgba(96, 165, 250, 0.9);
+    backdrop-filter: blur(10px);
+    border-radius: 2rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  /* Project Content */
+  .project-content {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+
+  .project-content h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: white;
+  }
+
+  .project-description {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 1.5rem;
+  }
+
+  /* Tech Stack */
+  .tech-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .tech-badge {
+    padding: 0.4rem 0.9rem;
+    background: rgba(96, 165, 250, 0.15);
+    border: 1px solid rgba(96, 165, 250, 0.3);
+    border-radius: 1.5rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: #60a5fa;
+    transition: all 0.2s;
+  }
+
+  .tech-badge:hover {
+    background: rgba(96, 165, 250, 0.25);
+    border-color: rgba(96, 165, 250, 0.5);
+  }
+
+  /* Project Highlights */
+  .project-highlights {
+    list-style: none;
+    margin-bottom: 1.5rem;
+    flex: 1;
+  }
+
+  .project-highlights li {
+    padding-left: 1.5rem;
+    position: relative;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin-bottom: 0.5rem;
+  }
+
+  .project-highlights li::before {
+    content: '▹';
+    position: absolute;
+    left: 0;
+    color: #60a5fa;
+    font-size: 1.2rem;
+  }
+
+  /* Project Links */
+  .project-links {
+    display: flex;
+    gap: 1rem;
+    margin-top: auto;
+  }
+
+  .project-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: all 0.2s;
+    text-decoration: none;
+    flex: 1;
+    justify-content: center;
+  }
+
+  .project-btn.primary {
+    background: rgba(96, 165, 250, 0.2);
+    border: 1px solid rgba(96, 165, 250, 0.4);
+    color: #60a5fa;
+  }
+
+  .project-btn.primary:hover {
+    background: rgba(96, 165, 250, 0.3);
+    border-color: rgba(96, 165, 250, 0.6);
+    transform: translateY(-2px);
+  }
+
+  .project-btn.secondary {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  .project-btn.secondary:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+  }
+
+  /* CTA Section */
+  .cta-section {
+    text-align: center;
+    padding: 4rem 2rem;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .cta-section h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+  }
+
+  .cta-section p {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 2rem;
+  }
+
+  .cta-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem 2rem;
+    background: rgba(96, 165, 250, 0.2);
+    border: 1px solid rgba(96, 165, 250, 0.4);
+    border-radius: 0.5rem;
+    color: #60a5fa;
+    font-weight: 600;
+    transition: all 0.3s;
+  }
+
+  .cta-btn:hover {
+    background: rgba(96, 165, 250, 0.3);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(96, 165, 250, 0.2);
+  }
+
+  .cta-btn.secondary {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.2);
+    color: white;
+  }
+
+  .cta-btn.secondary:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.3);
+  }
+
+  /* Mobile */
+  @media (max-width: 768px) {
+    .navbar {
+      padding: 1rem 1.5rem;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .nav-links {
+      gap: 1rem;
+      font-size: 0.85rem;
+    }
+
+    .section {
+      padding: 0 1.5rem;
+    }
+
+    .projects-grid {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    .project-links {
+      flex-direction: column;
+    }
+
+    .cta-buttons {
+      flex-direction: column;
+      width: 100%;
+    }
+
+    .cta-btn {
+      width: 100%;
+    }
+  }
+</style>
