@@ -51,8 +51,8 @@ Hi! I’m **Bryan Tran**, a passionate developer focused on building **interacti
 ## 📫 Contact Me
 
 - **Email:** bryantran21@gmail.com  
-- **LinkedIn:** [linkedin.com/in/bryan-tran](https://linkedin.com/in/bryan-huy-tran)  
-- **GitHub:** [github.com/bryan-tran](https://github.com/bryantran21)  
+- **LinkedIn:** [linkedin.com/in/bryan-huy-tran](https://linkedin.com/in/bryan-huy-tran)  
+- **GitHub:** [github.com/bryantran21](https://github.com/bryantran21)  
 
 ---
 
