@@ -1,46 +1,63 @@
-# Astro Starter Kit: Basics
+# Bryan Tran – Portfolio & Resume Website
 
-```sh
-npm create astro@latest -- --template basics
-```
+![Website](https://img.shields.io/badge/Website-Live-brightgreen) ![React](https://img.shields.io/badge/React-18-blue) ![Tailwind](https://img.shields.io/badge/Tailwind-3.5-blueviolet) ![TypeScript](https://img.shields.io/badge/TypeScript-5.2-blue)
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+Welcome to my **personal portfolio website**, showcasing my skills, projects, and experience in **frontend, backend, and AI/ML development**.
 
-## 🚀 Project Structure
+---
 
-Inside of your Astro project, you'll see the following folders and files:
+## 👋 About Me
 
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
-```
+Hi! I’m **Bryan Tran**, a passionate developer focused on building **interactive web applications**, **data-driven dashboards**, and **AI-powered tools** that make information actionable and intuitive. I enjoy combining **clean design**, **efficient code**, and **data visualization** to create impactful experiences.
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+---
 
-## 🧞 Commands
+## 💻 Tech Stack
 
-All commands are run from the root of the project, from a terminal:
+| Frontend          | Backend      | Tools & DevOps      | Other / Misc        |
+|------------------|-------------|-------------------|-------------------|
+| React             | Node.js     | Docker            | Power BI          |
+| Next.js           | Java        | Git               | Power Apps        |
+| TypeScript        | Spring Boot | AWS               | VS Code           |
+| Tailwind CSS      | Python      | Azure             | Figma             |
+| HTML / CSS        | MySQL       | Jira              | C#                |
+| Astro             |             |                   |                   |
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+---
 
-## 👀 Want to learn more?
+## 📂 Projects
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+### 1. **Portfolio Optimizer**
+- Simulates optimized investment portfolios using historical stock data
+- Features **Max Sharpe**, **Minimum Volatility**, and **Efficient Frontier** calculations
+- Built with **FastAPI**, **yfinance**, **React**, and **Next.js**
+
+<!-- ### 2. **AI Workout & Nutrition Planner**
+- Personalized workout and nutrition recommendations with plateau detection
+- Built using **Python**, **ML models**, and **interactive web frontend** -->
+
+### 2. **Personal Finance Health Dashboard**
+- Tracks spending, budgets, and portfolio allocations
+- Built with **React**, **Chart.js**, and **FastAPI**
+
+---
+
+## 🌐 Live Demo
+
+[Visit My Portfolio](https://bhtran.com)
+
+---
+
+## 📫 Contact Me
+
+- **Email:** bryan.tran@example.com  
+- **LinkedIn:** [linkedin.com/in/bryan-tran](https://linkedin.com/in/bryan-huy-tran)  
+- **GitHub:** [github.com/bryan-tran](https://github.com/bryan-tran)  
+
+---
+
+## ⚡ Notes
+
+- Fully responsive, mobile-friendly design  
+- Easy to update for future projects and skills  
+- Built to showcase both **technical expertise** and **personal branding**
