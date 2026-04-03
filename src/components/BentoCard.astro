@@ -1,0 +1,61 @@
+---
+const { title, description, size = "small", href } = Astro.props;
+---
+
+<a class={`card ${size}`} href={href}>
+  <div class="content">
+    <h3>{title}</h3>
+    <p>{description}</p>
+  </div>
+</a>
+
+<style>
+.card {
+  display: block;
+  background: #111;
+  color: white;
+  border-radius: 20px;
+  padding: 20px;
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Hover animation */
+.card:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+}
+
+/* Size variants */
+.small {
+  grid-column: span 1;
+  grid-row: span 1;
+}
+
+.wide {
+  grid-column: span 2;
+}
+
+.tall {
+  grid-row: span 2;
+}
+
+.big {
+  grid-column: span 2;
+  grid-row: span 2;
+}
+
+/* Content styling */
+.content h3 {
+  font-size: 1.5rem;
+  margin-bottom: 8px;
+}
+
+.content p {
+  opacity: 0.7;
+  font-size: 0.9rem;
+}
+</style>
