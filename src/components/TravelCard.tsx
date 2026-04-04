@@ -49,11 +49,17 @@ export default function TravelCard() {
 
   return (
     <>
-      <motion.div
-        layoutId="globe-card"
-        className="bento-card"
-        onClick={() => setIsExpanded(true)}
-      >
+        <motion.div
+          layoutId="globe-card"
+          className="bento-card"
+          onClick={() => setIsExpanded(true)}
+          whileHover={{ 
+            scale: 1.02,
+            borderColor: "rgba(159, 85, 255, 0.4)", // Purple border on hover
+            boxShadow: "0 20px 40px rgba(0,0,0,0.6), 0 0 20px rgba(159, 85, 255, 0.1)"
+          }}
+          transition={{ type: "spring", stiffness: 300, damping: 30 }}
+        >
         <div className="card-header">
           <motion.div layoutId="title" className="text-content">
             <h3>Travel Globe 🌍</h3>
@@ -69,7 +75,7 @@ export default function TravelCard() {
             backgroundColor="rgba(0,0,0,0)"
             globeImageUrl="//unpkg.com/three-globe/example/img/earth-dark.jpg"
             showAtmosphere={true}
-            atmosphereColor="#3a7bd5"
+            atmosphereColor="#9F55FF"            
             atmosphereDaylightAlpha={0.3}
           />
         </div>
@@ -97,11 +103,7 @@ export default function TravelCard() {
                   
                   // POLYGON FIXES
                   polygonsData={geoData.features}
-                  polygonCapColor={d => 
-                    VISITED_STATES.includes(d.properties.name) // Using lowercase .name
-                      ? 'rgba(58, 123, 213, 0.8)' 
-                      : 'rgba(255, 255, 255, 0.08)'
-                  }
+                  polygonCapColor={d => VISITED_STATES.includes(d.properties.name) ? 'rgba(159, 85, 255, 0.7)' : 'rgba(255, 255, 255, 0.05)'}
                   polygonSideColor={() => 'rgba(0, 0, 0, 0.2)'}
                   polygonStrokeColor={() => 'rgba(255, 255, 255, 0.2)'}
                   onPolygonClick={(polygon: any) => {
@@ -126,9 +128,9 @@ export default function TravelCard() {
                       ← Back to Map
                     </button>
                     <h2>{selectedLocation}</h2>
-                    <p className="subtitle">{MY_TRAVEL_DATA[selectedLocation]?.title}</p>
+                    <p className="subtitle">{MY_TRAVEL_DATA[selectedLocation as TravelLocation]?.title}</p>
                     <div className="links-list">
-                      {MY_TRAVEL_DATA[selectedLocation]?.links.map((link, i) => (
+                      {MY_TRAVEL_DATA[selectedLocation as TravelLocation]?.links.map((link, i) => (
                         <a key={i} href={link.url} className="travel-link">{link.label}</a>
                       ))}
                     </div>

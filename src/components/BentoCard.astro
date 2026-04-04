@@ -3,6 +3,7 @@ const { title, description, size = "small", href } = Astro.props;
 ---
 
 <a class={`card ${size}`} href={href}>
+  <div class="card-glow"></div>
   <div class="content">
     <h3>{title}</h3>
     <p>{description}</p>
@@ -11,51 +12,84 @@ const { title, description, size = "small", href } = Astro.props;
 
 <style>
 .card {
-  display: block;
-  background: #111;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end; /* Aligns text to bottom like the Globe card */
+  background: #111111;
   color: white;
-  border-radius: 20px;
-  padding: 20px;
+  border-radius: 28px; /* Matched to TravelCard */
+  padding: 30px;
   text-decoration: none;
   position: relative;
   overflow: hidden;
-
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  min-height: 220px; /* Ensures consistency with TravelCard height */
+  
+  transition: 
+    transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1), 
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
-/* Hover animation */
+/* The subtle purple radial glow behind the text */
+.card-glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at 50% 120%, 
+    rgba(159, 85, 255, 0.15) 0%, 
+    transparent 70%
+  );
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+}
+
+/* Hover States */
 .card:hover {
-  transform: translateY(-6px) scale(1.02);
-  box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+  transform: scale(1.02);
+  border-color: rgba(159, 85, 255, 0.4);
+  box-shadow: 
+    0 20px 40px rgba(0,0,0,0.6), 
+    0 0 20px rgba(159, 85, 255, 0.1);
 }
 
-/* Size variants */
-.small {
-  grid-column: span 1;
-  grid-row: span 1;
+.card:hover .card-glow {
+  opacity: 1;
 }
 
-.wide {
-  grid-column: span 2;
+/* Content Typography */
+.content {
+  position: relative;
+  z-index: 2;
 }
 
-.tall {
-  grid-row: span 2;
-}
-
-.big {
-  grid-column: span 2;
-  grid-row: span 2;
-}
-
-/* Content styling */
 .content h3 {
-  font-size: 1.5rem;
-  margin-bottom: 8px;
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin: 0;
+  letter-spacing: -0.02em;
+  color: #ffffff;
 }
 
 .content p {
-  opacity: 0.7;
-  font-size: 0.9rem;
+  margin: 6px 0 0;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+/* Grid Logic */
+.small { grid-column: span 1; }
+.wide { grid-column: span 2; }
+.tall { grid-row: span 2; }
+.big { grid-column: span 2; grid-row: span 2; }
+
+/* Responsive tweaks */
+@media (max-width: 768px) {
+  .card {
+    padding: 24px;
+    min-height: 180px;
+  }
 }
 </style>

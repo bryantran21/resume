@@ -1,8 +1,4 @@
 ---
-function setOpen(arg0: boolean) {
-throw new Error('Function not implemented.');
-}
-
 import Layout from '../layouts/Layout.astro';
 import BentoCard from '../components/BentoCard.astro';
 import BentoGrid from '../components/BentoGrid.astro';
@@ -17,15 +13,14 @@ const bio = {
     "🎬 Movie/Anime & 📖 Manga Enjoyer",
     "🎴 TCG collector (One Piece & Pokémon)",
     "🏋️ Avid lifter & 💪 future bodybuilder",
-    "✈️ Traveler &  🍽️ a foodie" 
+    "✈️ Traveler & 🍽️ a foodie" 
     ]
 };
-
 ---
 
 <Layout title="About Me - Bryan Tran" description="Learn more about my interests, hobbies, and what I'm into">
   <div class="about-page">
-    <!-- Navbar -->
+    
     <nav class="navbar">
       <a href="/" class="logo">BRYAN</a>
       <div class="nav-links">
@@ -36,13 +31,11 @@ const bio = {
       </div>
     </nav>
 
-    <!-- Hero -->
     <div class="about-hero">
       <h1>About Me</h1>
       <p class="subtitle">This was an excuse to showcase my hobbies</p>
     </div>
 
-    <!-- Bio Section -->
     <section class="section bio-section">
       <div class="bio-card">
         <p class="bio-intro">{bio.intro}</p>
@@ -53,93 +46,67 @@ const bio = {
         </div>
       </div>
     </section>
+
+    <section class="section bento-section">
+      <BentoGrid>
+        <TravelCard client:only="react" />
+
+        <BentoCard
+          title="Resume Website 📝"
+          description="Side project to showcase my skills, projects, and experience."
+          size="small"
+        />
+      </BentoGrid>
+    </section>
   </div>
-
-  <BentoGrid>
-
-    <TravelCard client:only="react" />
-
-    <BentoCard
-      title="Job AI Assistant 🤖"
-      description="Resume vs job matching"
-      size="wide"
-    />
-
-
-    <BentoCard
-      title="LSU Sports Trivia 🏈"
-      description="Fun side project"
-      size="small"
-    />
-</BentoGrid>
 </Layout>
 
 <style>
+  /* Root Variables for the Purple Theme */
+  :root {
+    --bg-main: #000000;
+    --card-surface: #111111;
+    --card-hover: #161616;
+    --border-color: rgba(255, 255, 255, 0.08);
+    --text-primary: #ffffff;
+    --text-secondary: #888888;
+    
+    /* Theme Accent: Rich Deep Violet */
+    --accent-purple: #9F55FF; 
+  }
+
+  /* Global page setup: BLACK and Font Stack */
   .about-page {
     min-height: 100vh;
-    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-    color: white;
-    padding-bottom: 4rem;
+    background-color: var(--bg-main);
+    color: var(--text-primary);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    padding-bottom: 6rem;
   }
 
-  /* Bio Section */
-  .bio-section {
-    margin-bottom: 4rem;
-  }
-
-  .bio-card {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 1.5rem;
-    padding: 2.5rem;
-    backdrop-filter: blur(10px);
-  }
-
-  .bio-intro {
-    font-size: 1.15rem;
-    line-height: 1.8;
-    color: rgba(255, 255, 255, 0.9);
-    margin-bottom: 2rem;
-  }
-
-  .quick-facts {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 1rem;
-  }
-
-  .fact-item {
-    padding: 1rem 1.25rem;
-    background: rgba(255, 255, 255, 0.08);
-    border-radius: 0.75rem;
-    font-size: 0.95rem;
-    color: rgba(255, 255, 255, 0.85);
-    border-left: 3px solid #60a5fa;
-  }
-
-  /* Navbar */
+  /* Navbar: Sophisticated Dark */
   .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1.5rem 3rem;
-    background: rgba(0, 0, 0, 0.3);
-    backdrop-filter: blur(10px);
-    border: none;
-    outline: none;
+    padding: 1.5rem 10%;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(20px);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 0.5px solid var(--border-color);
   }
 
   .logo {
-    font-size: 1.5rem;
-    font-weight: 800;
-    color: white;
-    letter-spacing: 0.05em;
-    outline: none;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    text-decoration: none;
+    letter-spacing: -0.01em;
   }
 
-  .logo:hover {
-    opacity: 0.8;
-  }
+  .logo:hover { opacity: 0.8; }
 
   .nav-links {
     display: flex;
@@ -147,76 +114,104 @@ const bio = {
   }
 
   .nav-link {
-    color: white;
-    font-size: 0.95rem;
-    font-weight: 400;
-    opacity: 0.9;
-    transition: opacity 0.2s;
-    outline: none;
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: color 0.3s ease;
   }
 
   .nav-link:hover {
-    opacity: 1;
+    color: var(--text-primary);
   }
 
   .nav-link.active {
-    opacity: 1;
-    border-bottom: 2px solid #60a5fa;
+    color: var(--text-primary);
+    border-bottom: 1.5px solid var(--accent-purple); /* PURPLE active underline */
     padding-bottom: 0.25rem;
   }
 
-  /* Hero */
+  /* Hero: Bold and Tight */
   .about-hero {
     text-align: center;
-    padding: 3rem 2rem 4rem;
+    padding: 6rem 2rem 4rem;
     max-width: 50rem;
     margin: 0 auto;
   }
 
   .about-hero h1 {
-    font-size: clamp(2.5rem, 6vw, 4rem);
-    font-weight: 800;
-    margin-bottom: 0.5rem;
+    font-size: clamp(3rem, 7vw, 4.5rem);
+    font-weight: 700;
+    letter-spacing: -0.04em; /* Tight letter spacing for that Pro look */
+    margin-bottom: 0.75rem;
   }
 
   .about-hero .subtitle {
-    font-size: 1.25rem;
-    color: rgba(255, 255, 255, 0.7);
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: var(--text-secondary);
   }
 
-  /* Sections */
+  /* Section constraints */
   .section {
     max-width: 70rem;
-    margin: 0 auto 5rem;
+    margin: 0 auto;
     padding: 0 2rem;
   }
 
-  .section-title {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    font-size: 2rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
-    padding-bottom: 1rem;
-    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+  .bio-section {
+    max-width: 900px;
+    margin-bottom: 6rem;
   }
 
-  .section-title i {
-    font-size: 1.5rem;
-    color: #60a5fa;
+  /* Bio Card: Deep Gray Glassmorphism */
+  .bio-card {
+    background: var(--card-surface);
+    border: 1px solid var(--border-color);
+    border-radius: 2rem;
+    padding: 3.5rem;
+    backdrop-filter: blur(10px);
+    transition: transform 0.3s ease;
   }
 
-  .section-description {
-    color: rgba(255, 255, 255, 0.7);
-    margin-bottom: 2rem;
+  .bio-intro {
+    font-size: 1.25rem;
+    line-height: 1.7;
+    font-weight: 400;
+    color: var(--text-primary);
+    margin-bottom: 3rem;
   }
 
+  .quick-facts {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.25rem;
+  }
+
+  /* Fact Items: Subtle Purple interaction */
+  .fact-item {
+    padding: 1.25rem 1.5rem;
+    background: rgba(255, 255, 255, 0.04);
+    border-radius: 1rem;
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    border-left: 3px solid var(--accent-purple); /* PURPLE border */
+    transition: all 0.3s ease;
+  }
+
+  .fact-item:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--text-primary);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), 0 0 20px rgba(159, 85, 255, 0.05);
+  }
+
+  /* Title styling (retained for consistency, though unused in provided JSX) */
   .subsection-title {
     font-size: 1.5rem;
     font-weight: 600;
     margin: 3rem 0 1.5rem;
-    color: #60a5fa;
+    color: var(--accent-purple); /* PURPLE Subsection titles */
   }
 
   /* Mobile */
@@ -227,13 +222,29 @@ const bio = {
       gap: 1rem;
     }
 
+    .logo {
+      font-size: 1.1rem;
+    }
+
     .nav-links {
-      gap: 1rem;
-      font-size: 0.85rem;
+      gap: 1.25rem;
+      font-size: 0.8rem;
     }
 
     .section {
       padding: 0 1.5rem;
+    }
+
+    .about-hero {
+      padding: 4rem 1.5rem 3rem;
+    }
+
+    .bio-card {
+      padding: 2rem;
+    }
+
+    .bio-intro {
+      font-size: 1.1rem;
     }
   }
 </style>
