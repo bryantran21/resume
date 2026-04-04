@@ -1,26 +1,36 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Globe from "react-globe.gl";
 
 export default function TravelCard() {
-  const [open, setOpen] = useState(false);
+  const [state, setState] = useState<"closed" | "expanding" | "expanded">("closed");
+
+  const isOpen = state !== "closed";
+
+  const handleOpen = () => {
+    if (state === "closed") {
+      setState("expanding");
+
+      setTimeout(() => {
+        setState("expanded");
+      }, 300);
+    }
+  };
+
+  const handleClose = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setState("closed");
+  };
+
+  const globeRef = useRef<any>(null);
 
   return (
     <>
-      <div
-        className={`bento-card travel ${open ? "expanded" : ""}`}
-        onClick={() => setOpen(true)}
-      >
-        {/* CLOSE BUTTON (only when expanded) */}
-        {open && (
-          <button
-            className="close"
-            onClick={(e) => {
-              e.stopPropagation(); // 🔥 prevents re-open bug
-              setOpen(false);
-            }}
-          >
+      <div className={`bento-card ${state}`} onClick={handleOpen}>
+        {/* CLOSE BUTTON */}
+        {state === "expanded" && (
+          <button className="close" onClick={handleClose}>
             ✕
           </button>
         )}
@@ -34,10 +44,15 @@ export default function TravelCard() {
         {/* GLOBE */}
         <div className="globe-wrapper">
           <Globe
-            width={open ? window.innerWidth : 120}
-            height={open ? window.innerHeight : 120}
+            width={isOpen ? window.innerWidth : 120}
+            height={isOpen ? window.innerHeight : 120}
             globeImageUrl="//unpkg.com/three-globe/example/img/earth-dark.jpg"
             backgroundColor="rgba(0,0,0,0)"
+            enablePointerInteraction={state === "expanded"}
+            onGlobeReady={(globe) => {
+              globe.controls().autoRotate = true;
+              globe.controls().autoRotateSpeed = 1;
+            }}
           />
         </div>
       </div>
@@ -51,7 +66,7 @@ export default function TravelCard() {
           color: white;
           cursor: pointer;
           overflow: hidden;
-          transition: all 0.5s ease;
+          transition: all 0.4s ease;
         }
 
         .bento-card:hover {
@@ -68,39 +83,38 @@ export default function TravelCard() {
           bottom: -20px;
           right: -20px;
           opacity: 0.6;
-          transition: all 0.5s ease;
+          transition: all 0.4s ease;
         }
 
-        .bento-card {
-            position: relative;
-            padding: 20px;
-            border-radius: 20px;
-            background: #111;
-            color: white;
-            cursor: pointer;
-            overflow: hidden;
+        /* STEP 1: expand animation */
+        .expanding {
+          transform: scale(1.2);
+          z-index: 50;
+        }
 
-            transition: transform 0.5s ease, border-radius 0.5s ease;
-            }
+        /* STEP 2: fullscreen */
+        .expanded {
+          position: fixed;
+          inset: 0;
+          border-radius: 0;
+          z-index: 999;
+          background: black;
+        }
 
-            .bento-card:hover {
-            transform: scale(1.03);
-            }
-
-            /* STEP 1: smooth scale up */
-            .expanding {
-            transform: scale(1.2);
-            z-index: 50;
-            }
-
-            /* STEP 2: fullscreen */
-            .expanded {
-            position: fixed;
-            inset: 0;
-            border-radius: 0;
-            z-index: 999;
-            background: black;
-            }
+        /* CLOSE BUTTON */
+        .close {
+          position: absolute;
+          top: 20px;
+          right: 20px;
+          z-index: 1000;
+          background: rgba(0,0,0,0.6);
+          border: none;
+          color: white;
+          font-size: 22px;
+          cursor: pointer;
+          border-radius: 8px;
+          padding: 6px 10px;
+        }
       `}</style>
     </>
   );

@@ -6,7 +6,6 @@ throw new Error('Function not implemented.');
 import Layout from '../layouts/Layout.astro';
 import BentoCard from '../components/BentoCard.astro';
 import BentoGrid from '../components/BentoGrid.astro';
-import GlobeModal from '../components/GlobeModal';
 import TravelCard from '../components/TravelCard';
 
 // Bio
@@ -58,13 +57,14 @@ const bio = {
 
   <BentoGrid>
 
+    <TravelCard client:only="react" />
+
     <BentoCard
       title="Job AI Assistant 🤖"
       description="Resume vs job matching"
       size="wide"
     />
 
-    <TravelCard client:only="react" />
 
     <BentoCard
       title="LSU Sports Trivia 🏈"
