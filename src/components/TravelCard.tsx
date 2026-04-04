@@ -1,119 +1,224 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import Globe from "react-globe.gl";
+import { motion, AnimatePresence } from "framer-motion";
+
+// 1. UPDATED DATA: Your actual travel list
+const MY_TRAVEL_DATA = {
+  "Texas": 
+  { title: "Lone Star State", 
+    links: [{ label: "Austin BBQ Guide", url: "#" }] },
+  "New York": { title: "The Empire State", 
+    links: [{ label: "NYC Skyline", url: "#" }] },
+  "Illinois": { title: "The Prairie State", 
+    links: [{ label: "Chicago Deep Dish", url: "#" }] },
+  "Alabama": { title: "Yellowhammer State", 
+    links: [{ label: "Gulf Shores", url: "#" }] },
+  "Louisiana": { title: "Pelican State", 
+    links: [{ label: "NOLA Jazz", url: "#" }] },
+  "Florida": { title: "Sunshine State", 
+    links: [{ label: "Miami Beach", url: "#" }] }
+};
+
+const VISITED_STATES = Object.keys(MY_TRAVEL_DATA);
 
 export default function TravelCard() {
-  const [state, setState] = useState<"closed" | "expanding" | "expanded">("closed");
+  const [isExpanded, setIsExpanded] = useState(false);
+  const [selectedLocation, setSelectedLocation] = useState<string | null>(null);
+  const [geoData, setGeoData] = useState({ features: [] });
+  const globeRef = useRef<any>();
 
-  const isOpen = state !== "closed";
+  // Load US States GeoJSON
+  useEffect(() => {
+    fetch("https://raw.githubusercontent.com/PublicaMundi/MappingAPI/master/data/geojson/us-states.json")
+      .then(res => res.json())
+      .then(setGeoData);
+  }, []);
 
-  const handleOpen = () => {
-    if (state === "closed") {
-      setState("expanding");
-
-      setTimeout(() => {
-        setState("expanded");
-      }, 300);
+  // Initial Camera position (Center on USA)
+  useEffect(() => {
+    if (globeRef.current) {
+      const controls = globeRef.current.controls();
+      controls.autoRotate = !isExpanded; 
+      controls.autoRotateSpeed = 0.8;
+      // Focus on US
+      globeRef.current.pointOfView({ lat: 37.09, lng: -95.71, altitude: 2.2 });
     }
-  };
-
-  const handleClose = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    setState("closed");
-  };
-
-  const globeRef = useRef<any>(null);
+  }, [isExpanded]);
 
   return (
     <>
-      <div className={`bento-card ${state}`} onClick={handleOpen}>
-        {/* CLOSE BUTTON */}
-        {state === "expanded" && (
-          <button className="close" onClick={handleClose}>
-            ✕
-          </button>
-        )}
-
-        {/* TEXT */}
-        <div className="content">
-          <h3>Travel Globe 🌍</h3>
-          <p>Places I've been</p>
+      <motion.div
+        layoutId="globe-card"
+        className="bento-card"
+        onClick={() => setIsExpanded(true)}
+      >
+        <div className="card-header">
+          <motion.div layoutId="title" className="text-content">
+            <h3>Travel Globe 🌍</h3>
+            <p>Places I've been</p>
+          </motion.div>
         </div>
 
-        {/* GLOBE */}
-        <div className="globe-wrapper">
+        <div className="globe-preview-wrapper">
           <Globe
-            width={isOpen ? window.innerWidth : 120}
-            height={isOpen ? window.innerHeight : 120}
-            globeImageUrl="//unpkg.com/three-globe/example/img/earth-dark.jpg"
+            ref={globeRef}
+            width={280}
+            height={280}
             backgroundColor="rgba(0,0,0,0)"
-            enablePointerInteraction={state === "expanded"}
-            onGlobeReady={(globe) => {
-              globe.controls().autoRotate = true;
-              globe.controls().autoRotateSpeed = 1;
-            }}
+            globeImageUrl="//unpkg.com/three-globe/example/img/earth-dark.jpg"
+            showAtmosphere={true}
+            atmosphereColor="#3a7bd5"
+            atmosphereDaylightAlpha={0.3}
           />
         </div>
-      </div>
+      </motion.div>
+
+      <AnimatePresence mode="wait">
+        {isExpanded && (
+          <motion.div
+            layoutId="globe-card"
+            className="expanded-view"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <button className="close-btn" onClick={() => setIsExpanded(false)}>✕</button>
+
+            <div className="fullscreen-container">
+              <div className="globe-main">
+                <Globe
+                  ref={globeRef}
+                  width={typeof window !== 'undefined' ? window.innerWidth : 1000}
+                  height={typeof window !== 'undefined' ? window.innerHeight : 1000}
+                  backgroundColor="rgba(0,0,0,0)"
+                  globeImageUrl="//unpkg.com/three-globe/example/img/earth-dark.jpg"
+                  
+                  // POLYGON FIXES
+                  polygonsData={geoData.features}
+                  polygonCapColor={d => 
+                    VISITED_STATES.includes(d.properties.name) // Using lowercase .name
+                      ? 'rgba(58, 123, 213, 0.8)' 
+                      : 'rgba(255, 255, 255, 0.08)'
+                  }
+                  polygonSideColor={() => 'rgba(0, 0, 0, 0.2)'}
+                  polygonStrokeColor={() => 'rgba(255, 255, 255, 0.2)'}
+                  onPolygonClick={(polygon: any) => {
+                    const name = polygon.properties.name;
+                    if (VISITED_STATES.includes(name)) {
+                      setSelectedLocation(name);
+                    }
+                  }}
+                  polygonAltitude={d => VISITED_STATES.includes(d.properties.name) ? 0.02 : 0.005}
+                />
+              </div>
+
+              <AnimatePresence>
+                {selectedLocation && (
+                  <motion.div 
+                    className="compendium-panel"
+                    initial={{ x: 400 }}
+                    animate={{ x: 0 }}
+                    exit={{ x: 400 }}
+                  >
+                    <button className="back-link" onClick={() => setSelectedLocation(null)}>
+                      ← Back to Map
+                    </button>
+                    <h2>{selectedLocation}</h2>
+                    <p className="subtitle">{MY_TRAVEL_DATA[selectedLocation]?.title}</p>
+                    <div className="links-list">
+                      {MY_TRAVEL_DATA[selectedLocation]?.links.map((link, i) => (
+                        <a key={i} href={link.url} className="travel-link">{link.label}</a>
+                      ))}
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       <style>{`
         .bento-card {
-          position: relative;
-          padding: 20px;
-          border-radius: 20px;
-          background: #111;
-          color: white;
+          width: 350px;
+          height: 220px;
+          background: #0a0a0a;
+          border-radius: 28px;
+          padding: 24px;
           cursor: pointer;
-          overflow: hidden;
-          transition: all 0.4s ease;
-        }
-
-        .bento-card:hover {
-          transform: scale(1.03);
-        }
-
-        .content {
           position: relative;
-          z-index: 2;
+          overflow: hidden;
+          border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        .globe-wrapper {
-          position: absolute;
-          bottom: -20px;
-          right: -20px;
-          opacity: 0.6;
-          transition: all 0.4s ease;
-        }
-
-        /* STEP 1: expand animation */
-        .expanding {
-          transform: scale(1.2);
-          z-index: 50;
-        }
-
-        /* STEP 2: fullscreen */
-        .expanded {
+        .expanded-view {
           position: fixed;
           inset: 0;
-          border-radius: 0;
-          z-index: 999;
-          background: black;
+          z-index: 1000;
+          background: #000;
         }
 
-        /* CLOSE BUTTON */
-        .close {
+        .globe-preview-wrapper {
           position: absolute;
-          top: 20px;
-          right: 20px;
-          z-index: 1000;
-          background: rgba(0,0,0,0.6);
-          border: none;
+          top: 55%;
+          left: 55%;
+          transform: translate(-20%, -20%);
+          pointer-events: none;
+        }
+
+        .compendium-panel {
+          position: absolute;
+          right: 0;
+          top: 0;
+          bottom: 0;
+          width: 380px;
+          background: rgba(15, 15, 15, 0.9);
+          backdrop-filter: blur(20px);
+          padding: 80px 40px;
+          z-index: 1020;
           color: white;
-          font-size: 22px;
+          border-left: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .text-content h3 { color: white; margin: 0; font-size: 1.4rem; }
+        .text-content p { color: rgba(255,255,255,0.6); margin: 4px 0; }
+
+        .back-link {
+          background: none;
+          border: none;
+          color: #3a7bd5;
           cursor: pointer;
-          border-radius: 8px;
-          padding: 6px 10px;
+          margin-bottom: 20px;
+          padding: 0;
+        }
+
+        .travel-link {
+          display: block;
+          color: #3a7bd5;
+          margin-top: 12px;
+          text-decoration: none;
+        }
+
+        .close-btn {
+          position: absolute;
+          top: 30px;
+          left: 30px;
+          width: 44px;
+          height: 44px;
+          border-radius: 50%;
+          background: rgba(255,255,255,0.1);
+          color: white;
+          border: none;
+          z-index: 1100;
+          cursor: pointer;
+        }
+
+        .fullscreen-container {
+          width: 100vw;
+          height: 100vh;
+          position: relative;
         }
       `}</style>
     </>
