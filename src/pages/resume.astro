@@ -1,4 +1,5 @@
 ---
+import { span } from 'framer-motion/m';
 import Layout from '../layouts/Layout.astro';
 
 const experiences = [
@@ -25,9 +26,9 @@ const experiences = [
     location: 'Baton Rouge, LA',
     period: 'May 2022 - May 2023',
     achievements: [
-        "Diagnose, fix errors, and application crashes through log files, code walkthroughs, and error logs using different DevOps tools through a System Admin",
-        "Remodeled LSU's applications using WAVE, HTML, and CSS, making it more accessible for users with screen readers and updating the Bootstrap packages",
-        "Migrated LSU's Java applications to the most current version of Spring by updating Maven repositories and resolving dependency conflicts"
+        "Diagnosed and resolved application crashes through log analysis and DevOps tooling",
+        "Remodeled LSU's applications for WCAG accessibility using WAVE, HTML, and CSS",
+        "Migrated Java applications to Spring Boot by resolving complex Maven dependency conflicts"
     ]
   },
   {
@@ -37,9 +38,9 @@ const experiences = [
     location: 'Remote',
     period: 'January 2022 - May 2022',
     achievements: [
-      'Conceptualizing design for application/functionality of custom software for laboratory animal clinics',
-      'Creating site layout/user interfaces from provided design concepts by using standard HTML/CSS/PHP/Javascript practices for web applications',
-      'Designed and creation of relational database schemas, using BackboneJS to apply front end user requirements'
+      'Conceptualized custom software functionality for laboratory animal clinics',
+      'Developed user interfaces using standard HTML/CSS/PHP/Javascript practices',
+      'Designed relational database schemas and applied front-end requirements via BackboneJS'
     ]
   },
   {
@@ -49,10 +50,10 @@ const experiences = [
     location: 'Baton Rouge, LA',
     period: 'March 2021 - Dec 2021',
     achievements: [
-      'Provided technical support for all departments within the company through video calls and remote access, on-site debugging, and setting up hardware for new/current users',
-      "Gathered bid data on Power BI and made tables displaying the company's growth and progress on contracts",
-      'Helped build internal application using PowerApps to improve workflows',
-      'Managed user data as an IT Admin, making sure new employees were provided Microsoft accounts, and terminated employees were logged onto OneDrive for company security'
+      'Provided technical support and hardware configuration for cross-departmental users',
+      "Architected Power BI dashboards to visualize contract growth and bid data",
+      'Built internal workflow applications using the Microsoft Power Platform',
+      'Managed enterprise user data and security protocols as an IT Administrator'
     ]
   }
 ];
@@ -63,14 +64,16 @@ const education = [
     logo: '/logos/gatech.png',
     degree: 'MS Computer Science',
     period: 'Aug 2026 - Present',
-    gpa: 'n/a'
+    gpa: 'n/a',
+    coursework: ['Graduate Algorithms', 'Machine Learning', 'Software Architecture', 'Info Security']
   },
   {
     school: 'Louisiana State University',
     logo: '/logos/lsu.jpg',
     degree: 'BS Computer Science',
     period: 'Aug 2019 - May 2023',
-    gpa: '3.4'
+    gpa: '3.4',
+    coursework: ['Data Structures', 'Operating Systems', 'Database Management', 'Cloud Computing', 'Cybersecurity']
   }
 ];
 
@@ -84,7 +87,6 @@ const certificates = [
 
 <Layout title="Bryan Tran - Resume" description="Software Developer specializing in Full Stack Development">
   <div class="resume-page">
-    <!-- Navbar -->
     <nav class="navbar">
       <a href="/" class="logo">BRYAN</a>
       <div class="nav-links">
@@ -95,7 +97,6 @@ const certificates = [
       </div>
     </nav>
 
-    <!-- Hero Section -->
     <div class="resume-hero">
       <h1>Resume</h1>
       <p class="subtitle">Full Stack Developer & Problem Solver</p>
@@ -105,885 +106,207 @@ const certificates = [
       </a>
     </div>
 
-    <!-- Experience Section -->
     <section class="section">
-      <h2 class="section-title">
-        <i class="fas fa-briefcase"></i>
-        Experience
-      </h2>
-      
+      <h2 class="section-label">Experience</h2>
       <div class="timeline">
         {experiences.map(exp => (
           <div class="experience-card">
             <div class="card-header">
               <div class="company-info">
-                <img src={exp.logo} alt={exp.company} class="company-logo" />
+                <div class="logo-wrapper"><img src={exp.logo} alt={exp.company} class="company-logo" /></div>
                 <div>
-                  <h3>{exp.company}</h3>
-                  <p class="role">{exp.role}</p>
+                  <h3>{exp.role}</h3>
+                  <p class="company-name">{exp.company}</p>
                 </div>
               </div>
               <div class="meta">
-                <p class="location">{exp.location}</p>
                 <p class="period">{exp.period}</p>
+                <p class="location">{exp.location}</p>
               </div>
             </div>
             <ul class="achievements">
-              {exp.achievements.map(achievement => (
-                <li>{achievement}</li>
-              ))}
+              {exp.achievements.map(achievement => <li>{achievement}</li>)}
             </ul>
           </div>
         ))}
       </div>
     </section>
 
-    <!-- Tech Stack Section -->
-    <section class="section tech-stack-section">
-      <h2 class="section-title">
-        <i class="fas fa-code"></i>
-        Tech Stack
-      </h2>
+    <section class="section">
+      <h2 class="section-label">Technical Arsenal</h2>
       
-      <!-- Frontend -->
       <div class="tech-category">
         <h3 class="tech-category-title">Frontend</h3>
         <div class="tech-grid">
-          <div class="tech-item" data-tech="react">
-            <div class="tech-icon-wrapper">
-              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React" />
-            </div>
-            <span>React</span>
-          </div>
-          <div class="tech-item" data-tech="angular">
-            <div class="tech-icon-wrapper">
-              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/angular/angular-original.svg" alt="Angular" />
-            </div>
-            <span>Angular</span>
-          </div>
-          <div class="tech-item" data-tech="nextjs">
-            <div class="tech-icon-wrapper">
-              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" alt="Next.js" />
-            </div>
-            <span>Next.js</span>
-          </div>
-          <div class="tech-item" data-tech="typescript">
-            <div class="tech-icon-wrapper">
-              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" alt="TypeScript" />
-            </div>
-            <span>TypeScript</span>
-          </div>
-          <div class="tech-item" data-tech="tailwind">
-            <div class="tech-icon-wrapper">
-              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg" alt="Tailwind" />
-            </div>
-            <span>Tailwind</span>
-          </div>
-          <div class="tech-item" data-tech="html">
-            <div class="tech-icon-wrapper">
-              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML5" />
-            </div>
-            <span>HTML</span>
-          </div>
-          <div class="tech-item" data-tech="css">
-            <div class="tech-icon-wrapper">
-              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-original.svg" alt="CSS"/>
-            </div>
-            <span>CSS</span>
-          </div>
-          <div class="tech-item" data-tech="astro">
-            <div class="tech-icon-wrapper">
-              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/astro/astro-original.svg" alt="Astro"/>
-            </div>
-            <span>Astro</span>
-          </div>
-          <div class="tech-item" data-tech="bootstrap">
-            <div class="tech-icon-wrapper">
-              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg" alt="Bootstrap"/>
-            </div>
-            <span>Bootstrap</span>
-          </div>
-          <div class="tech-item" data-tech="handlebars">
-            <div class="tech-icon-wrapper">
-              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/handlebars/handlebars-original.svg" alt="Handlebars"/>
-            </div>
-            <span>Handlebars</span>
-          </div>
-          <div class="tech-item" data-tech="backbonejs">
-            <div class="tech-icon-wrapper">
-              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/backbonejs/backbonejs-original.svg" alt="Backbone.js"/>
-            </div>
-            <span>Backbone.js</span>
-          </div>
+          <div class="tech-item" data-tech="react"><div class="tech-icon-wrapper"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" /></div><span>React</span></div>
+          <div class="tech-item" data-tech="angular"><div class="tech-icon-wrapper"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/angular/angular-original.svg" /></div><span>Angular</span></div>
+          <div class="tech-item" data-tech="nextjs"><div class="tech-icon-wrapper"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" /></div><span>Next.js</span></div>
+          <div class="tech-item" data-tech="typescript"><div class="tech-icon-wrapper"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" /></div><span>TypeScript</span></div>
+          <div class="tech-item" data-tech="tailwind"><div class="tech-icon-wrapper"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg" /></div><span>Tailwind</span></div>
+          <div class="tech-item" data-tech="astro"><div class="tech-icon-wrapper"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/astro/astro-original.svg" /></div><span>Astro</span></div>
+          <div class="tech-item" data-tech="bootstrap"><div class="tech-icon-wrapper"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg" /></div><span>Bootstrap</span></div>
+          <div class="tech-item" data-tech="html"><div class="tech-icon-wrapper"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" /></div><span>HTML5</span></div>
+          <div class="tech-item" data-tech="css"><div class="tech-icon-wrapper"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-original.svg" /></div><span>CSS3</span></div>
         </div>
       </div>
 
-      <!-- Backend -->
       <div class="tech-category">
-        <h3 class="tech-category-title">Backend</h3>
+        <h3 class="tech-category-title">Backend & Database</h3>
         <div class="tech-grid">
-          <div class="tech-item" data-tech="java">
-            <div class="tech-icon-wrapper">
-              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java" />
-            </div>
-            <span>Java</span>
-          </div>
-          <div class="tech-item" data-tech="spring">
-            <div class="tech-icon-wrapper">
-              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg" alt="Spring Boot" />
-            </div>
-            <span>Spring Boot</span>
-          </div>
-          <div class="tech-item" data-tech="nodejs">
-            <div class="tech-icon-wrapper">
-              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="Node.js" />
-            </div>
-            <span>Node.js</span>
-          </div>
-          <div class="tech-item" data-tech="python">
-            <div class="tech-icon-wrapper">
-              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" />
-            </div>
-            <span>Python</span>
-          </div>
-          <div class="tech-item" data-tech="mysql">
-            <div class="tech-icon-wrapper">
-              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="MySQL" />
-            </div>
-            <span>MySQL</span>
-          </div>
-          <div class="tech-item" data-tech="php">
-            <div class="tech-icon-wrapper">
-              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" alt="PHP"/>
-            </div>
-            <span>PHP</span>
-          </div>
-          <div class="tech-item" data-tech="oracle">
-            <div class="tech-icon-wrapper">
-              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/oracle/oracle-original.svg" alt="Oracle" />
-            </div>
-            <span>Oracle</span>
-          </div>
-          <div class="tech-item" data-tech="apache">
-            <div class="tech-icon-wrapper">
-              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apache/apache-original.svg" alt="Apache"/>
-            </div>
-            <span>Apache</span>
-          </div>
-          <div class="tech-item" data-tech="tomcat">
-            <div class="tech-icon-wrapper">
-              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tomcat/tomcat-original.svg" alt="Tomcat"/>
-            </div>
-            <span>Tomcat</span>
-          </div>
-          <div class="tech-item" data-tech="mongodb">
-            <div class="tech-icon-wrapper">
-              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" alt="MongoDB"/>
-            </div>
-            <span>MongoDB</span>
-          </div>
-          <div class="tech-item" data-tech="csharp">
-            <div class="tech-icon-wrapper">
-              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg" alt="C#"/>
-            </div>
-            <span>C#</span>
-          </div>
-          <div class="tech-item" data-tech="sql-developer">
-            <div class="tech-icon-wrapper">
-              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sqldeveloper/sqldeveloper-original.svg" alt="SQL Developer"/>
-            </div>
-            <span>SQL Developer</span>
-          </div>
+          <div class="tech-item" data-tech="java"><div class="tech-icon-wrapper"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" /></div><span>Java</span></div>
+          <div class="tech-item" data-tech="spring"><div class="tech-icon-wrapper"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg" /></div><span>Spring Boot</span></div>
+          <div class="tech-item" data-tech="nodejs"><div class="tech-icon-wrapper"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" /></div><span>Node.js</span></div>
+          <div class="tech-item" data-tech="python"><div class="tech-icon-wrapper"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" /></div><span>Python</span></div>          
+          <div class="tech-item" data-tech="mysql"><div class="tech-icon-wrapper"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" /></div><span>MySQL</span></div>
+          <div class="tech-item" data-tech="mongodb"><div class="tech-icon-wrapper"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" /></div><span>MongoDB</span></div>
+          <div class="tech-item" data-tech="csharp"><div class="tech-icon-wrapper"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg" /></div><span>C#</span></div>
+          <div class="tech-item" data-tech="php"><div class="tech-icon-wrapper"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" /></div><span>PHP</span></div>
+          <div class="tech-item" data-tech="oracle"><div class="tech-icon-wrapper"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/oracle/oracle-original.svg" /></div><span>Oracle</span></div>
         </div>
       </div>
 
-      <!-- Tools & DevOps -->
       <div class="tech-category">
-        <h3 class="tech-category-title">Tools & DevOps</h3>
+        <h3 class="tech-category-title">DevOps & Tools</h3>
         <div class="tech-grid">
-          <div class="tech-item" data-tech="git">
-            <div class="tech-icon-wrapper">
-              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git" />
-            </div>
-            <span>Git</span>
-          </div>
-          <div class="tech-item" data-tech="aws">
-            <div class="tech-icon-wrapper">
-              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-plain-wordmark.svg" alt="AWS" />
-            </div>
-            <span>AWS</span>
-          </div>
-          <div class="tech-item" data-tech="azure">
-            <div class="tech-icon-wrapper">
-              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azure/azure-original.svg" alt="Azure" />
-            </div>
-            <span>Azure</span>
-          </div>
-          <div class="tech-item" data-tech="docker">
-            <div class="tech-icon-wrapper">
-              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" alt="Docker" />
-            </div>
-            <span>Docker</span>
-          </div>
-          <div class="tech-item" data-tech="jira">
-            <div class="tech-icon-wrapper">
-              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jira/jira-original.svg" alt="Jira" />
-            </div>
-            <span>Jira</span>
-          </div>
-          <div class="tech-item" data-tech="gitlab">
-            <div class="tech-icon-wrapper">
-              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/gitlab/gitlab-original.svg" alt="GitLab"/>
-            </div>
-            <span>GitLab</span>
-          </div>
-          <div class="tech-item" data-tech="bitbucket">
-            <div class="tech-icon-wrapper">
-              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bitbucket/bitbucket-original.svg" alt="Bitbucket"/>
-            </div>
-            <span>Bitbucket</span>
-          </div>
-          <div class="tech-item" data-tech="npm">
-            <div class="tech-icon-wrapper">
-              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/npm/npm-original-wordmark.svg" alt="npm"/>
-            </div>
-            <span>npm</span>
-          </div>
-          <div class="tech-item" data-tech="maven">
-            <div class="tech-icon-wrapper">
-              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/maven/maven-original.svg" alt="Maven"/>
-            </div>
-            <span>Maven</span>
-          </div>
-          <div class="tech-item" data-tech="cPanel">
-            <div class="tech-icon-wrapper">
-              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cpanel/cpanel-original.svg" alt="cPanel"/>
-            </div>
-            <span>cPanel</span>
-          </div>
-          <div class="tech-item" data-tech="postman">
-            <div class="tech-icon-wrapper">
-              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postman/postman-original.svg" alt="Postman"/>
-            </div>
-            <span>Postman</span>
-          </div>
-          <div class="tech-item" data-tech="eclipse">
-            <div class="tech-icon-wrapper">
-              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/eclipse/eclipse-original.svg" alt="Eclipse"/>
-            </div>
-            <span>Eclipse</span>
-          </div>
-          <div class="tech-item" data-tech="intellij">
-            <div class="tech-icon-wrapper">
-              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/intellij/intellij-original.svg" alt="IntelliJ"/>
-            </div>
-            <span>IntelliJ</span>
-          </div>
-          <div class="tech-item" data-tech="vscode">
-            <div class="tech-icon-wrapper">
-              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" alt="VS Code"/>
-            </div>
-            <span>VS Code</span>
-          </div>
-          <div class="tech-item" data-tech="vercel">
-            <div class="tech-icon-wrapper">
-              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vercel/vercel-original.svg" alt="Vercel"/>
-            </div>
-            <span>Vercel</span>
-          </div>
-          <div class="tech-item" data-tech="swaggerui">
-            <div class="tech-icon-wrapper">
-              <img src="https://static1.smartbear.co/swagger/media/assets/images/swagger_logo.svg" alt="SwaggerUI"/>
-            </div>
-            <span>SwaggerUI</span>
-          </div>
-          <div class="tech-item" data-tech="mockito">
-            <div class="tech-icon-wrapper">
-              <img src="https://raw.githubusercontent.com/mockito/mockito.github.io/master/img/logo%402x.png" alt="Mockito"/>
-            </div>
-            <span>Mockito</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Other / Misc -->
-      <div class="tech-category">
-        <h3 class="tech-category-title">Other</h3>
-        <div class="tech-grid">
-          <div class="tech-item" data-tech="figma">
-            <div class="tech-icon-wrapper">
-              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" alt="Figma"/>
-            </div>
-            <span>Figma</span>
-          </div>
-          <div class="tech-item" data-tech="junit">
-            <div class="tech-icon-wrapper">
-              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/junit/junit-original.svg" alt="JUnit"/>
-            </div>
-            <span>JUnit</span>
-          </div>
-          <div class="tech-item" data-tech="yaml">
-            <div class="tech-icon-wrapper">
-              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/yaml/yaml-original.svg" alt="YAML"/>
-            </div>
-            <span>YAML</span>
-          </div>
-          <div class="tech-item" data-tech="json">
-            <div class="tech-icon-wrapper">
-              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/json/json-original.svg" alt="JSON"/>
-            </div>
-            <span>JSON</span>
-          </div>
+          <div class="tech-item" data-tech="aws"><div class="tech-icon-wrapper"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-plain-wordmark.svg" /></div><span>AWS</span></div>
+          <div class="tech-item" data-tech="azure"><div class="tech-icon-wrapper"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azure/azure-original.svg" /></div><span>Azure</span></div>
+          <div class="tech-item" data-tech="docker"><div class="tech-icon-wrapper"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" /></div><span>Docker</span></div>
+          <div class="tech-item" data-tech="git"><div class="tech-icon-wrapper"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" /></div><span>Git</span></div>
+          <div class="tech-item" data-tech="jira"><div class="tech-icon-wrapper"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jira/jira-original.svg" /></div><span>Jira</span></div>
+          <div class="tech-item" data-tech="maven"><div class="tech-icon-wrapper"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/maven/maven-original.svg" /></div><span>Maven</span></div>
+          <div class="tech-item" data-tech="vscode"><div class="tech-icon-wrapper"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" /></div><span>VS Code</span></div>
+          <div class="tech-item" data-tech="figma"><div class="tech-icon-wrapper"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" /></div><span>Figma</span></div>
         </div>
       </div>
     </section>
 
-
-    <!-- Education Section -->
-    <section class="section">
-      <h2 class="section-title">
-        <i class="fas fa-graduation-cap"></i>
-        Education
-      </h2>
-      
-      <div class="education-grid">
-        {education.map(edu => (
-          <div class="education-card">
-            <img src={edu.logo} alt={edu.school} class="school-logo" />
-            <h3>{edu.school}</h3>
-            <p class="degree">{edu.degree} (GPA: {edu.gpa})</p>
-            <p class="period">{edu.period}</p>
-          </div>
-        ))}
-      </div>
-    </section>
-
-    <!-- Certificates Section -->
-    <section class="section">
-      <h2 class="section-title">
-        <i class="fas fa-certificate"></i>
-        Certifications
-      </h2>
-      
-      <div class="certs-grid">
-        {certificates.map(cert => (
-          <div class="cert-card">
-            <i class={cert.icon}></i>
-            <div>
-              <h4>{cert.name}</h4>
-              <p>{cert.issuer}</p>
+    <section class="section dual-grid">
+      <div class="edu-column">
+        <h2 class="section-label">Education</h2>
+        <div class="edu-list">
+          {education.map(edu => (
+            <div class="interactive-edu-card">
+              <div class="edu-header">
+                  <img src={edu.logo} alt={edu.school} class="edu-logo-small" />
+                  <div class="edu-info">
+                    <h3>{edu.school}</h3>
+                    <p>{edu.degree} <span class="gpa-tag">GPA {edu.gpa}</span></p>
+                  </div>
+              </div>
+              <div class="edu-details">
+                <p class="edu-period">{edu.period}</p>
+                <div class="course-list">
+                    {edu.coursework.map(course => <span class="course-tag">{course}</span>)}
+                </div>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
+      </div>
+
+      <div class="cert-column">
+        <h2 class="section-label">Certifications</h2>
+        <div class="cert-list">
+          {certificates.map(cert => (
+            <div class="cert-item-minimal">
+              <i class={cert.icon}></i>
+              <div class="cert-text">
+                <h4>{cert.name}</h4>
+                <p>{cert.issuer}</p>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   </div>
 </Layout>
 
 <style>
+  :root {
+    --bg-main: #000000;
+    --card-surface: #0a0a0a;
+    --accent-purple: #9F55FF;
+    --text-primary: #ffffff;
+    --text-secondary: #888888;
+    --border-dim: rgba(255, 255, 255, 0.08);
+  }
+
   .resume-page {
+    background-color: var(--bg-main);
+    color: var(--text-primary);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     min-height: 100vh;
-    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-    color: white;
-    padding: 0 0 4rem 0;
+    padding-bottom: 6rem;
   }
 
   /* Navbar */
-  .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1.5rem 3rem;
-    background: rgba(0, 0, 0, 0.3);
-    backdrop-filter: blur(10px);
-    border: none;
-    outline: none;
-  }
-
-  .logo {
-    font-size: 1.5rem;
-    font-weight: 800;
-    color: white;
-    letter-spacing: 0.05em;
-    outline: none;
-  }
-
-  .logo:hover {
-    opacity: 0.8;
-  }
-
-  .nav-links {
-    display: flex;
-    gap: 2rem;
-  }
-
-  .nav-link {
-    color: white;
-    font-size: 0.95rem;
-    font-weight: 400;
-    opacity: 0.9;
-    transition: opacity 0.2s;
-    outline: none;
-  }
-
-  .nav-link:hover {
-    opacity: 1;
-  }
-
-  .nav-link.active {
-    opacity: 1;
-    border-bottom: 2px solid #60a5fa;
-    padding-bottom: 0.25rem;
-  }
+  .navbar { display: flex; justify-content: space-between; align-items: center; padding: 1.5rem 10%; background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border-dim); position: sticky; top: 0; z-index: 1000; }
+  .logo { font-size: 1.25rem; font-weight: 700; color: white; text-decoration: none; }
+  .nav-links { display: flex; gap: 2rem; }
+  .nav-link { color: var(--text-secondary); text-decoration: none; font-size: 0.9rem; transition: 0.3s; }
+  .nav-link:hover, .nav-link.active { color: white; }
+  .nav-link.active { border-bottom: 2px solid var(--accent-purple); padding-bottom: 4px; }
 
   /* Hero */
-  .resume-hero {
-    text-align: center;
-    padding: 3rem 2rem 4rem;
-    max-width: 50rem;
-    margin: 0 auto;
-  }
+  .resume-hero { text-align: center; padding: 6rem 2rem 4rem; }
+  .resume-hero h1 { font-size: clamp(3rem, 7vw, 4.5rem); font-weight: 800; letter-spacing: -0.04em; margin-bottom: 1rem; }
+  .resume-hero .subtitle { font-size: 1.5rem; color: var(--text-secondary); margin-bottom: 2.5rem; }
+  .download-btn { display: inline-flex; align-items: center; gap: 0.75rem; padding: 1rem 2.5rem; background: white; color: black; border-radius: 100px; font-weight: 600; text-decoration: none; transition: 0.3s; }
+  .download-btn:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(159, 85, 255, 0.3); }
 
-  .resume-hero h1 {
-    font-size: clamp(2.5rem, 6vw, 4rem);
-    font-weight: 800;
-    margin-bottom: 0.5rem;
-  }
-
-  .resume-hero .subtitle {
-    font-size: 1.25rem;
-    color: rgba(255, 255, 255, 0.7);
-    margin-bottom: 2rem;
-  }
-
-  .download-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.875rem 2rem;
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 2rem;
-    color: white;
-    font-weight: 500;
-    backdrop-filter: blur(10px);
-    transition: all 0.2s;
-  }
-
-  .download-btn:hover {
-    background: rgba(255, 255, 255, 0.2);
-    transform: translateY(-2px);
-    text-decoration: none;
-  }
-
-  /* Sections */
-  .section {
-    max-width: 60rem;
-    margin: 0 auto 4rem;
-    padding: 0 2rem;
-  }
-
-  .section:last-of-type {
-    margin-bottom: 0;
-    padding-bottom: 4rem;
-  }
-
-  .section-title {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    font-size: 2rem;
-    font-weight: 700;
-    margin-bottom: 2rem;
-    padding-bottom: 1rem;
-    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
-  }
-
-  .section-title i {
-    font-size: 1.5rem;
-    color: #60a5fa;
-  }
+  /* Section Labels */
+  .section { max-width: 1000px; margin: 0 auto 6rem; padding: 0 2rem; }
+  .section-label { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.2em; color: var(--accent-purple); margin-bottom: 3rem; font-weight: 700; }
 
   /* Experience Cards */
-  .timeline {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-  }
+  .experience-card { background: var(--card-surface); border: 1px solid var(--border-dim); border-radius: 24px; padding: 3rem; margin-bottom: 2rem; transition: 0.4s cubic-bezier(0.23, 1, 0.32, 1); }
+  .experience-card:hover { border-color: rgba(159, 85, 255, 0.4); transform: translateY(-5px); }
+  .card-header { display: flex; justify-content: space-between; margin-bottom: 2.5rem; }
+  .logo-wrapper { width: 54px; height: 54px; background: white; border-radius: 12px; display: flex; align-items: center; justify-content: center; padding: 6px; }
+  .company-logo { width: 100%; height: auto; object-fit: contain; }
+  .company-info { display: flex; gap: 1.5rem; align-items: center; }
+  .company-info h3 { font-size: 1.6rem; font-weight: 700; margin: 0; letter-spacing: -0.02em; }
+  .company-name { color: var(--accent-purple); font-weight: 600; font-size: 1.1rem; margin-top: 4px; }
+  .meta { text-align: right; }
+  .period { font-weight: 600; margin: 0; }
+  .location { color: var(--text-secondary); font-size: 0.9rem; margin-top: 4px; }
+  .achievements { list-style: none; padding: 0; }
+  .achievements li { color: #cecece; margin-bottom: 1.25rem; line-height: 1.7; padding-left: 1.5rem; position: relative; font-size: 1.05rem; }
+  .achievements li::before { content: "•"; color: var(--accent-purple); position: absolute; left: 0; font-weight: bold; }
 
-  .experience-card {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 1rem;
-    padding: 2rem;
-    backdrop-filter: blur(10px);
-    transition: all 0.3s;
-  }
+  /* Tech Grid */
+  .tech-category-title { color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 2rem; text-transform: uppercase; }
+  .tech-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 1.5rem; margin-bottom: 4rem; }
+  .tech-item { background: var(--card-surface); border: 1px solid var(--border-dim); border-radius: 20px; padding: 2rem 1rem; display: flex; flex-direction: column; align-items: center; gap: 1.25rem; transition: 0.4s cubic-bezier(0.23, 1, 0.32, 1); }
+  .tech-item:hover { border-color: var(--accent-purple); transform: translateY(-8px); box-shadow: 0 15px 35px rgba(0,0,0,0.5), 0 0 15px rgba(159, 85, 255, 0.2); }
+  .tech-icon-wrapper { width: 50px; height: 50px; transition: 0.5s; }
+  .tech-item:hover .tech-icon-wrapper { transform: scale(1.2) rotate(8deg); }
+  .tech-icon-wrapper img { width: 100%; filter: grayscale(0.2); transition: 0.3s; }
+  .tech-item:hover img { filter: grayscale(0); }
+  .tech-item span { font-size: 0.85rem; color: var(--text-secondary); font-weight: 500; }
+  .tech-item:hover span { color: white; }
 
-  .experience-card:hover {
-    background: rgba(255, 255, 255, 0.08);
-    transform: translateY(-4px);
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-  }
+  /* Education & Certs */
+  .dual-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 5rem; }
+  .interactive-edu-card { background: var(--card-surface); border: 1px solid var(--border-dim); border-radius: 20px; padding: 2rem; margin-bottom: 1.5rem; transition: 0.3s; }
+  .interactive-edu-card:hover { border-color: var(--accent-purple); }
+  .edu-header { display: flex; gap: 1.25rem; align-items: center; }
+  .edu-logo-small { width: 50px; height: 50px; background: white; border-radius: 10px; padding: 6px; }
+  .gpa-tag { font-size: 0.7rem; background: rgba(159, 85, 255, 0.15); color: var(--accent-purple); padding: 4px 10px; border-radius: 6px; font-weight: 800; display: inline-block; margin-top: 8px; }
+  .course-list { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 1.5rem; }
+  .course-tag { font-size: 0.75rem; background: #1a1a1a; color: var(--text-secondary); padding: 4px 12px; border-radius: 100px; border: 1px solid var(--border-dim); }
+  .edu-period { color: var(--text-secondary); font-size: 0.9rem; margin-top: 1rem; font-weight: 500; }
 
-  .card-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 1.5rem;
-    flex-wrap: wrap;
-    gap: 1rem;
-  }
+  .cert-item-minimal { display: flex; align-items: center; gap: 1.25rem; margin-bottom: 2rem; }
+  .cert-item-minimal i { font-size: 1.8rem; color: var(--accent-purple); width: 30px; text-align: center; }
+  .cert-text h4 { font-size: 1rem; margin: 0; }
+  .cert-text p { color: var(--text-secondary); font-size: 0.85rem; margin: 2px 0 0; }
 
-  .company-info {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-  }
-
-  .company-logo {
-    width: 60px;
-    height: 60px;
-    border-radius: 0.75rem;
-    object-fit: contain;
-    background: white;
-    padding: 0.5rem;
-  }
-
-  .company-info h3 {
-    font-size: 1.5rem;
-    font-weight: 700;
-    margin-bottom: 0.25rem;
-  }
-
-  .role {
-    color: rgba(255, 255, 255, 0.7);
-    font-size: 1.1rem;
-  }
-
-  .meta {
-    text-align: right;
-  }
-
-  .location {
-    color: rgba(255, 255, 255, 0.6);
-    font-size: 0.95rem;
-    margin-bottom: 0.25rem;
-  }
-
-  .period {
-    color: rgba(255, 255, 255, 0.5);
-    font-size: 0.9rem;
-    font-style: italic;
-  }
-
-  .achievements {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-  }
-
-  .achievements li {
-    padding-left: 1.5rem;
-    position: relative;
-    color: rgba(255, 255, 255, 0.8);
-    line-height: 1.6;
-  }
-
-  .achievements li::before {
-    content: '▹';
-    position: absolute;
-    left: 0;
-    color: #60a5fa;
-    font-size: 1.2rem;
-  }
-
-  /* Tech Stack Section */
-  .tech-stack-section {
-    margin-bottom: 4rem;
-  }
-
-  .tech-category {
-    margin-bottom: 3rem;
-  }
-
-  .tech-category-title {
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: #60a5fa;
-    margin-bottom: 1.5rem;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
-
-  .tech-category-title::before {
-    content: '';
-    width: 4px;
-    height: 1.5rem;
-    background: linear-gradient(180deg, #60a5fa, #3b82f6);
-    border-radius: 2px;
-  }
-
-  .tech-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-    gap: 2rem;
-  }
-
-  .tech-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.75rem;
-    padding: 1.5rem 1rem;
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 1rem;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .tech-item::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 0;
-    height: 0;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(96, 165, 250, 0.4), transparent);
-    transform: translate(-50%, -50%);
-    transition: width 0.6s, height 0.6s;
-    z-index: 0;
-  }
-
-  .tech-item:hover::before {
-    width: 200%;
-    height: 200%;
-  }
-
-  .tech-item:hover {
-    background: rgba(255, 255, 255, 0.08);
-    border-color: rgba(96, 165, 250, 0.4);
-    transform: translateY(-8px) scale(1.05);
-    box-shadow: 0 20px 40px rgba(96, 165, 250, 0.2);
-  }
-
-  .tech-icon-wrapper {
-    width: 60px;
-    height: 60px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    position: relative;
-    z-index: 1;
-  }
-
-  .tech-icon-wrapper img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    filter: grayscale(0.3);
-    transition: all 0.3s;
-  }
-
-  .tech-item:hover .tech-icon-wrapper img {
-    transform: rotateY(360deg) scale(1.1);
-    filter: grayscale(0) drop-shadow(0 0 20px rgba(96, 165, 250, 0.6));
-  }
-
-  .tech-item span {
-    font-size: 0.9rem;
-    font-weight: 500;
-    color: rgba(255, 255, 255, 0.8);
-    position: relative;
-    z-index: 1;
-    transition: all 0.3s;
-  }
-
-  .tech-item:hover span {
-    color: white;
-    font-weight: 600;
-  }
-
-  /* Tech-specific glow colors */
-  .tech-item[data-tech="react"]:hover {
-    border-color: rgba(97, 218, 251, 0.5);
-    box-shadow: 0 20px 40px rgba(97, 218, 251, 0.3);
-  }
-
-  .tech-item[data-tech="angular"]:hover {
-    border-color: rgba(221, 0, 49, 0.5);
-    box-shadow: 0 20px 40px rgba(221, 0, 49, 0.3);
-  }
-
-  .tech-item[data-tech="java"]:hover {
-    border-color: rgba(242, 101, 34, 0.5);
-    box-shadow: 0 20px 40px rgba(242, 101, 34, 0.3);
-  }
-
-  .tech-item[data-tech="python"]:hover {
-    border-color: rgba(55, 118, 171, 0.5);
-    box-shadow: 0 20px 40px rgba(55, 118, 171, 0.3);
-  }
-
-  .tech-item[data-tech="typescript"]:hover {
-    border-color: rgba(49, 120, 198, 0.5);
-    box-shadow: 0 20px 40px rgba(49, 120, 198, 0.3);
-  }
-
-  .tech-item[data-tech="aws"]:hover {
-    border-color: rgba(255, 153, 0, 0.5);
-    box-shadow: 0 20px 40px rgba(255, 153, 0, 0.3);
-  }
-
-  .tech-item[data-tech="docker"]:hover {
-    border-color: rgba(33, 150, 243, 0.5);
-    box-shadow: 0 20px 40px rgba(33, 150, 243, 0.3);
-  }
-
-  /* Education Grid */
-  .education-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2rem;
-  }
-
-  .education-card {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 1rem;
-    padding: 2rem;
-    text-align: center;
-    transition: all 0.3s;
-  }
-
-  .education-card:hover {
-    background: rgba(255, 255, 255, 0.08);
-    transform: translateY(-4px);
-  }
-
-  .school-logo {
-    width: 80px;
-    height: 80px;
-    border-radius: 1rem;
-    object-fit: contain;
-    background: white;
-    padding: 0.75rem;
-    margin: 0 auto 1rem;
-  }
-
-  .education-card h3 {
-    font-size: 1.25rem;
-    font-weight: 700;
-    margin-bottom: 0.5rem;
-  }
-
-  .degree {
-    color: rgba(255, 255, 255, 0.7);
-    margin-bottom: 0.5rem;
-  }
-
-  .education-card .period {
-    color: rgba(255, 255, 255, 0.5);
-    font-size: 0.9rem;
-  }
-
-  /* Certificates Grid */
-  .certs-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 1.5rem;
-  }
-
-  .cert-card {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 1rem;
-    padding: 1.5rem;
-    transition: all 0.3s;
-  }
-
-  .cert-card:hover {
-    background: rgba(255, 255, 255, 0.08);
-    transform: translateY(-2px);
-  }
-
-  .cert-card i {
-    font-size: 2rem;
-    color: #60a5fa;
-  }
-
-  .cert-card h4 {
-    font-size: 1rem;
-    font-weight: 600;
-    margin-bottom: 0.25rem;
-  }
-
-  .cert-card p {
-    font-size: 0.85rem;
-    color: rgba(255, 255, 255, 0.6);
-  }
-
-  /* Mobile */
   @media (max-width: 768px) {
-    .navbar {
-      padding: 1rem 1.5rem;
-      flex-direction: column;
-      gap: 1rem;
-    }
-
-    .nav-links {
-      gap: 1rem;
-      font-size: 0.85rem;
-    }
-
-    .section {
-      padding: 0 1.5rem;
-    }
-
-    .card-header {
-      flex-direction: column;
-    }
-
-    .meta {
-      text-align: left;
-    }
-
-    .company-logo {
-      width: 50px;
-      height: 50px;
-    }
-
-    .tech-grid {
-      grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
-      gap: 1rem;
-    }
-
-    .tech-item {
-      padding: 1rem 0.75rem;
-    }
-
-    .tech-icon-wrapper {
-      width: 45px;
-      height: 45px;
-    }
-
-    .tech-item span {
-      font-size: 0.8rem;
-    }
-
-    .education-grid,
-    .certs-grid {
-      grid-template-columns: 1fr;
-    }
+    .dual-grid { grid-template-columns: 1fr; }
+    .card-header { flex-direction: column; gap: 1rem; }
+    .meta { text-align: left; }
+    .navbar { padding: 1rem 5%; }
   }
 </style>
