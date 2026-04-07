@@ -8,12 +8,9 @@ import TravelCard from '../components/TravelCard';
 const bio = {
   intro: "I’m Bryan, a full-stack developer from New Orleans, Louisiana, interested in building impactful software. I’m currently pursuing my master’s in Computer Science to deepen my technical expertise, while building personal projects that bridge real-world problems with innovative solutions. My goal is to break into finance or healthcare technology, creating software that drives meaningful outcomes for users and organizations alike.",
   quickFacts: [
-    "🐯 LSU & ⚜️ Saints Football Fan ",
-    "🏌️ Golf enthusiast with a PB of 99",
     "🎬 Movie/Anime & 📖 Manga Enjoyer",
     "🎴 TCG collector (One Piece & Pokémon)",
     "🏋️ Avid lifter & 💪 future bodybuilder",
-    "✈️ Traveler & 🍽️ a foodie" 
     ]
 };
 ---
@@ -31,82 +28,97 @@ const bio = {
       </div>
     </nav>
 
-    <div class="about-hero">
-      <h1>About Me</h1>
-      <p class="subtitle">This was an excuse to showcase my hobbies</p>
-    </div>
-
-    <section class="section bio-section">
-      <div class="bio-card">
-        <p class="bio-intro">{bio.intro}</p>
-        <div class="quick-facts">
-          {bio.quickFacts.map(fact => (
-            <div class="fact-item">{fact}</div>
-          ))}
-        </div>
+    <div class="content-wrapper">
+      <div class="about-hero">
+        <h1>About Me</h1>
+        <p class="subtitle">This was an excuse to showcase my hobbies</p>
       </div>
-    </section>
 
-    <section class="section bento-section">
-      <BentoGrid>
-        <TravelCard client:only="react" />
+      <section class="section bento-section">
+        <BentoGrid>
+          <TravelCard client:only="react" />
 
-        <BentoCard
-          title="Resume Website 📝"
-          description="Side project to showcase my skills, projects, and experience."
-          size="small"
-        />
-      </BentoGrid>
-    </section>
+          <BentoCard
+            title="Resume Website 📝"
+            description="Side project to showcase my skills, projects, and experience."
+            size="small"
+          />
+
+          <BentoCard title="Sports & Fitness" size="wide">
+            <div class="stats-container">
+              <div class="stat-item">
+                <span class="stat-label">Golf PB</span>
+                <span class="stat-value">99</span>
+              </div>
+              <div class="team-badges">
+                <img src="/logos/lsu_sports.png" alt="LSU" />
+                <img src="/logos/saints.png" alt="Saints" />
+                <img src="/logos/LA_Dodgers.png" alt="Dodgers" />
+              </div>
+            </div>
+          </BentoCard>
+        </BentoGrid>
+      </section>
+    </div>
   </div>
 </Layout>
 
 <style>
-  /* Root Variables for the Purple Theme */
   :root {
     --bg-main: #000000;
     --card-surface: #111111;
-    --card-hover: #161616;
     --border-color: rgba(255, 255, 255, 0.08);
     --text-primary: #ffffff;
     --text-secondary: #888888;
-    
-    /* Theme Accent: Rich Deep Violet */
     --accent-purple: #9F55FF; 
   }
 
-  /* Global page setup: BLACK and Font Stack */
   .about-page {
     min-height: 100vh;
     background-color: var(--bg-main);
     color: var(--text-primary);
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  }
+
+  /* WRAPPER TO PUSH CONTENT DOWN */
+  .content-wrapper {
+    padding-top: 8rem; /* Enough space so the fixed navbar doesn't cover H1 */
     padding-bottom: 6rem;
   }
 
-  /* Navbar: Sophisticated Dark */
+  /* --- THE GLASS PILL NAVBAR --- */
   .navbar {
+    position: fixed;
+    top: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1.5rem 10%;
-    background: rgba(0, 0, 0, 0.8);
-    backdrop-filter: blur(20px);
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    border-bottom: 0.5px solid var(--border-color);
+    
+    /* LOCK THESE TWO VALUES ACROSS ALL FILES */
+    width: 90%;
+    max-width: 850px; 
+    
+    padding: 0.8rem 2.5rem;
+    
+    background: rgba(10, 10, 10, 0.4);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 100px;
   }
 
   .logo {
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: var(--text-primary);
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: white;
+    letter-spacing: 0.1em;
     text-decoration: none;
-    letter-spacing: -0.01em;
   }
-
-  .logo:hover { opacity: 0.8; }
 
   .nav-links {
     display: flex;
@@ -116,135 +128,68 @@ const bio = {
   .nav-link {
     color: var(--text-secondary);
     text-decoration: none;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     font-weight: 500;
     transition: color 0.3s ease;
+    position: relative;
+    padding: 4px 0;
   }
 
-  .nav-link:hover {
-    color: var(--text-primary);
+  .nav-link:hover, .nav-link.active {
+    color: white;
   }
 
-  .nav-link.active {
-    color: var(--text-primary);
-    border-bottom: 1.5px solid var(--accent-purple); /* PURPLE active underline */
-    padding-bottom: 0.25rem;
+  /* UNDERLINE ANIMATION (Matches Index) */
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: var(--accent-purple);
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+    border-radius: 2px;
   }
 
-  /* Hero: Bold and Tight */
+  .nav-link:hover::after, .nav-link.active::after {
+    width: 100%;
+  }
+
+  /* --- REST OF STYLES --- */
   .about-hero {
     text-align: center;
-    padding: 6rem 2rem 4rem;
-    max-width: 50rem;
-    margin: 0 auto;
+    padding: 4rem 2rem;
   }
 
   .about-hero h1 {
-    font-size: clamp(3rem, 7vw, 4.5rem);
-    font-weight: 700;
-    letter-spacing: -0.04em; /* Tight letter spacing for that Pro look */
-    margin-bottom: 0.75rem;
+    font-size: clamp(3.5rem, 8vw, 5rem);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    margin-bottom: 1rem;
   }
 
   .about-hero .subtitle {
-    font-size: 1.5rem;
-    font-weight: 400;
+    font-size: 1.2rem;
     color: var(--text-secondary);
   }
 
-  /* Section constraints */
   .section {
-    max-width: 70rem;
+    max-width: 1100px;
     margin: 0 auto;
     padding: 0 2rem;
   }
 
-  .bio-section {
-    max-width: 900px;
-    margin-bottom: 6rem;
-  }
-
-  /* Bio Card: Deep Gray Glassmorphism */
-  .bio-card {
-    background: var(--card-surface);
-    border: 1px solid var(--border-color);
-    border-radius: 2rem;
-    padding: 3.5rem;
-    backdrop-filter: blur(10px);
-    transition: transform 0.3s ease;
-  }
-
-  .bio-intro {
-    font-size: 1.25rem;
-    line-height: 1.7;
-    font-weight: 400;
-    color: var(--text-primary);
-    margin-bottom: 3rem;
-  }
-
-  .quick-facts {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1.25rem;
-  }
-
-  /* Fact Items: Subtle Purple interaction */
-  .fact-item {
-    padding: 1.25rem 1.5rem;
-    background: rgba(255, 255, 255, 0.04);
-    border-radius: 1rem;
-    font-size: 0.95rem;
-    color: var(--text-secondary);
-    border-left: 3px solid var(--accent-purple); /* PURPLE border */
-    transition: all 0.3s ease;
-  }
-
-  .fact-item:hover {
-    background: rgba(255, 255, 255, 0.08);
-    color: var(--text-primary);
-    transform: translateY(-2px);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), 0 0 20px rgba(159, 85, 255, 0.05);
-  }
-
-  /* Title styling (retained for consistency, though unused in provided JSX) */
-  .subsection-title {
-    font-size: 1.5rem;
-    font-weight: 600;
-    margin: 3rem 0 1.5rem;
-    color: var(--accent-purple); /* PURPLE Subsection titles */
-  }
-
-  /* Mobile */
+  /* Mobile Responsive */
   @media (max-width: 768px) {
     .navbar {
-      padding: 1rem 1.5rem;
-      flex-direction: column;
-      gap: 1rem;
+      width: 95%;
+      padding: 0.6rem 1.5rem;
+      top: 1rem;
     }
-
-    .logo {
-      font-size: 1.1rem;
-    }
-
-    .nav-links {
-      gap: 1.25rem;
-      font-size: 0.8rem;
-    }
-
-    .section {
-      padding: 0 1.5rem;
-    }
-
-    .about-hero {
-      padding: 4rem 1.5rem 3rem;
-    }
-
-    .bio-card {
-      padding: 2rem;
-    }
-
-    .bio-intro {
-      font-size: 1.1rem;
-    }
+    .content-wrapper { padding-top: 6rem; }
+    .nav-links { gap: 1rem; }
+    .nav-link { font-size: 0.75rem; }
   }
 </style>

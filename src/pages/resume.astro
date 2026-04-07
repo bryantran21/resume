@@ -1,5 +1,4 @@
 ---
-import { span } from 'framer-motion/m';
 import Layout from '../layouts/Layout.astro';
 
 const experiences = [
@@ -87,6 +86,7 @@ const certificates = [
 
 <Layout title="Bryan Tran - Resume" description="Software Developer specializing in Full Stack Development">
   <div class="resume-page">
+    
     <nav class="navbar">
       <a href="/" class="logo">BRYAN</a>
       <div class="nav-links">
@@ -97,128 +97,130 @@ const certificates = [
       </div>
     </nav>
 
-    <div class="resume-hero">
-      <h1>Resume</h1>
-      <p class="subtitle">Full Stack Developer & Problem Solver</p>
-      <a href="/Bryan_Tran_Resume.pdf" download class="download-btn">
-        <i class="fas fa-download"></i>
-        Download PDF
-      </a>
-    </div>
-
-    <section class="section">
-      <h2 class="section-label">Experience</h2>
-      <div class="timeline">
-        {experiences.map(exp => (
-          <div class="experience-card">
-            <div class="card-header">
-              <div class="company-info">
-                <div class="logo-wrapper"><img src={exp.logo} alt={exp.company} class="company-logo" /></div>
-                <div>
-                  <h3>{exp.role}</h3>
-                  <p class="company-name">{exp.company}</p>
-                </div>
-              </div>
-              <div class="meta">
-                <p class="period">{exp.period}</p>
-                <p class="location">{exp.location}</p>
-              </div>
-            </div>
-            <ul class="achievements">
-              {exp.achievements.map(achievement => <li>{achievement}</li>)}
-            </ul>
-          </div>
-        ))}
-      </div>
-    </section>
-
-    <section class="section">
-      <h2 class="section-label">Technical Arsenal</h2>
-      
-      <div class="tech-category">
-        <h3 class="tech-category-title">Frontend</h3>
-        <div class="tech-grid">
-          <div class="tech-item" data-tech="react"><div class="tech-icon-wrapper"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" /></div><span>React</span></div>
-          <div class="tech-item" data-tech="angular"><div class="tech-icon-wrapper"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/angular/angular-original.svg" /></div><span>Angular</span></div>
-          <div class="tech-item" data-tech="nextjs"><div class="tech-icon-wrapper"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" /></div><span>Next.js</span></div>
-          <div class="tech-item" data-tech="typescript"><div class="tech-icon-wrapper"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" /></div><span>TypeScript</span></div>
-          <div class="tech-item" data-tech="tailwind"><div class="tech-icon-wrapper"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg" /></div><span>Tailwind</span></div>
-          <div class="tech-item" data-tech="astro"><div class="tech-icon-wrapper"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/astro/astro-original.svg" /></div><span>Astro</span></div>
-          <div class="tech-item" data-tech="bootstrap"><div class="tech-icon-wrapper"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg" /></div><span>Bootstrap</span></div>
-          <div class="tech-item" data-tech="html"><div class="tech-icon-wrapper"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" /></div><span>HTML5</span></div>
-          <div class="tech-item" data-tech="css"><div class="tech-icon-wrapper"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-original.svg" /></div><span>CSS3</span></div>
-        </div>
+    <div class="content-wrapper">
+      <div class="resume-hero">
+        <h1>Resume</h1>
+        <p class="subtitle">Full Stack Developer & Problem Solver</p>
+        <a href="/Bryan_Tran_Resume.pdf" download class="download-btn">
+          <i class="fas fa-download"></i>
+          Download PDF
+        </a>
       </div>
 
-      <div class="tech-category">
-        <h3 class="tech-category-title">Backend & Database</h3>
-        <div class="tech-grid">
-          <div class="tech-item" data-tech="java"><div class="tech-icon-wrapper"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" /></div><span>Java</span></div>
-          <div class="tech-item" data-tech="spring"><div class="tech-icon-wrapper"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg" /></div><span>Spring Boot</span></div>
-          <div class="tech-item" data-tech="nodejs"><div class="tech-icon-wrapper"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" /></div><span>Node.js</span></div>
-          <div class="tech-item" data-tech="python"><div class="tech-icon-wrapper"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" /></div><span>Python</span></div>          
-          <div class="tech-item" data-tech="mysql"><div class="tech-icon-wrapper"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" /></div><span>MySQL</span></div>
-          <div class="tech-item" data-tech="mongodb"><div class="tech-icon-wrapper"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" /></div><span>MongoDB</span></div>
-          <div class="tech-item" data-tech="csharp"><div class="tech-icon-wrapper"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg" /></div><span>C#</span></div>
-          <div class="tech-item" data-tech="php"><div class="tech-icon-wrapper"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" /></div><span>PHP</span></div>
-          <div class="tech-item" data-tech="oracle"><div class="tech-icon-wrapper"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/oracle/oracle-original.svg" /></div><span>Oracle</span></div>
-        </div>
-      </div>
-
-      <div class="tech-category">
-        <h3 class="tech-category-title">DevOps & Tools</h3>
-        <div class="tech-grid">
-          <div class="tech-item" data-tech="aws"><div class="tech-icon-wrapper"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-plain-wordmark.svg" /></div><span>AWS</span></div>
-          <div class="tech-item" data-tech="azure"><div class="tech-icon-wrapper"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azure/azure-original.svg" /></div><span>Azure</span></div>
-          <div class="tech-item" data-tech="docker"><div class="tech-icon-wrapper"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" /></div><span>Docker</span></div>
-          <div class="tech-item" data-tech="git"><div class="tech-icon-wrapper"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" /></div><span>Git</span></div>
-          <div class="tech-item" data-tech="jira"><div class="tech-icon-wrapper"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jira/jira-original.svg" /></div><span>Jira</span></div>
-          <div class="tech-item" data-tech="maven"><div class="tech-icon-wrapper"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/maven/maven-original.svg" /></div><span>Maven</span></div>
-          <div class="tech-item" data-tech="vscode"><div class="tech-icon-wrapper"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" /></div><span>VS Code</span></div>
-          <div class="tech-item" data-tech="figma"><div class="tech-icon-wrapper"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" /></div><span>Figma</span></div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section dual-grid">
-      <div class="edu-column">
-        <h2 class="section-label">Education</h2>
-        <div class="edu-list">
-          {education.map(edu => (
-            <div class="interactive-edu-card">
-              <div class="edu-header">
-                  <img src={edu.logo} alt={edu.school} class="edu-logo-small" />
-                  <div class="edu-info">
-                    <h3>{edu.school}</h3>
-                    <p>{edu.degree} <span class="gpa-tag">GPA {edu.gpa}</span></p>
+      <section class="section">
+        <h2 class="section-label">Experience</h2>
+        <div class="timeline">
+          {experiences.map(exp => (
+            <div class="experience-card">
+              <div class="card-header">
+                <div class="company-info">
+                  <div class="logo-wrapper"><img src={exp.logo} alt={exp.company} class="company-logo" /></div>
+                  <div>
+                    <h3>{exp.role}</h3>
+                    <p class="company-name">{exp.company}</p>
                   </div>
-              </div>
-              <div class="edu-details">
-                <p class="edu-period">{edu.period}</p>
-                <div class="course-list">
-                    {edu.coursework.map(course => <span class="course-tag">{course}</span>)}
+                </div>
+                <div class="meta">
+                  <p class="period">{exp.period}</p>
+                  <p class="location">{exp.location}</p>
                 </div>
               </div>
+              <ul class="achievements">
+                {exp.achievements.map(achievement => <li>{achievement}</li>)}
+              </ul>
             </div>
           ))}
         </div>
-      </div>
+      </section>
 
-      <div class="cert-column">
-        <h2 class="section-label">Certifications</h2>
-        <div class="cert-list">
-          {certificates.map(cert => (
-            <div class="cert-item-minimal">
-              <i class={cert.icon}></i>
-              <div class="cert-text">
-                <h4>{cert.name}</h4>
-                <p>{cert.issuer}</p>
-              </div>
-            </div>
-          ))}
+      <section class="section">
+        <h2 class="section-label">Technical Arsenal</h2>
+        
+        <div class="tech-category">
+          <h3 class="tech-category-title">Frontend</h3>
+          <div class="tech-grid">
+            <div class="tech-item" data-tech="react"><div class="tech-icon-wrapper"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" /></div><span>React</span></div>
+            <div class="tech-item" data-tech="angular"><div class="tech-icon-wrapper"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/angular/angular-original.svg" /></div><span>Angular</span></div>
+            <div class="tech-item" data-tech="nextjs"><div class="tech-icon-wrapper"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" /></div><span>Next.js</span></div>
+            <div class="tech-item" data-tech="typescript"><div class="tech-icon-wrapper"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" /></div><span>TypeScript</span></div>
+            <div class="tech-item" data-tech="tailwind"><div class="tech-icon-wrapper"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg" /></div><span>Tailwind</span></div>
+            <div class="tech-item" data-tech="astro"><div class="tech-icon-wrapper"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/astro/astro-original.svg" /></div><span>Astro</span></div>
+            <div class="tech-item" data-tech="bootstrap"><div class="tech-icon-wrapper"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg" /></div><span>Bootstrap</span></div>
+            <div class="tech-item" data-tech="html"><div class="tech-icon-wrapper"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" /></div><span>HTML5</span></div>
+            <div class="tech-item" data-tech="css"><div class="tech-icon-wrapper"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-original.svg" /></div><span>CSS3</span></div>
+          </div>
         </div>
-      </div>
-    </section>
+
+        <div class="tech-category">
+          <h3 class="tech-category-title">Backend & Database</h3>
+          <div class="tech-grid">
+            <div class="tech-item" data-tech="java"><div class="tech-icon-wrapper"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" /></div><span>Java</span></div>
+            <div class="tech-item" data-tech="spring"><div class="tech-icon-wrapper"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg" /></div><span>Spring Boot</span></div>
+            <div class="tech-item" data-tech="nodejs"><div class="tech-icon-wrapper"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" /></div><span>Node.js</span></div>
+            <div class="tech-item" data-tech="python"><div class="tech-icon-wrapper"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" /></div><span>Python</span></div>          
+            <div class="tech-item" data-tech="mysql"><div class="tech-icon-wrapper"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" /></div><span>MySQL</span></div>
+            <div class="tech-item" data-tech="mongodb"><div class="tech-icon-wrapper"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" /></div><span>MongoDB</span></div>
+            <div class="tech-item" data-tech="csharp"><div class="tech-icon-wrapper"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg" /></div><span>C#</span></div>
+            <div class="tech-item" data-tech="php"><div class="tech-icon-wrapper"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" /></div><span>PHP</span></div>
+            <div class="tech-item" data-tech="oracle"><div class="tech-icon-wrapper"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/oracle/oracle-original.svg" /></div><span>Oracle</span></div>
+          </div>
+        </div>
+
+        <div class="tech-category">
+          <h3 class="tech-category-title">DevOps & Tools</h3>
+          <div class="tech-grid">
+            <div class="tech-item" data-tech="aws"><div class="tech-icon-wrapper"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-plain-wordmark.svg" /></div><span>AWS</span></div>
+            <div class="tech-item" data-tech="azure"><div class="tech-icon-wrapper"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azure/azure-original.svg" /></div><span>Azure</span></div>
+            <div class="tech-item" data-tech="docker"><div class="tech-icon-wrapper"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" /></div><span>Docker</span></div>
+            <div class="tech-item" data-tech="git"><div class="tech-icon-wrapper"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" /></div><span>Git</span></div>
+            <div class="tech-item" data-tech="jira"><div class="tech-icon-wrapper"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jira/jira-original.svg" /></div><span>Jira</span></div>
+            <div class="tech-item" data-tech="maven"><div class="tech-icon-wrapper"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/maven/maven-original.svg" /></div><span>Maven</span></div>
+            <div class="tech-item" data-tech="vscode"><div class="tech-icon-wrapper"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" /></div><span>VS Code</span></div>
+            <div class="tech-item" data-tech="figma"><div class="tech-icon-wrapper"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" /></div><span>Figma</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section dual-grid">
+        <div class="edu-column">
+          <h2 class="section-label">Education</h2>
+          <div class="edu-list">
+            {education.map(edu => (
+              <div class="interactive-edu-card">
+                <div class="edu-header">
+                    <img src={edu.logo} alt={edu.school} class="edu-logo-small" />
+                    <div class="edu-info">
+                      <h3>{edu.school}</h3>
+                      <p>{edu.degree} <span class="gpa-tag">GPA {edu.gpa}</span></p>
+                    </div>
+                </div>
+                <div class="edu-details">
+                  <p class="edu-period">{edu.period}</p>
+                  <div class="course-list">
+                      {edu.coursework.map(course => <span class="course-tag">{course}</span>)}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div class="cert-column">
+          <h2 class="section-label">Certifications</h2>
+          <div class="cert-list">
+            {certificates.map(cert => (
+              <div class="cert-item-minimal">
+                <i class={cert.icon}></i>
+                <div class="cert-text">
+                  <h4>{cert.name}</h4>
+                  <p>{cert.issuer}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    </div>
   </div>
 </Layout>
 
@@ -237,25 +239,106 @@ const certificates = [
     color: var(--text-primary);
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     min-height: 100vh;
+  }
+
+  /* --- THE UNIVERSAL GLASS PILL --- */
+  .navbar {
+    position: fixed;
+    top: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+    width: 90%;
+    max-width: 850px; 
+    padding: 0.8rem 2.5rem;
+    
+    background: rgba(10, 10, 10, 0.4);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 100px;
+  }
+
+  .logo {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: white;
+    letter-spacing: 0.1em; 
+    text-decoration: none;
+    transition: opacity 0.2s;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+  }
+
+  .nav-link {
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: color 0.3s ease;
+    position: relative;
+    padding: 6px 0;
+  }
+
+  .nav-link:hover, 
+  .nav-link.active {
+    color: white;
+  }
+
+  /* The Growing Underline */
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: var(--accent-purple);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transform: translateX(-50%);
+    border-radius: 2px;
+  }
+
+  .nav-link:hover::after,
+  .nav-link.active::after {
+    width: 100%;
+  }
+
+  /* Content Spacing */
+  .content-wrapper {
+    padding-top: 8rem;
     padding-bottom: 6rem;
   }
 
-  /* Navbar */
-  .navbar { display: flex; justify-content: space-between; align-items: center; padding: 1.5rem 10%; background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border-dim); position: sticky; top: 0; z-index: 1000; }
-  .logo { font-size: 1.25rem; font-weight: 700; color: white; text-decoration: none; }
-  .nav-links { display: flex; gap: 2rem; }
-  .nav-link { color: var(--text-secondary); text-decoration: none; font-size: 0.9rem; transition: 0.3s; }
-  .nav-link:hover, .nav-link.active { color: white; }
-  .nav-link.active { border-bottom: 2px solid var(--accent-purple); padding-bottom: 4px; }
-
   /* Hero */
-  .resume-hero { text-align: center; padding: 6rem 2rem 4rem; }
+  .resume-hero { text-align: center; padding: 4rem 2rem; }
   .resume-hero h1 { font-size: clamp(3rem, 7vw, 4.5rem); font-weight: 800; letter-spacing: -0.04em; margin-bottom: 1rem; }
   .resume-hero .subtitle { font-size: 1.5rem; color: var(--text-secondary); margin-bottom: 2.5rem; }
-  .download-btn { display: inline-flex; align-items: center; gap: 0.75rem; padding: 1rem 2.5rem; background: white; color: black; border-radius: 100px; font-weight: 600; text-decoration: none; transition: 0.3s; }
+  
+  .download-btn { 
+    display: inline-flex; 
+    align-items: center; 
+    gap: 0.75rem; 
+    padding: 1rem 2.5rem; 
+    background: white; 
+    color: black; 
+    border-radius: 100px; 
+    font-weight: 600; 
+    text-decoration: none; 
+    transition: 0.3s; 
+  }
   .download-btn:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(159, 85, 255, 0.3); }
 
-  /* Section Labels */
+  /* Sections */
   .section { max-width: 1000px; margin: 0 auto 6rem; padding: 0 2rem; }
   .section-label { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.2em; color: var(--accent-purple); margin-bottom: 3rem; font-weight: 700; }
 
@@ -307,6 +390,7 @@ const certificates = [
     .dual-grid { grid-template-columns: 1fr; }
     .card-header { flex-direction: column; gap: 1rem; }
     .meta { text-align: left; }
-    .navbar { padding: 1rem 5%; }
+    .navbar { top: 1rem; padding: 0.7rem 1.5rem; width: 95%; }
+    .content-wrapper { padding-top: 6rem; }
   }
 </style>
