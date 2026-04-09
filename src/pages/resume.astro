@@ -133,6 +133,46 @@ const certificates = [
         </div>
       </section>
 
+            <section class="section dual-grid">
+        <div class="edu-column">
+          <h2 class="section-label">Education</h2>
+          <div class="edu-list">
+            {education.map(edu => (
+              <div class="interactive-edu-card">
+                <div class="edu-header">
+                    <img src={edu.logo} alt={edu.school} class="edu-logo-small" />
+                    <div class="edu-info">
+                      <h3>{edu.school}</h3>
+                      <p>{edu.degree} <span class="gpa-tag">GPA {edu.gpa}</span></p>
+                    </div>
+                </div>
+                <div class="edu-details">
+                  <p class="edu-period">{edu.period}</p>
+                  <div class="course-list">
+                      {edu.coursework.map(course => <span class="course-tag">{course}</span>)}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div class="cert-column">
+          <h2 class="section-label">Certifications</h2>
+          <div class="cert-list">
+            {certificates.map(cert => (
+              <div class="cert-item-minimal">
+                <i class={cert.icon}></i>
+                <div class="cert-text">
+                  <h4>{cert.name}</h4>
+                  <p>{cert.issuer}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section class="section">
         <h2 class="section-label">Technical Arsenal</h2>
         
@@ -181,45 +221,6 @@ const certificates = [
         </div>
       </section>
 
-      <section class="section dual-grid">
-        <div class="edu-column">
-          <h2 class="section-label">Education</h2>
-          <div class="edu-list">
-            {education.map(edu => (
-              <div class="interactive-edu-card">
-                <div class="edu-header">
-                    <img src={edu.logo} alt={edu.school} class="edu-logo-small" />
-                    <div class="edu-info">
-                      <h3>{edu.school}</h3>
-                      <p>{edu.degree} <span class="gpa-tag">GPA {edu.gpa}</span></p>
-                    </div>
-                </div>
-                <div class="edu-details">
-                  <p class="edu-period">{edu.period}</p>
-                  <div class="course-list">
-                      {edu.coursework.map(course => <span class="course-tag">{course}</span>)}
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div class="cert-column">
-          <h2 class="section-label">Certifications</h2>
-          <div class="cert-list">
-            {certificates.map(cert => (
-              <div class="cert-item-minimal">
-                <i class={cert.icon}></i>
-                <div class="cert-text">
-                  <h4>{cert.name}</h4>
-                  <p>{cert.issuer}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
     </div>
   </div>
 </Layout>
