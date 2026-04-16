@@ -1,0 +1,175 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+// This fetches all your .md or .mdx files from src/content/blog/
+const posts = await getCollection('blog');
+// Sort by date (newest first)
+const sortedPosts = posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+const title = "The Lab Notes";
+const description = "Research, AI/ML, and technical deep dives by Bryan Tran.";
+---
+
+<Layout title={title} description={description}>
+  <div class="blog-index">
+    
+    <header class="blog-hero">
+      <h2 class="section-label">Research & Writing</h2>
+      <h1>The Lab Notes</h1>
+      <p class="subtitle">Documenting my journey through AI/ML at Georgia Tech and beyond.</p>
+    </header>
+
+    <section class="posts-grid">
+      {sortedPosts.length > 0 ? (
+        sortedPosts.map((post) => (
+          <a href={`/blog/${post.slug}`} class="post-card">
+            <div class="post-meta">
+              <span class="date">{post.data.pubDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</span>
+              <div class="tags">
+                {post.data.tags.map(tag => <span class="tag">#{tag}</span>)}
+              </div>
+            </div>
+            <h2 class="post-title">{post.data.title}</h2>
+            <p class="post-description">{post.data.description}</p>
+            <div class="read-more">
+              Read Analysis <i class="fas fa-arrow-right"></i>
+            </div>
+          </a>
+        ))
+      ) : (
+        <div class="empty-state">
+          <p>The lab is currently quiet. Check back soon for new research entries.</p>
+        </div>
+      )}
+    </section>
+  </div>
+</Layout>
+
+<style>
+  .blog-index {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 8rem 2rem 6rem;
+  }
+
+  .blog-hero {
+    margin-bottom: 5rem;
+    text-align: left;
+  }
+
+  .section-label {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--accent-purple);
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+  }
+
+  .blog-hero h1 {
+    font-size: clamp(3rem, 7vw, 4.5rem);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    margin-bottom: 1rem;
+  }
+
+  .subtitle {
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.6);
+    max-width: 600px;
+  }
+
+  /* Post Cards */
+  .posts-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .post-card {
+    background: #0a0a0a;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 24px;
+    padding: 2.5rem;
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    text-decoration: none;
+    display: block;
+  }
+
+  .post-card:hover {
+    border-color: var(--accent-purple);
+    transform: translateY(-5px);
+    background: #111;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  }
+
+  .post-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+  }
+
+  .date {
+    font-size: 0.85rem;
+    color: var(--accent-purple);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .tags {
+    display: flex;
+    gap: 0.75rem;
+  }
+
+  .tag {
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.4);
+  }
+
+  .post-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 1rem;
+    letter-spacing: -0.02em;
+  }
+
+  .post-description {
+    font-size: 1.05rem;
+    color: rgba(255, 255, 255, 0.6);
+    line-height: 1.6;
+    margin-bottom: 2rem;
+  }
+
+  .read-more {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: white;
+    transition: gap 0.3s;
+  }
+
+  .post-card:hover .read-more {
+    gap: 0.8rem;
+    color: var(--accent-purple);
+  }
+
+  .empty-state {
+    padding: 4rem;
+    text-align: center;
+    border: 1px dashed rgba(255, 255, 255, 0.1);
+    border-radius: 24px;
+    color: rgba(255, 255, 255, 0.4);
+  }
+
+  @media (max-width: 768px) {
+    .blog-index { padding-top: 6rem; }
+    .post-card { padding: 1.5rem; }
+    .post-title { font-size: 1.4rem; }
+  }
+</style>
