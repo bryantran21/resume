@@ -8,6 +8,18 @@ const {
   title, 
   description = "Personal website and portfolio" 
 } = Astro.props;
+
+// Standardize links here so they update everywhere at once
+const navLinks = [
+  { label: 'About', href: '/about' },
+  { label: 'Resume', href: '/resume' },
+  { label: 'Projects', href: '/projects' },
+  { label: 'Blog', href: '/blog' },
+];
+
+// Get current path to handle the "active" underline state
+const pathname = new URL(Astro.url).pathname;
+const currentPath = pathname.slice(1); // removes the leading slash
 ---
 
 <!doctype html>
@@ -17,21 +29,38 @@ const {
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content={description} />
   <meta name="generator" content={Astro.generator} />
+  <link rel="icon" type="image/png" href="/favicon.png" />
   
-  <link rel="icon" type="image/svg+xml" href="/favicon.png" />
-  
-  <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
   
   <title>{title}</title>
 </head>
 <body>
-  <slot />
+<nav class="navbar">
+  <a href="/" class="logo">BRYAN</a>
+  <div class="nav-links">
+    {navLinks.map(link => (
+      <a 
+        href={link.href} 
+        class={`nav-link ${pathname === link.href ? 'active' : ''}`}
+      >
+        {link.label}
+      </a>
+    ))}
+  </div>
+</nav>
+
+  <main>
+    <slot />
+  </main>
 </body>
 </html>
 
 <style is:global>
   :root {
+    --accent-purple: #9F55FF;
+    --bg-black: #000000;
+    --text-secondary: rgba(255, 255, 255, 0.7);
     --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   }
 
@@ -43,11 +72,99 @@ const {
 
   body {
     font-family: var(--font-sans);
+    background-color: var(--bg-black);
+    color: white;
     -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
   }
 
-  a {
+  /* --- THE UNIVERSAL GLASS PILL --- */
+  .navbar {
+    position: fixed;
+    top: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+    width: 90%;
+    max-width: 850px; 
+    padding: 0.8rem 2.5rem;
+    
+    /* Obsidian Glass Effect */
+    background: rgba(10, 10, 10, 0.4);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 100px;
+  }
+
+  .logo {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: white !important; /* Force white */
+    letter-spacing: 0.1em; 
     text-decoration: none;
+    transition: opacity 0.2s;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+  }
+
+  .nav-link {
+    color: var(--text-secondary) !important;
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: color 0.3s ease;
+    position: relative;
+    padding: 6px 0;
+  }
+
+  .nav-link:hover, 
+  .nav-link.active {
+    color: white !important;
+  }
+
+  /* The Purple Underline logic */
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: var(--accent-purple);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transform: translateX(-50%);
+    border-radius: 2px;
+  }
+
+  .nav-link:hover::after,
+  .nav-link.active::after {
+    width: 100%;
+  }
+
+  /* Ensure main content is pushed down for all pages EXCEPT Index */
+  main {
+    width: 100%;
+  }
+
+  /* Mobile Responsive */
+  @media (max-width: 768px) {
+    .navbar {
+      top: 1rem;
+      padding: 0.7rem 1.5rem;
+      width: 95%;
+    }
+    .nav-links { gap: 1rem; }
+    .nav-link { font-size: 0.8rem; }
   }
 </style>

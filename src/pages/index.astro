@@ -4,13 +4,6 @@ import Layout from '../layouts/Layout.astro';
 const name = "BRYAN";
 const tagline = "The future belongs to those who believe in the possibilities of tomorrow.";
 
-const navLinks = [
-  { label: 'About', href: '/about' },
-  { label: 'Resume', href: '/resume' },
-  { label: 'Projects', href: '/projects' },
-  { label: 'Sign In', href: '#' },
-];
-
 const socialLinks = [
   { label: 'GitHub', href: 'https://github.com/bryantran21', icon: 'fab fa-github' },
   { label: 'LinkedIn', href: 'https://linkedin.com/in/bryan-huy-tran', icon: 'fab fa-linkedin' },
@@ -22,16 +15,6 @@ const socialLinks = [
 
 <Layout title={name} description={`${name} - ${tagline}`}>
   <div class="page" id="page">
-    
-    <nav class="navbar">
-      <a href="/" class="logo">{name}</a>
-      <div class="nav-links">
-        {navLinks.map(link => (
-          <a href={link.href} class="nav-link">{link.label}</a>
-        ))}
-      </div>
-    </nav>
-
     <div class="hero">
       <div class="profile-island">
         <img 
@@ -81,77 +64,6 @@ const socialLinks = [
     inset: 0;
     background: radial-gradient(circle at center, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.7) 100%);
     z-index: 0;
-  }
-
-  /* --- REFINED NAVBAR --- */
-.navbar {
-    position: fixed;
-    top: 2rem;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 1000;
-    
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    
-    /* LOCK THESE TWO VALUES ACROSS ALL FILES */
-    width: 90%;
-    max-width: 850px; 
-    
-    padding: 0.8rem 2.5rem;
-    
-    background: rgba(10, 10, 10, 0.4);
-    backdrop-filter: blur(20px) saturate(180%);
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
-    
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 100px;
-  }
-
-  .logo {
-    font-size: 1.1rem;
-    font-weight: 800;
-    color: white;
-    letter-spacing: 0.1em;
-    text-decoration: none;
-  }
-
-  .nav-links {
-    display: flex;
-    gap: 2rem;
-  }
-
-  .nav-link {
-    color: rgba(255, 255, 255, 0.7);
-    text-decoration: none;
-    font-size: 0.85rem;
-    font-weight: 500;
-    transition: color 0.3s ease;
-    position: relative;
-    padding: 4px 0;
-  }
-
-  .nav-link:hover {
-    color: white;
-  }
-
-  /* Purple underline interaction */
-  .nav-link::after {
-    content: '';
-    position: absolute;
-    bottom: -2px;
-    left: 50%;
-    width: 0;
-    height: 2px;
-    background: var(--accent-purple);
-    transition: all 0.3s ease;
-    transform: translateX(-50%);
-    border-radius: 2px;
-  }
-
-  .nav-link:hover::after {
-    width: 100%;
   }
 
   /* Hero Section */
@@ -240,8 +152,6 @@ const socialLinks = [
   }
 
   @media (max-width: 768px) {
-    .navbar { width: 95%; padding: 0.6rem 1.5rem; top: 1rem; }
-    .nav-links { gap: 1rem; }
     .name { font-size: 3.5rem; }
     .social-link { padding: 0.6rem 1rem; }
   }
