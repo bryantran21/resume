@@ -3,18 +3,30 @@
 import { useState, useEffect, useRef } from "react";
 import Globe from "react-globe.gl";
 import { motion, AnimatePresence } from "framer-motion";
+import { label } from "framer-motion/client";
 
 // 1. UPDATED DATA: Your actual travel list
 const MY_TRAVEL_DATA = {
   "Texas": 
   { title: "Lone Star State", 
-    links: [{ label: "Austin BBQ Guide", url: "#" }] },
-  "New York": { title: "The Empire State", 
-    links: [{ label: "NYC Skyline", url: "#" }] },
+    links: [{ label: "Houston", url: "#" }] },
+  "New York": { title: "The Big Apple", 
+    links: [{ label: "NYC", url: "#" }] },
   "Louisiana": { title: "Pelican State", 
-    links: [{ label: "NOLA Jazz", url: "#" }] },
+    links: [
+      { label: "New Orleans", url: "#" },
+      { label: "Baton Rouge", url: "#" }
+    ] },
   "Florida": { title: "Sunshine State", 
-    links: [{ label: "Miami Beach", url: "#" }] }
+    links: [{ label: "Orlando", url: "#" }] },
+  "Colorado": { title: "Centennial State", 
+    links: [
+      { label: "Denver", url: "#" },
+      {label: "Breckenridge", url: "#"}] },
+
+    "Washington": { title: "Evergreen State", 
+    links: [
+      { label: "Seattle", url: "#" }] },
 };
 
 const VISITED_STATES = Object.keys(MY_TRAVEL_DATA);
@@ -188,20 +200,34 @@ export default function TravelCard() {
         .text-content h3 { color: white; margin: 0; font-size: 1.4rem; }
         .text-content p { color: rgba(255,255,255,0.6); margin: 4px 0; }
 
-        .back-link {
+       .back-link {
           background: none;
           border: none;
-          color: #3a7bd5;
+          color: var(--accent-purple, #9F55FF); /* Dynamic variable with fallback */
           cursor: pointer;
           margin-bottom: 20px;
           padding: 0;
+          font-weight: 600;
+          transition: opacity 0.2s;
+        }
+
+        .back-link:hover {
+          opacity: 0.8;
         }
 
         .travel-link {
           display: block;
-          color: #3a7bd5;
+          color: var(--accent-purple, #9F55FF);
           margin-top: 12px;
           text-decoration: none;
+          font-size: 0.9rem;
+          font-weight: 500;
+          transition: transform 0.2s ease;
+        }
+
+        .travel-link:hover {
+          text-decoration: underline;
+          transform: translateX(4px); /* Subtle nudge for that premium feel */
         }
 
         .close-btn {
