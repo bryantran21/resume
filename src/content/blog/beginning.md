@@ -53,7 +53,7 @@ I was destroyed. Junior year internships are pivotal for return offers, and I fe
 
 # Post-grad
 
-I was blessed enough to land a full-time offer as an **Application Developer** specializing in Frontend technologies. I flunked the technical, but did well on the behavioral—I guess I got that charisma, yknowwhatimsayin 😎.
+I was blessed enough to land a full-time offer as an **Application Developer** specializing in Frontend technologies. I flunked the technical, but did well on the behavioral—I guess I got that charisma, yknowwhatimsayin. 😎
 
 I'm grateful they took a chance on me, but I feel like I'm stagnating. I really want to grow while I'm young. You have to take a chance on yourself at some point.
 
@@ -69,9 +69,9 @@ As of writing this, **I'm going back to school!** I'm entering the Georgia Tech 
 3.  **Rigor:** The program has been refined since 2012 to match its in-person counterpart.
 
 ### The Branching Timelines:
-* **The Research Path:** Get my Master's and some research done. If it goes well, I’d consider a PhD at a "Big Four" (CMU, Stanford, MIT, UC Berkeley). 
-* **The Big Tech Pipeline:** Targets include Microsoft, Google, Anthropic, and Apple.
-* **Quant Dev:** A rising interest. The idea of refining trading strategies and probability practice just seems more interesting than the traditional LeetCode grind.
+* **The Research Path:** Get my Master's and some research done. If it goes well, I’d consider a PhD at a dream school (CMU, Stanford, MIT, UC Berkeley, Georgia Tech). I'd like to research either CS/Finance or CS/Biology, probably centered around ML or AI.
+* **The Big Tech Pipeline:** Targets include Microsoft, Google, Anthropic, and Apple. I know some of these companies do research fellowships too, so it'd be cool to intertwine the two paths.
+* **Quant Dev:** A rising interest. The idea of refining trading strategies and probability practice just seems more interesting than the traditional LeetCode grind. CS/Finance path too which has always been an interest of mine.
 
 ---
 
