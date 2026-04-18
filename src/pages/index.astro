@@ -132,6 +132,15 @@ const socialLinks = [
     border-radius: 100px;
     border: 1px solid rgba(255, 255, 255, 0.1);
     transition: all 0.3s ease;
+    
+    /* Remove any inherited underlines */
+    text-decoration: none !important;
+  }
+
+  /* Kill the sliding underline from Layout.astro */
+  .social-link::after {
+    display: none !important;
+    content: none !important;
   }
 
   .social-link:hover {
@@ -139,6 +148,7 @@ const socialLinks = [
     border-color: var(--accent-purple);
     transform: translateY(-4px);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    text-decoration: none !important;
   }
 
   /* Spin animation */
