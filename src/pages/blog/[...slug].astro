@@ -1,0 +1,156 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+
+// This function tells Astro which Markdown files exist
+export async function getStaticPaths() {
+  const blogEntries = await getCollection('blog');
+  return blogEntries.map(entry => ({
+    params: { slug: entry.slug }, props: { entry },
+  }));
+}
+
+// This part grabs the specific post you clicked on
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+---
+
+<Layout title={entry.data.title} description={entry.data.description}>
+  <div id="progress-bar"></div>
+  
+  <article class="blog-post">
+    <header class="post-header">
+      <div class="meta">
+        <span class="date">
+          {entry.data.pubDate.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
+        </span>
+        <div class="tags">
+          {entry.data.tags.map(tag => <span class="tag">#{tag}</span>)}
+        </div>
+      </div>
+      <h1>{entry.data.title}</h1>
+      <p class="description">{entry.data.description}</p>
+      <hr class="divider" />
+    </header>
+
+    <div class="markdown-content">
+      <Content />
+    </div>
+  </article>
+</Layout>
+
+<script>
+  // Simple progress bar logic
+  window.onscroll = () => {
+    const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    const scrolled = (winScroll / height) * 100;
+    const bar = document.getElementById("progress-bar");
+    if (bar) bar.style.width = scrolled + "%";
+  };
+</script>
+
+<style>
+  .blog-post {
+    max-width: 750px;
+    margin: 0 auto;
+    padding: 10rem 2rem 6rem;
+  }
+
+  #progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 4px;
+    background: var(--accent-purple);
+    width: 0%;
+    z-index: 1001;
+    transition: width 0.1s ease;
+  }
+
+  .post-header {
+    margin-bottom: 4rem;
+  }
+
+  .meta {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+  }
+
+  .date {
+    font-size: 0.9rem;
+    color: var(--accent-purple);
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+
+  .tag {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.4);
+    margin-left: 0.8rem;
+  }
+
+  h1 {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    margin-bottom: 1.5rem;
+    line-height: 1.1;
+  }
+
+  .description {
+    font-size: 1.25rem;
+    color: rgba(255, 255, 255, 0.6);
+    line-height: 1.6;
+    font-style: italic;
+  }
+
+  .divider {
+    border: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    margin: 3rem 0;
+  }
+
+  /* STYLING YOUR MARKDOWN CONTENT */
+  .markdown-content {
+    line-height: 1.8;
+    font-size: 1.15rem; /* Matches your Bio size */
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  :global(.markdown-content h2) {
+    font-size: 2rem;
+    color: white;
+    margin: 3.5rem 0 1.5rem;
+    font-weight: 700;
+  }
+
+  :global(.markdown-content h3) {
+    font-size: 1.5rem;
+    color: var(--accent-purple);
+    margin: 2.5rem 0 1rem;
+  }
+
+  :global(.markdown-content p) {
+    margin-bottom: 1.8rem;
+  }
+
+  :global(.markdown-content ul) {
+    margin-bottom: 2rem;
+    padding-left: 1.5rem;
+  }
+
+  :global(.markdown-content li) {
+    margin-bottom: 0.8rem;
+  }
+
+  :global(.markdown-content pre) {
+    background: #0a0a0a !important;
+    padding: 1.5rem;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    margin: 2.5rem 0;
+    font-size: 0.95rem;
+  }
+</style>
