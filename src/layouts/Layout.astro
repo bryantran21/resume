@@ -1,15 +1,18 @@
 ---
+import LineWaves from '../components/LineWaves';
+
 interface Props {
   title: string;
   description?: string;
+  showWaves?: boolean; // New prop to toggle background
 }
 
 const { 
   title, 
-  description = "Personal website and portfolio" 
+  description = "Personal website and portfolio",
+  showWaves = true 
 } = Astro.props;
 
-// Standardize links here so they update everywhere at once
 const navLinks = [
   { label: 'About', href: '/about' },
   { label: 'Resume', href: '/resume' },
@@ -17,9 +20,7 @@ const navLinks = [
   { label: 'Blog', href: '/blog' },
 ];
 
-// Get current path to handle the "active" underline state
 const pathname = new URL(Astro.url).pathname;
-const currentPath = pathname.slice(1); // removes the leading slash
 ---
 
 <!doctype html>
@@ -30,25 +31,25 @@ const currentPath = pathname.slice(1); // removes the leading slash
   <meta name="description" content={description} />
   <meta name="generator" content={Astro.generator} />
   <link rel="icon" type="image/png" href="/favicon.png" />
-  
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
-  
   <title>{title}</title>
 </head>
 <body>
-<nav class="navbar">
-  <a href="/" class="logo">BRYAN</a>
-  <div class="nav-links">
-    {navLinks.map(link => (
-      <a 
-        href={link.href} 
-        class={`nav-link ${pathname === link.href ? 'active' : ''}`}
-      >
-        {link.label}
-      </a>
-    ))}
-  </div>
-</nav>
+  {showWaves && <LineWaves client:only="react" color="#9F55FF" />}
+
+  <nav class="navbar">
+    <a href="/" class="logo">BRYAN</a>
+    <div class="nav-links">
+      {navLinks.map(link => (
+        <a 
+          href={link.href} 
+          class={`nav-link ${pathname === link.href ? 'active' : ''}`}
+        >
+          {link.label}
+        </a>
+      ))}
+    </div>
+  </nav>
 
   <main>
     <slot />
@@ -78,13 +79,13 @@ const currentPath = pathname.slice(1); // removes the leading slash
     overflow-x: hidden;
   }
 
-  /* --- THE UNIVERSAL GLASS PILL --- */
   .navbar {
     position: fixed;
     top: 2rem;
     left: 50%;
     transform: translateX(-50%);
-    z-index: 1000;
+    /* High Z-index to stay above waves and vignette */
+    z-index: 1000; 
     
     display: flex;
     justify-content: space-between;
@@ -94,7 +95,6 @@ const currentPath = pathname.slice(1); // removes the leading slash
     max-width: 850px; 
     padding: 0.8rem 2.5rem;
     
-    /* Obsidian Glass Effect */
     background: rgba(10, 10, 10, 0.4);
     backdrop-filter: blur(20px) saturate(180%);
     -webkit-backdrop-filter: blur(20px) saturate(180%);
@@ -106,10 +106,9 @@ const currentPath = pathname.slice(1); // removes the leading slash
   .logo {
     font-size: 1.1rem;
     font-weight: 800;
-    color: white !important; /* Force white */
+    color: white !important;
     letter-spacing: 0.1em; 
     text-decoration: none;
-    transition: opacity 0.2s;
   }
 
   .nav-links {
@@ -133,7 +132,6 @@ const currentPath = pathname.slice(1); // removes the leading slash
     color: white !important;
   }
 
-  /* The Purple Underline logic */
   .nav-link::after {
     content: '';
     position: absolute;
@@ -152,12 +150,14 @@ const currentPath = pathname.slice(1); // removes the leading slash
     width: 100%;
   }
 
-  /* Ensure main content is pushed down for all pages EXCEPT Index */
   main {
     width: 100%;
+    /* Ensure content is above the wave div but below the navbar */
+    position: relative;
+    z-index: 10;
+    padding-top: 8rem;
   }
 
-  /* Mobile Responsive */
   @media (max-width: 768px) {
     .navbar {
       top: 1rem;
