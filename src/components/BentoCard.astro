@@ -147,8 +147,17 @@ const { title, description, size = "small", href } = Astro.props;
   .small { grid-column: span 1; }
   .wide { grid-column: span 2; }
   .big { grid-column: span 2; grid-row: span 2; }
+  .full  { grid-column: span 4; }
 
   @media (max-width: 768px) {
     .card { padding: 24px; min-height: 180px; }
+  }
+
+  @media (max-width: 900px) {
+    .full, .wide, .big { grid-column: span 2; }
+  }
+
+  @media (max-width: 600px) {
+    .full, .wide, .big { grid-column: span 1; }
   }
 </style>

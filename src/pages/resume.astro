@@ -77,16 +77,15 @@ const education = [
 ];
 
 const certificates = [
-  { name: 'AWS Cloud Practitioner', issuer: 'Amazon', icon: 'fab fa-aws' },
-  { name: 'Azure Fundamentals', issuer: 'Microsoft', icon: 'fab fa-microsoft' },
-  { name: 'Security Clearance: Secret', issuer: 'US Navy', icon: 'fas fa-shield-alt' },
-  { name: 'Foundational C#', issuer: 'Microsoft', icon: 'fab fa-microsoft' },
+  { name: 'AWS Cloud Practitioner', issuer: 'Amazon', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-original-wordmark.svg' },
+  { name: 'Azure Fundamentals', issuer: 'Microsoft', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azure/azure-original.svg' },
+  { name: 'Security Clearance: Secret', issuer: 'US Navy', icon: 'fas fa-shield-alt' }, 
+  { name: 'Foundational C#', issuer: 'Microsoft', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Microsoft_logo.svg/960px-Microsoft_logo.svg.png?_=20210729021049' },
 ];
 ---
 
 <Layout title="Bryan Tran - Resume" description="Software Developer specializing in Full Stack Development">
   <div class="resume-page">
-
     <div class="content-wrapper">
       <div class="resume-hero">
         <h1>Resume</h1>
@@ -123,7 +122,7 @@ const certificates = [
         </div>
       </section>
 
-            <section class="section dual-grid">
+      <section class="section dual-grid">
         <div class="edu-column">
           <h2 class="section-label">Education</h2>
           <div class="edu-list">
@@ -152,7 +151,13 @@ const certificates = [
           <div class="cert-list">
             {certificates.map(cert => (
               <div class="cert-item-minimal">
-                <i class={cert.icon}></i>
+                <div class="cert-icon-box">
+                  {cert.logo ? (
+                    <img src={cert.logo} alt={cert.name} class="cert-img" />
+                  ) : (
+                    <i class={cert.icon}></i>
+                  )}
+                </div>
                 <div class="cert-text">
                   <h4>{cert.name}</h4>
                   <p>{cert.issuer}</p>
@@ -210,7 +215,6 @@ const certificates = [
           </div>
         </div>
       </section>
-
     </div>
   </div>
 </Layout>
@@ -232,79 +236,6 @@ const certificates = [
     min-height: 100vh;
   }
 
-  /* --- THE UNIVERSAL GLASS PILL --- */
-  .navbar {
-    position: fixed;
-    top: 2rem;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 1000;
-    
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    
-    width: 90%;
-    max-width: 850px; 
-    padding: 0.8rem 2.5rem;
-    
-    background: rgba(10, 10, 10, 0.4);
-    backdrop-filter: blur(20px) saturate(180%);
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
-    
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 100px;
-  }
-
-  .logo {
-    font-size: 1.1rem;
-    font-weight: 800;
-    color: white;
-    letter-spacing: 0.1em; 
-    text-decoration: none;
-    transition: opacity 0.2s;
-  }
-
-  .nav-links {
-    display: flex;
-    gap: 2rem;
-  }
-
-  .nav-link {
-    color: rgba(255, 255, 255, 0.7);
-    text-decoration: none;
-    font-size: 0.85rem;
-    font-weight: 500;
-    transition: color 0.3s ease;
-    position: relative;
-    padding: 6px 0;
-  }
-
-  .nav-link:hover, 
-  .nav-link.active {
-    color: white;
-  }
-
-  /* The Growing Underline */
-  .nav-link::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    width: 0;
-    height: 2px;
-    background: var(--accent-purple);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    transform: translateX(-50%);
-    border-radius: 2px;
-  }
-
-  .nav-link:hover::after,
-  .nav-link.active::after {
-    width: 100%;
-  }
-
-  /* Content Spacing */
   .content-wrapper {
     padding-top: 8rem;
     padding-bottom: 6rem;
@@ -372,16 +303,74 @@ const certificates = [
   .course-tag { font-size: 0.75rem; background: #1a1a1a; color: var(--text-secondary); padding: 4px 12px; border-radius: 100px; border: 1px solid var(--border-dim); }
   .edu-period { color: var(--text-secondary); font-size: 0.9rem; margin-top: 1rem; font-weight: 500; }
 
-  .cert-item-minimal { display: flex; align-items: center; gap: 1.25rem; margin-bottom: 2rem; }
-  .cert-item-minimal i { font-size: 1.8rem; color: var(--accent-purple); width: 30px; text-align: center; }
-  .cert-text h4 { font-size: 1rem; margin: 0; }
-  .cert-text p { color: var(--text-secondary); font-size: 0.85rem; margin: 2px 0 0; }
+  /* Certifications Styles */
+  .cert-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .cert-item-minimal {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.02); 
+    border: 1px solid var(--border-dim);
+    border-radius: 16px;
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  .cert-icon-box {
+    width: 32px; /* Restored to smaller size */
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .cert-icon-box i {
+    font-size: 1.2rem;
+    color: var(--accent-purple);
+  }
+
+  .cert-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: grayscale(0.2);
+    transition: 0.3s;
+  }
+
+  .cert-item-minimal:hover {
+    background: rgba(159, 85, 255, 0.05);
+    border-color: rgba(159, 85, 255, 0.4);
+    transform: translateX(10px);
+  }
+
+  .cert-item-minimal:hover .cert-img {
+    filter: grayscale(0);
+    transform: scale(1.1);
+  }
+
+  .cert-text h4 {
+    font-size: 1rem;
+    font-weight: 700;
+    margin: 0;
+    color: white;
+  }
+
+  .cert-text p {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin: 2px 0 0;
+  }
 
   @media (max-width: 768px) {
     .dual-grid { grid-template-columns: 1fr; }
     .card-header { flex-direction: column; gap: 1rem; }
     .meta { text-align: left; }
-    .navbar { top: 1rem; padding: 0.7rem 1.5rem; width: 95%; }
     .content-wrapper { padding-top: 6rem; }
   }
 </style>

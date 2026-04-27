@@ -27,6 +27,10 @@ const MY_TRAVEL_DATA = {
     "Washington": { title: "Evergreen State", 
     links: [
       { label: "Seattle", url: "#" }] },
+    "Washington D.C.": { title: "Capital City",
+    links: [
+      { label: "Smithsonian Museums", url: "#" }
+    ] },
 };
 
 const VISITED_STATES = Object.keys(MY_TRAVEL_DATA);

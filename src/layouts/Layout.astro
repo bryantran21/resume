@@ -39,10 +39,9 @@ const pathname = new URL(Astro.url).pathname;
   {showWaves && (
     <DarkVeil 
       client:only="react" 
-      speed={0.2} 
-      hueShift={280} /* Adjusted for deeper purple */
+      speed={0.9} 
+      hueShift={-35} 
       noiseIntensity={0.04}
-      brightness={0.3} /* Increased brightness for a punchier purple */
       warpAmount={0.2}
     />
   )}
