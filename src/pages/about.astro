@@ -20,21 +20,38 @@ const bio = {
         <p class="subtitle">This was an excuse to showcase my hobbies</p>
       </div>
 
-      <section class="section bio-section">
+      <!-- <section class="section bio-section">
         <div class="bio-content">
           <h2 class="section-label">My Story</h2>
           <p class="bio-text">
             I grew up always interested by tech. I went to LSU for my undergrad, and I'm pursuing my Master's at Georgia Tech.
             <br/><br/>
-            After my Master's, I'm hopping to gain research experience in AI/ML and pursue either a PhD or gain experience at a big Tech Company!
+            After my Master's, I'm hoping to gain research experience in AI/ML and pursue either a PhD or gain experience at a big Tech Company!
             <br/><br/>
           </p>
         </div>
-      </section>
+      </section> -->
 
       <section class="section">
         <BentoGrid>
-          <TravelCard client:only="react" />
+
+          <BentoCard 
+              title="My Story" 
+              size="full"
+            >
+              <div class="bio-text-wrapper">
+                <p>
+                  I grew up always interested by tech. I went to LSU for my undergrad, 
+                  and I'm pursuing my Master's at Georgia Tech.
+                </p>
+                <p>
+                  After my Master's, I'm hoping to gain research experience in AI/ML 
+                  and pursue either a PhD or gain experience at a big Tech Company!
+                </p>
+              </div>
+            </BentoCard>
+          
+            <TravelCard client:only="react" />
           
           <BentoCard
             title="Resume Website 📝"
@@ -42,19 +59,19 @@ const bio = {
             size="small"
           />
 
-          <BentoCard title="Sports & Fitness" size="wide">
-            <div class="stats-container">
-              <div class="stat-item">
-                <span class="stat-label">Golf PB</span>
-                <span class="stat-value">99</span>
+            <BentoCard title="Sports & Fitness" size="wide">
+              <div class="stats-container">
+                <div class="stat-item">
+                  <span class="stat-label">Golf PB</span>
+                  <span class="stat-value">99</span>
+                </div>
+                <div class="team-badges">
+                  <img src="/logos/lsu_sports.png" alt="LSU" />
+                  <img src="/logos/saints.png" alt="Saints" />
+                  <img src="/logos/LA_Dodgers.png" alt="Dodgers" />
+                </div>
               </div>
-              <div class="team-badges">
-                <img src="/logos/lsu_sports.png" alt="LSU" />
-                <img src="/logos/saints.png" alt="Saints" />
-                <img src="/logos/LA_Dodgers.png" alt="Dodgers" />
-              </div>
-            </div>
-          </BentoCard>
+            </BentoCard>
         </BentoGrid>
       </section>
     </div>
