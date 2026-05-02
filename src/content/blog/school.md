@@ -1,44 +1,44 @@
 ---
-title: "My plan going into Grad School"
-description: "How I'm structuring and approaching OMSCS."
+title: "The OMSCS Blueprint"
+description: "How I'm structuring my approach to Georgia Tech's Master's program."
 pubDate: 2026-05-01
-tags: [ "Georgia Tech"]
+tags: ["Georgia Tech", "AI", "Machine Learning"]
 ---
 
-# The Expectations/Assumptions
+# The Vision
 
-So coming into OMSCS, my main goal was to expose myself to AI and ML technologies, outside of self-learning. I've always thrived and benefitted from the structure of academia I think, so this was a good opportunity to explore more within the field.
+Coming into OMSCS, my core objective is to bridge the gap between self-taught curiosity and academic rigor. I’ve always thrived in the structured environment of academia, and this program is the perfect vehicle to explore **AI/ML** at a graduate level.
 
-OMSCS has 6 specializations within the program, two of them being Artificial Intelligience and Machine Learning. I've been doing a lot of research on OMSCentral, Reddit, and watching a lot of CC's (shoutout Ben Johnson - will admit I was swayed by bro's YouTube vids); SO - here is my gameplan:
+With six specializations available, I’m positioning myself at the intersection of **Machine Learning** and **Artificial Intelligence**. After deep-diving into OMSCentral and Reddit (and being successfully influenced by Ben Johnson’s YouTube content), I’ve mapped out my trajectory.
 
-## Classes
+## The Core Curriculum
 
-So, just to list the classes then go into some depth after, these are my core classes:
-* Machine Learning for Trading
-    * My 1st class hopefully, so excited to learn about the subsect of ML and Finance
-* Machine Learning
-* AI, Ethics, and Society
-    * Easy and learning about an ethical approach to developing AI is cool
-* Artificial Intelligence
-    * Skimmed over the syllabus online... the projects look cool but kinda scary
-* Introduction to Graduate Algorithms
-    * Not a cure all per say, but I want to challenge myself and be cracked
-* Software Design Processes
+I’ve selected these classes to build a baseline exposure that allows me to eventually "plant" myself in a specific niche like **FinTech** or **HealthTech**.
 
-Some classes I am considering based on workload or just if I'm getting burnt out:
-* Digital Marketing
-    * Seems easy 🤷‍♂️
-* Software Architecture and Design
-    * With system design being so prevalant now, it seems like an important class
-* AI Classes
-    * Reinforcement Learning and Decision Making
-    * Deep Learning
-    * Natural Language Processing
-* Human Computer Interface
-    * Learning about UX seems cool, but I've read a lot of doomers on Reddit say this class is annoying
-* Expansion of biology background:
-    * Introduction to Health Informatics
-    * Introduction to Cognitive Science
-    * Big Data Analytics for Healthcare
+### 01. The Heavy Hitters
+*   **Machine Learning for Trading:** My intended 101. Merging ML with Finance is exactly where I want to be.
+*   **Artificial Intelligence:** The syllabus is intimidating, but the projects are high-signal.
+*   **Graduate Algorithms:** The "final boss." I want to take this to ensure I’m technically cracked.
 
-The main benefit of these classes are that I can position myself to get specializations in both Machine Learning and in Artificial Intelligence.
+### 02. The "Engineering" Track
+*   **Software Design Processes:** Strengthening the foundational workflow.
+*   **AI, Ethics, and Society:** A critical look at the moral implications of what we're building.
+
+## Strategic Alternatives
+*If workload becomes a factor or burnout hits, I'm eyeing these "pivot" classes:*
+
+| Category | Course |
+| :--- | :--- |
+| **System Design** | Software Architecture and Design |
+| **Specialized AI** | Deep Learning, NLP, or Reinforcement Learning |
+| **HealthTech** | Big Data Analytics for Healthcare, Health Informatics |
+| **UX/UI** | Human Computer Interface |
+
+## The End Goal
+
+The area I’m currently lacking in isn't interest—it's **niche depth**. I know I love the intersection of AI and Finance/Biology, but I don't yet know the specific sub-sects where I can provide the most value. 
+
+This curriculum isn't just about the degree; it's about gaining the baseline exposure needed to find my "forever niche" and skilling up until I'm an expert in that domain.
+
+---
+*Mindset: Currently ambitious. Ready for the grind.*
