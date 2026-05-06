@@ -2,173 +2,190 @@
 import Layout from '../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
 
-// This fetches all your .md or .mdx files from src/content/blog/
 const posts = await getCollection('blog');
-// Sort by date (newest first)
 const sortedPosts = posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
-const title = "Just some stuff about me";
-const description = "Documenting my life and experiences... surely I keep this up.";
+const blogTags = [...new Set(
+  sortedPosts.filter(post => (post.data.category || 'blog') === 'blog').flatMap(post => post.data.tags)
+)].sort();
+
+const resourceTags = [...new Set(
+  sortedPosts.filter(post => post.data.category === 'resources').flatMap(post => post.data.tags)
+)].sort();
+
+const title = "Library & Notes";
 ---
 
-<Layout title={title} description={description}>
+<Layout title={title}>
   <div class="blog-index">
     
     <header class="blog-hero">
-      <h1>Just some stuff about me</h1>
-      <p class="subtitle">Documenting my life and experiences... surely I keep this up.</p>
+      <h1>Library & Notes</h1>
+      <p class="subtitle">Documenting the grind and compiling resources.</p>
     </header>
 
-    <section class="posts-grid">
-      {sortedPosts.length > 0 ? (
-        sortedPosts.map((post) => (
-          <a href={`/blog/${post.slug}`} class="post-card">
-            <div class="post-meta">
-              <span class="date">{post.data.pubDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</span>
-              <div class="tags">
-                {post.data.tags.map(tag => <span class="tag">#{tag}</span>)}
+    <div class="filter-controls">
+      <div class="category-tabs">
+        <button class="tab-btn active" data-category="blog">Blog</button>
+        <button class="tab-btn" data-category="resources">Resources</button>
+      </div>
+
+      <div class="tag-filters" id="blog-tags">
+        {blogTags.map(tag => <button class="tag-pill" data-tag={tag}>#{tag}</button>)}
+      </div>
+
+      <div class="tag-filters" id="resource-tags" style="display: none;">
+        {resourceTags.map(tag => <button class="tag-pill" data-tag={tag}>#{tag}</button>)}
+      </div>
+    </div>
+
+    <section class="posts-grid" id="posts-container">
+      {sortedPosts.map((post) => {
+        const isExternal = !!post.data.link;
+        const targetUrl = isExternal ? post.data.link : `/blog/${post.slug}`;
+        
+        return (
+          <div 
+            class="post-wrapper" 
+            data-category={post.data.category || 'blog'} 
+            data-tags={post.data.tags.join(',')}
+          >
+            <a href={targetUrl} class="post-card" target={isExternal ? "_blank" : "_self"}>
+              <div class="card-inner">
+                <div class="post-meta">
+                  <span class="date">
+                    {isExternal ? 'Link' : post.data.pubDate.toLocaleDateString('en-US', { year: 'numeric' })}
+                  </span>
+                </div>
+                <h2 class="post-title">
+                  {post.data.title}
+                  {isExternal && <i class="fas fa-external-link-alt"></i>}
+                </h2>
+                <p class="post-description">{post.data.description}</p>
+                <div class="tags-row">
+                  {post.data.tags.slice(0, 3).map(tag => <span class="mini-tag">#{tag}</span>)}
+                </div>
               </div>
-            </div>
-            <h2 class="post-title">{post.data.title}</h2>
-            <p class="post-description">{post.data.description}</p>
-            <div class="read-more">
-              Read <i class="fas fa-arrow-right"></i>
-            </div>
-          </a>
-        ))
-      ) : (
-        <div class="empty-state">
-          <p>Nothing here unfortunately...</p>
-        </div>
-      )}
+            </a>
+          </div>
+        )
+      })}
     </section>
   </div>
 </Layout>
 
+<script>
+  const tabBtns = document.querySelectorAll('.tab-btn');
+  const tagPills = document.querySelectorAll('.tag-pill');
+  const posts = document.querySelectorAll('.post-wrapper');
+  const container = document.getElementById('posts-container');
+  const blogTags = document.getElementById('blog-tags');
+  const resTags = document.getElementById('resource-tags');
+
+  let activeCategory = 'blog';
+  let activeTag = null;
+
+  function filterPosts() {
+    // Toggle Grid Layout
+    if (activeCategory === 'resources') {
+      container.classList.add('compact-grid');
+    } else {
+      container.classList.remove('compact-grid');
+    }
+
+    posts.forEach(post => {
+      const category = post.getAttribute('data-category');
+      const tags = post.getAttribute('data-tags').split(',');
+      const categoryMatch = category === activeCategory;
+      const tagMatch = !activeTag || tags.includes(activeTag);
+
+      if (categoryMatch && tagMatch) {
+        post.classList.remove('hidden');
+      } else {
+        post.classList.add('hidden');
+      }
+    });
+  }
+
+  tabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      tabBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      activeCategory = btn.getAttribute('data-category');
+      
+      blogTags.style.display = activeCategory === 'blog' ? 'flex' : 'none';
+      resTags.style.display = activeCategory === 'resources' ? 'flex' : 'none';
+
+      activeTag = null;
+      tagPills.forEach(p => p.classList.remove('active'));
+      filterPosts();
+    });
+  });
+
+  tagPills.forEach(pill => {
+    pill.addEventListener('click', () => {
+      const isActive = pill.classList.contains('active');
+      tagPills.forEach(p => p.classList.remove('active'));
+      if (!isActive) {
+        pill.classList.add('active');
+        activeTag = pill.getAttribute('data-tag');
+      } else {
+        activeTag = null;
+      }
+      filterPosts();
+    });
+  });
+
+  filterPosts();
+</script>
+
 <style>
-  .blog-index {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 8rem 2rem 6rem;
-  }
+  .blog-index { max-width: 1000px; margin: 0 auto; padding: 8rem 2rem; }
+  .blog-hero { margin-bottom: 3rem; }
+  .blog-hero h1 { font-size: 4rem; font-weight: 800; letter-spacing: -0.04em; }
+  .subtitle { color: rgba(255,255,255,0.5); }
 
-  .blog-hero {
-    margin-bottom: 5rem;
-    text-align: left;
-  }
+  .filter-controls { margin-bottom: 3rem; display: flex; flex-direction: column; gap: 1.5rem; }
+  .category-tabs { display: flex; gap: 0.5rem; background: rgba(255,255,255,0.03); padding: 0.4rem; border-radius: 100px; width: fit-content; border: 1px solid rgba(255,255,255,0.05); }
+  .tab-btn { padding: 0.6rem 1.2rem; border-radius: 100px; border: none; background: transparent; color: rgba(255,255,255,0.5); font-size: 0.75rem; font-weight: 800; cursor: pointer; text-transform: uppercase; }
+  .tab-btn.active { background: white; color: black; }
 
-  .section-label {
-    font-size: 0.85rem;
-    text-transform: uppercase;
-    letter-spacing: 0.2em;
-    color: var(--accent-purple);
-    margin-bottom: 1.5rem;
-    font-weight: 700;
-  }
+  .tag-filters { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .tag-pill { background: transparent; border: 1px solid rgba(255,255,255,0.1); color: rgba(255,255,255,0.4); padding: 0.3rem 0.8rem; border-radius: 100px; font-size: 0.7rem; font-weight: 600; cursor: pointer; }
+  .tag-pill.active { border-color: var(--accent-purple); color: var(--accent-purple); background: rgba(159, 85, 255, 0.1); }
 
-  .blog-hero h1 {
-    font-size: clamp(3rem, 7vw, 4.5rem);
-    font-weight: 800;
-    letter-spacing: -0.04em;
-    margin-bottom: 1rem;
-  }
+  /* Grid Logic */
+  .posts-grid { display: flex; flex-direction: column; gap: 1.5rem; transition: all 0.3s ease; }
+  .posts-grid.compact-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1rem; }
 
-  .subtitle {
-    font-size: 1.2rem;
-    color: rgba(255, 255, 255, 0.6);
-    max-width: 600px;
-  }
-
-  /* Post Cards */
-  .posts-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-  }
+  .post-wrapper.hidden { display: none; }
 
   .post-card {
-    background: #0a0a0a;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 24px;
-    padding: 2.5rem;
-    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    background: rgba(15, 15, 15, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    padding: 1.5rem;
     text-decoration: none;
     display: block;
+    height: 100%;
+    transition: 0.3s ease;
   }
 
-  .post-card:hover {
-    border-color: var(--accent-purple);
-    transform: translateY(-5px);
-    background: #111;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-  }
+  .post-card:hover { border-color: var(--accent-purple); background: rgba(25, 25, 25, 0.6); transform: translateY(-3px); }
 
-  .post-meta {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1.5rem;
-  }
+  .post-title { font-size: 1.25rem; font-weight: 700; color: white; margin-bottom: 0.5rem; display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; }
+  .post-title i { font-size: 0.7rem; opacity: 0.4; }
+  
+  .post-description { font-size: 0.9rem; color: rgba(255, 255, 255, 0.4); line-height: 1.5; margin-bottom: 1rem; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 
-  .date {
-    font-size: 0.85rem;
-    color: var(--accent-purple);
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-  }
+  .post-meta { margin-bottom: 0.5rem; }
+  .date { font-size: 0.65rem; color: var(--accent-purple); font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; }
 
-  .tags {
-    display: flex;
-    gap: 0.75rem;
-  }
-
-  .tag {
-    font-size: 0.75rem;
-    color: rgba(255, 255, 255, 0.4);
-  }
-
-  .post-title {
-    font-size: 1.8rem;
-    font-weight: 700;
-    color: white;
-    margin-bottom: 1rem;
-    letter-spacing: -0.02em;
-  }
-
-  .post-description {
-    font-size: 1.05rem;
-    color: rgba(255, 255, 255, 0.6);
-    line-height: 1.6;
-    margin-bottom: 2rem;
-  }
-
-  .read-more {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 0.9rem;
-    font-weight: 600;
-    color: white;
-    transition: gap 0.3s;
-  }
-
-  .post-card:hover .read-more {
-    gap: 0.8rem;
-    color: var(--accent-purple);
-  }
-
-  .empty-state {
-    padding: 4rem;
-    text-align: center;
-    border: 1px dashed rgba(255, 255, 255, 0.1);
-    border-radius: 24px;
-    color: rgba(255, 255, 255, 0.4);
-  }
+  .tags-row { display: flex; gap: 0.5rem; }
+  .mini-tag { font-size: 0.65rem; color: rgba(255,255,255,0.2); font-weight: 600; }
 
   @media (max-width: 768px) {
     .blog-index { padding-top: 6rem; }
-    .post-card { padding: 1.5rem; }
-    .post-title { font-size: 1.4rem; }
+    .posts-grid.compact-grid { grid-template-columns: 1fr; }
   }
 </style>
