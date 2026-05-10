@@ -3,10 +3,11 @@ import Layout from '../layouts/Layout.astro';
 
 const projects = [
   {
+    id: 'resume',
     title: 'Personal Resume Website',
     description: 'A modern, interactive portfolio engineered to showcase technical depth. Built with a focus on high-performance SSR and custom-engineered UI components without the crutch of CSS frameworks.',
     tech: ['Astro', 'TypeScript', 'CSS', 'Node.js'],
-    category: 'Engineering',
+    category: 'Interface Engineering',
     liveUrl: 'https://bhtran.com',
     githubUrl: 'https://github.com/bryantran21/resume',
     featured: true,
@@ -16,13 +17,28 @@ const projects = [
       'Server-side rendering (SSR) via Astro',
       'Glassmorphic UI architecture'
     ]
+  },
+  {
+    id: 'iron-log',
+    title: 'Iron Log',
+    description: 'A high-performance fitness synchronization engine designed for mobile-first progressive overload tracking. Engineered with a focus on data integrity, real-time volume scoring, and an adaptive training split architecture.',
+    tech: ['Next.js 14', 'Supabase SSR', 'TypeScript', 'Tailwind CSS', 'Framer Motion'],
+    category: 'Systems Engineering',
+    liveUrl: 'https://gym.bhtran.com',
+    githubUrl: 'https://github.com/bryantran21/fitness-tracker',
+    featured: true,
+    highlights: [
+      'Next.js 14 Server Actions with async cookie management',
+      'Custom Supabase SSR Auth integration for secure persistence',
+      'Dynamic volume-scoring algorithm (Weight × Reps) for analytics',
+      'Zero-layout-shift (CLS) optimized glassmorphic UI'
+    ]
   }
 ];
 ---
 
 <Layout title="Projects - Bryan Tran" description="Portfolio of software engineering projects and applications">
   <div class="projects-page">
-
     <div class="content-wrapper">
       <div class="projects-hero">
         <h1>Projects</h1>
@@ -34,10 +50,21 @@ const projects = [
           {projects.map(project => (
             <div class="project-card">
               <div class="project-image">
-                {project.image ? (
-                  <img src={project.image} alt={project.title} />
+                {project.id === 'iron-log' ? (
+                  /* OPTION 1: MINIMALIST HEATMAP PREVIEW */
+                  <div class="heatmap-container">
+                    <div class="heatmap-grid">
+                      {Array.from({ length: 40 }).map((_, i) => (
+                        <div class={`heat-tile level-${(i % 7 === 0 || i % 5 === 0) ? Math.floor(Math.random() * 3) + 1 : 0}`}></div>
+                      ))}
+                    </div>
+                    <div class="heatmap-label">ACTIVITY_METRIC_v2.0</div>
+                  </div>
                 ) : (
-                  <div class="image-placeholder"></div>
+                  /* OPTION 2: SCANNER / INTERFACE PREVIEW */
+                  <div class="image-placeholder">
+                    <div class="scan-line"></div>
+                  </div>
                 )}
                 <div class="project-category">{project.category}</div>
               </div>
@@ -52,27 +79,21 @@ const projects = [
                   ))}
                 </div>
 
-                {project.highlights && (
-                  <ul class="project-highlights">
-                    {project.highlights.slice(0, 3).map(highlight => (
-                      <li>{highlight}</li>
-                    ))}
-                  </ul>
-                )}
+                <ul class="project-highlights">
+                  {project.highlights.map(highlight => (
+                    <li>{highlight}</li>
+                  ))}
+                </ul>
 
                 <div class="project-links">
-                  {project.liveUrl && (
-                    <a href={project.liveUrl} target="_blank" class="project-btn primary">
-                      <i class="fas fa-external-link-alt"></i>
-                      Live View
-                    </a>
-                  )}
-                  {project.githubUrl && (
-                    <a href={project.githubUrl} target="_blank" class="project-btn secondary">
-                      <i class="fab fa-github"></i>
-                      Source
-                    </a>
-                  )}
+                  <a href={project.liveUrl} target="_blank" class="project-btn primary">
+                    <i class="fas fa-external-link-alt"></i>
+                    Live View
+                  </a>
+                  <a href={project.githubUrl} target="_blank" class="project-btn secondary">
+                    <i class="fab fa-github"></i>
+                    Source
+                  </a>
                 </div>
               </div>
             </div>
@@ -107,74 +128,26 @@ const projects = [
     --border-dim: rgba(255, 255, 255, 0.08);
   }
 
-  .projects-page {
-    min-height: 100vh;
-    background: #000000;
-  }
+  .projects-page { min-height: 100vh; background: transparent; }
+  .content-wrapper { padding-top: 8rem; padding-bottom: 6rem; }
 
-  .content-wrapper {
-    padding-top: 8rem;
-    padding-bottom: 6rem;
-  }
+  .projects-hero { text-align: left; max-width: 1100px; margin: 0 auto; padding: 4rem 2rem; }
+  .projects-hero h1 { font-size: clamp(3.5rem, 8vw, 5rem); font-weight: 800; letter-spacing: -0.04em; margin-bottom: 1rem; color: white; }
+  .subtitle { font-size: 1.25rem; color: rgba(255, 255, 255, 0.6); max-width: 600px; line-height: 1.5; }
 
-  /* Section Labels */
-  .section-label {
-    font-size: 0.85rem;
-    text-transform: uppercase;
-    letter-spacing: 0.2rem;
-    color: var(--accent-purple);
-    margin-bottom: 1.5rem;
-    font-weight: 700;
-  }
-
-  /* Hero */
-  .projects-hero {
-    text-align: left;
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 4rem 2rem;
-  }
-
-  .projects-hero h1 {
-    font-size: clamp(3.5rem, 8vw, 5rem);
-    font-weight: 800;
-    letter-spacing: -0.04em;
-    margin-bottom: 1rem;
-    color: white;
-  }
-
-  .subtitle {
-    font-size: 1.25rem;
-    color: rgba(255, 255, 255, 0.6);
-    max-width: 600px;
-    line-height: 1.5;
-  }
-
-  /* Grid */
-  .section {
-    max-width: 1150px;
-    margin: 0 auto;
-    padding: 0 2rem;
-  }
-
-  .projects-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
-    gap: 3rem;
-  }
+  .section { max-width: 1150px; margin: 0 auto; padding: 0 2rem; }
+  .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(400px, 1fr)); gap: 3rem; }
 
   /* Cards */
   .project-card {
     background: var(--card-bg);
     backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
     border: 1px solid var(--border-dim);
     border-radius: 28px;
     overflow: hidden;
     transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
     display: flex;
     flex-direction: column;
-    position: relative;
   }
 
   .project-card:hover {
@@ -186,227 +159,121 @@ const projects = [
   .project-image {
     position: relative;
     width: 100%;
-    aspect-ratio: 16/10;
-    overflow: hidden;
+    aspect-ratio: 16/9;
+    background: #050505;
     border-bottom: 1px solid var(--border-dim);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
   }
 
-  .project-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.6s ease;
+  /* --- HEATMAP PREVIEW STYLES --- */
+  .heatmap-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding: 2rem;
   }
 
-  /* Digital Signal Placeholder */
+  .heatmap-grid {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    gap: 6px;
+  }
+
+  .heat-tile {
+    width: 12px;
+    height: 12px;
+    border-radius: 3px;
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  .heat-tile.level-1 { background: #3c1e70; }
+  .heat-tile.level-2 { background: #6b35d4; }
+  .heat-tile.level-3 { background: #9F55FF; box-shadow: 0 0 15px rgba(159, 85, 255, 0.5); }
+
+  .heatmap-label {
+    font-family: monospace;
+    font-size: 0.6rem;
+    color: var(--accent-purple);
+    letter-spacing: 0.3em;
+    opacity: 0.6;
+  }
+
+  /* --- SCANNER PREVIEW STYLES --- */
   .image-placeholder {
     width: 100%;
     height: 100%;
+    background-image: 
+      linear-gradient(rgba(159, 85, 255, 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(159, 85, 255, 0.05) 1px, transparent 1px);
+    background-size: 20px 20px;
     position: relative;
-    background: #050505; /* Slightly lighter than pure black for contrast */
-    background-image:
-      linear-gradient(rgba(159, 85, 255, 0.15) 1.5px, transparent 1.5px), 
-      linear-gradient(90deg, rgba(159, 85, 255, 0.15) 1.5px, transparent 1.5px);
-    background-size: 40px 40px; /* Larger grid */
-    background-position: center;
   }
 
-  .image-placeholder::after {
-    content: '';
+  .scan-line {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 10px; /* Bigger dot */
-    height: 10px;
-    background: #9F55FF; /* Hardcoded color just in case variable fails */
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-    box-shadow: 0 0 25px 8px rgba(159, 85, 255, 0.8); /* Stronger glow */
-    animation: signal-pulse 2s infinite ease-in-out;
-    z-index: 10;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--accent-purple), transparent);
+    animation: scan 3s linear infinite;
+    opacity: 0.5;
   }
 
-  @keyframes signal-pulse {
-    0% { transform: translate(-50%, -50%) scale(1); opacity: 0.8; }
-    50% { transform: translate(-50%, -50%) scale(1.4); opacity: 1; }
-    100% { transform: translate(-50%, -50%) scale(1); opacity: 0.8; }
+  @keyframes scan {
+    0% { top: 0; }
+    100% { top: 100%; }
   }
 
   .project-category {
     position: absolute;
     top: 1.25rem;
     right: 1.25rem;
-    padding: 0.5rem 1rem;
-    background: rgba(159, 85, 255, 0.2);
+    padding: 0.4rem 0.8rem;
+    background: rgba(0, 0, 0, 0.6);
     backdrop-filter: blur(10px);
-    border: 1px solid rgba(159, 85, 255, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 100px;
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     font-weight: 700;
-    color: white;
+    color: var(--accent-purple);
     text-transform: uppercase;
     letter-spacing: 0.05em;
   }
 
-  /* Content */
-  .project-content {
-    padding: 2.5rem;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-  }
+  .project-content { padding: 2.5rem; flex: 1; display: flex; flex-direction: column; }
+  .project-content h3 { font-size: 1.75rem; font-weight: 700; margin-bottom: 1rem; color: white; }
+  .project-description { font-size: 1.05rem; line-height: 1.6; color: rgba(255, 255, 255, 0.5); margin-bottom: 2rem; }
+  
+  .tech-stack { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 2rem; }
+  .tech-badge { padding: 0.3rem 0.8rem; background: rgba(159, 85, 255, 0.1); border: 1px solid rgba(159, 85, 255, 0.2); border-radius: 100px; font-size: 0.75rem; color: white; }
 
-  .project-content h3 {
-    font-size: 1.75rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
-    letter-spacing: -0.02em;
-  }
+  .project-highlights { list-style: none; margin-bottom: 2.5rem; }
+  .project-highlights li { padding-left: 1.5rem; position: relative; color: rgba(255, 255, 255, 0.4); font-size: 0.9rem; margin-bottom: 0.6rem; }
+  .project-highlights li::before { content: "→"; position: absolute; left: 0; color: var(--accent-purple); }
 
-  .project-description {
-    font-size: 1.05rem;
-    line-height: 1.6;
-    color: rgba(255, 255, 255, 0.6);
-    margin-bottom: 2rem;
-  }
+  .project-links { display: flex; gap: 1rem; margin-top: auto; }
+  .project-btn { flex: 1; display: inline-flex; align-items: center; justify-content: center; gap: 0.75rem; padding: 0.8rem; border-radius: 12px; font-size: 0.85rem; font-weight: 700; text-decoration: none; transition: 0.3s; }
+  
+  .project-btn.primary { background: white; color: black; }
+  .project-btn.primary:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(159, 85, 255, 0.2); }
+  .project-btn.secondary { background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border-dim); color: white; }
+  .project-btn.secondary:hover { background: rgba(255, 255, 255, 0.1); }
 
-  .tech-stack {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.75rem;
-    margin-bottom: 2rem;
-  }
-
-  .tech-badge {
-    padding: 0.4rem 1rem;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid var(--border-dim);
-    border-radius: 100px;
-    font-size: 0.8rem;
-    font-weight: 600;
-    color: rgba(255, 255, 255, 0.8);
-  }
-
-  .project-highlights {
-    list-style: none;
-    margin-bottom: 2.5rem;
-  }
-
-  .project-highlights li {
-    padding-left: 1.5rem;
-    position: relative;
-    color: rgba(255, 255, 255, 0.5);
-    font-size: 0.9rem;
-    margin-bottom: 0.75rem;
-  }
-
-  .project-highlights li::before {
-    content: "→";
-    position: absolute;
-    left: 0;
-    color: var(--accent-purple);
-  }
-
-  /* Links */
-  .project-links {
-    display: flex;
-    gap: 1rem;
-    margin-top: auto;
-  }
-
-  .project-btn {
-    flex: 1;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.75rem;
-    padding: 0.9rem;
-    border-radius: 12px;
-    font-size: 0.9rem;
-    font-weight: 600;
-    transition: all 0.3s ease;
-  }
-
-  .project-btn.primary {
-    background: white;
-    color: black;
-  }
-
-  .project-btn.primary:hover {
-    background: var(--accent-purple);
-    color: white;
-    transform: translateY(-3px);
-  }
-
-  .project-btn.secondary {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid var(--border-dim);
-    color: white;
-  }
-
-  .project-btn.secondary:hover {
-    border-color: rgba(255, 255, 255, 0.3);
-    background: rgba(255, 255, 255, 0.1);
-  }
-
-  /* CTA Section */
-  .cta-section {
-    padding: 6rem 2rem;
-    max-width: 900px;
-    margin: 0 auto;
-  }
-
-  .cta-glass {
-    background: linear-gradient(135deg, rgba(20, 20, 20, 0.4) 0%, rgba(10, 10, 10, 0.4) 100%);
-    backdrop-filter: blur(20px);
-    border: 1px solid var(--border-dim);
-    padding: 4rem;
-    border-radius: 40px;
-    text-align: center;
-  }
-
-  .cta-glass h2 {
-    font-size: 2.5rem;
-    font-weight: 800;
-    margin-bottom: 1rem;
-    letter-spacing: -0.03em;
-  }
-
-  .cta-glass p {
-    color: rgba(255, 255, 255, 0.6);
-    font-size: 1.2rem;
-    margin-bottom: 2.5rem;
-  }
-
-  .cta-buttons {
-    display: flex;
-    gap: 1.5rem;
-    justify-content: center;
-  }
-
-  .cta-btn {
-    display: flex;
-    align-items: center;
-    gap: 0.8rem;
-    padding: 1rem 2rem;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid var(--border-dim);
-    border-radius: 100px;
-    color: white;
-    font-weight: 600;
-    transition: all 0.3s ease;
-  }
-
-  .cta-btn:hover {
-    background: rgba(159, 85, 255, 0.2);
-    border-color: var(--accent-purple);
-    transform: translateY(-5px);
-  }
+  .cta-section { padding: 6rem 2rem; max-width: 900px; margin: 0 auto; }
+  .cta-glass { background: rgba(10, 10, 10, 0.4); border: 1px solid var(--border-dim); padding: 4rem; border-radius: 40px; text-align: center; }
+  .cta-glass h2 { font-size: 2.5rem; font-weight: 800; margin-bottom: 1rem; }
+  .cta-glass p { color: rgba(255, 255, 255, 0.6); font-size: 1.2rem; margin-bottom: 2.5rem; }
+  .cta-buttons { display: flex; gap: 1.5rem; justify-content: center; }
+  .cta-btn { display: flex; align-items: center; gap: 0.8rem; padding: 1rem 2rem; background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border-dim); border-radius: 100px; color: white; text-decoration: none; font-weight: 600; transition: 0.3s; }
+  .cta-btn:hover { background: rgba(159, 85, 255, 0.1); border-color: var(--accent-purple); transform: translateY(-5px); }
 
   @media (max-width: 768px) {
     .projects-grid { grid-template-columns: 1fr; }
-    .content-wrapper { padding-top: 6rem; }
-    .cta-glass { padding: 2.5rem; }
     .cta-buttons { flex-direction: column; }
     .project-links { flex-direction: column; }
   }
