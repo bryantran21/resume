@@ -1,16 +1,12 @@
 ---
-import DarkVeil from '../components/DarkVeil';
-
 interface Props {
   title: string;
   description?: string;
-  showWaves?: boolean;
 }
 
-const { 
-  title, 
+const {
+  title,
   description = "Personal website and portfolio",
-  showWaves = true 
 } = Astro.props;
 
 const navLinks = [
@@ -31,47 +27,92 @@ const pathname = new URL(Astro.url).pathname;
   <meta name="description" content={description} />
   <meta name="generator" content={Astro.generator} />
   <link rel="icon" type="image/png" href="/favicon.png" />
+
+  <script is:inline>
+    const stored = localStorage.getItem('theme');
+    const theme = stored ?? (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    document.documentElement.dataset.theme = theme;
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
-  <link href="https://fonts.cdnfonts.com/css/sf-pro-display" rel="stylesheet">
   <title>{title}</title>
 </head>
 <body>
-  {showWaves && (
-    <DarkVeil 
-      client:only="react" 
-      speed={0.9} 
-      hueShift={-35} 
-      noiseIntensity={0.04}
-      warpAmount={0.2}
-    />
-  )}
-
   <nav class="navbar">
     <a href="/" class="logo">BRYAN</a>
     <div class="nav-links">
       {navLinks.map(link => (
-        <a 
-          href={link.href} 
+        <a
+          href={link.href}
           class={`nav-link ${pathname === link.href ? 'active' : ''}`}
         >
           {link.label}
         </a>
       ))}
     </div>
+    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle color theme">
+      <i class="fas fa-moon"></i>
+    </button>
   </nav>
 
   <main>
     <slot />
   </main>
+
+  <script is:inline>
+    const btn = document.getElementById('theme-toggle');
+    const icon = btn.querySelector('i');
+    const sync = () => { icon.className = document.documentElement.dataset.theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon'; };
+    sync();
+    btn.addEventListener('click', () => {
+      const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+      document.documentElement.dataset.theme = next;
+      localStorage.setItem('theme', next);
+      sync();
+    });
+  </script>
 </body>
 </html>
 
 <style is:global>
+  :root,
+  :root[data-theme="light"] {
+    --bg:              #FBFBF9;
+    --surface:         #FFFFFF;
+    --text:            #141414;
+    --text-secondary:  #5C5C5A;
+    --text-muted:      #8A8783;
+    --border:          #E5E2DB;
+    --border-strong:   #D6D2C9;
+    --accent:          #6D28D9;
+    --accent-soft:     #F1EBFB;
+    --btn-bg:          #141414;
+    --btn-fg:          #FBFBF9;
+  }
+
+  :root[data-theme="dark"] {
+    --bg:              #0B0B0C;
+    --surface:         #141416;
+    --text:            #FAFAFA;
+    --text-secondary:  #8E8E93;
+    --text-muted:      #6E6E73;
+    --border:          rgba(255,255,255,0.09);
+    --border-strong:   rgba(255,255,255,0.16);
+    --accent:          #A78BFA;
+    --accent-soft:     rgba(167,139,250,0.12);
+    --btn-bg:          #FAFAFA;
+    --btn-fg:          #0B0B0C;
+  }
+
   :root {
-    --accent-purple: #9F55FF;
-    --bg-black: #000000;
-    --text-secondary: rgba(255, 255, 255, 0.7);
-    --font-sans: 'SF Pro Display', 'SF Pro Text', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', monospace;
+    --maxw: 900px;
+    --radius-card: 12px;
+    --radius-pill: 100px;
   }
 
   * {
@@ -80,28 +121,35 @@ const pathname = new URL(Astro.url).pathname;
     padding: 0;
   }
 
-  body {
-    font-family: var(--font-sans);
-    background-color: var(--bg-black);
-    color: white;
-    -webkit-font-smoothing: antialiased;
-    overflow-x: hidden;
+  :root[data-theme="light"] {
+    color-scheme: light;
   }
 
-  /* GATEKEEPER: Ensures your pages stay transparent. */
-  main, 
-  .page, 
-  .about-page, 
-  .projects-page, 
-  .resume-page,
-  .content-wrapper {
-    background-color: transparent !important;
-    position: relative;
-    z-index: 10;
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background-color: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+    transition: background-color 0.2s ease, color 0.2s ease;
   }
 
   main {
     width: 100%;
+  }
+
+  h1, h2, h3, h4 {
+    font-weight: 600;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
   }
 
   .navbar {
@@ -113,25 +161,21 @@ const pathname = new URL(Astro.url).pathname;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 1.5rem;
     width: 90%;
-    max-width: 850px; 
-    padding: 0.8rem 2.5rem;
-    
-    /* Obsidian Glass Effect */
-    background: rgba(10, 10, 10, 0.4);
-    backdrop-filter: blur(20px) saturate(180%);
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
-    
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    /* Re-added pill shape */
-    border-radius: 100px !important; 
+    max-width: 850px;
+    padding: 0.8rem 1.5rem 0.8rem 2.5rem;
+
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-pill) !important;
   }
 
   .logo {
     font-size: 1.1rem;
-    font-weight: 800;
-    color: white !important;
-    letter-spacing: 0.1em; 
+    font-weight: 600;
+    color: var(--text) !important;
+    letter-spacing: 0.1em;
     text-decoration: none;
   }
 
@@ -146,14 +190,14 @@ const pathname = new URL(Astro.url).pathname;
     text-decoration: none;
     font-size: 0.85rem;
     font-weight: 500;
-    transition: color 0.3s ease;
+    transition: color 0.2s ease;
     position: relative;
     padding: 6px 0;
   }
 
-  .nav-link:hover, 
+  .nav-link:hover,
   .nav-link.active {
-    color: white !important;
+    color: var(--text) !important;
   }
 
   .nav-link::after {
@@ -162,11 +206,10 @@ const pathname = new URL(Astro.url).pathname;
     bottom: -2px;
     left: 50%;
     width: 0;
-    height: 2px;
-    background: var(--accent-purple);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    height: 1px;
+    background: var(--accent);
+    transition: all 0.2s ease;
     transform: translateX(-50%);
-    border-radius: 2px;
   }
 
   .nav-link:hover::after,
@@ -174,10 +217,30 @@ const pathname = new URL(Astro.url).pathname;
     width: 100%;
   }
 
+  .theme-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    color: var(--text-secondary);
+    cursor: pointer;
+    font-size: 0.8rem;
+    transition: border-color 0.2s ease, color 0.2s ease;
+  }
+
+  .theme-toggle:hover {
+    border-color: var(--border-strong);
+    color: var(--text);
+  }
+
   @media (max-width: 768px) {
     .navbar {
       top: 1rem;
-      padding: 0.7rem 1.5rem;
+      padding: 0.7rem 1rem 0.7rem 1.5rem;
       width: 95%;
     }
     .nav-links { gap: 1rem; }

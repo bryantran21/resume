@@ -3,14 +3,13 @@ const { title, description, size = "small", href } = Astro.props;
 ---
 
 <a class={`card ${size}`} href={href}>
-  <div class="card-glow"></div>
   <div class="content">
     <div class="header-group">
       <h3>{title}</h3>
       {description && <p>{description}</p>}
     </div>
-    
-    <slot /> 
+
+    <slot />
   </div>
 </a>
 
@@ -18,40 +17,20 @@ const { title, description, size = "small", href } = Astro.props;
   .card {
     display: flex;
     flex-direction: column;
-    background: #0a0a0a;
-    color: white;
-    border-radius: 28px;
+    background: var(--surface);
+    color: var(--text);
+    border-radius: var(--radius-card);
     padding: 30px;
     text-decoration: none;
     position: relative;
     overflow: hidden;
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    border: 1px solid var(--border);
     min-height: 220px; /* Matched to TravelCard */
-    transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.3s ease;
-  }
-
-  /* The Signature Purple Glow */
-  .card-glow {
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(
-      circle at 50% 120%, 
-      rgba(159, 85, 255, 0.15) 0%, 
-      transparent 70%
-    );
-    opacity: 0;
-    transition: opacity 0.5s ease;
-    pointer-events: none;
-    z-index: 1;
+    transition: border-color 0.2s ease;
   }
 
   .card:hover {
-    transform: scale(1.02);
-    border-color: rgba(159, 85, 255, 0.4);
-  }
-
-  .card:hover .card-glow {
-    opacity: 1;
+    border-color: var(--border-strong);
   }
 
   .content {
@@ -93,16 +72,16 @@ const { title, description, size = "small", href } = Astro.props;
 
   :global(.stat-label) {
     font-size: 0.7rem;
-    color: #888;
+    color: var(--accent);
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    font-weight: 700;
+    font-weight: 600;
   }
 
   :global(.stat-value) {
     font-size: 2.8rem;
-    font-weight: 800;
-    color: #9F55FF;
+    font-weight: 600;
+    color: var(--text);
     line-height: 1;
     margin-top: 4px;
   }
@@ -114,33 +93,18 @@ const { title, description, size = "small", href } = Astro.props;
   }
 
 :global(.team-badges img) {
-    /* 1. Define the "Box" */
-    width: 48px; 
+    width: 48px;
     height: 48px;
-
-    /* 2. Prevent Stretching (CRITICAL) */
-    object-fit: contain; 
-    
-    /* 3. Visual Polish */
-    background: rgba(255, 255, 255, 0.03); /* subtle backing */
-    padding: 6px; 
+    object-fit: contain;
+    background: var(--bg);
+    padding: 6px;
     border-radius: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.05);
-
-    /* 4. Effects */
-    filter: drop-shadow(0 0 8px rgba(159, 85, 255, 0.1));
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid var(--border);
+    transition: border-color 0.2s ease, filter 0.2s ease, opacity 0.2s ease;
   }
 
   :global(.team-badges img:hover) {
-    transform: translateY(-4px) scale(1.1);
-    background: rgba(255, 255, 255, 0.08);
-    border-color: var(--accent-purple);
-  }
-
-  :global(.team-badges img:hover) {
-    filter: drop-shadow(0 0 12px rgba(159, 85, 255, 0.4)) grayscale(0);
-    transform: scale(1.1);
+    border-color: var(--accent);
   }
 
   /* Size variants */

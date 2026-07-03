@@ -60,17 +60,11 @@ const bio = {
 </Layout>
 
 <style>
-  /* REMOVED :root redeclarations to ensure we use global SF Pro settings.
-     REMOVED .navbar and .nav-link styles as they are already in Layout.astro.
-  */
-
   .about-page {
     min-height: 100vh;
-    /* CRITICAL: Set to transparent so Layout waves are visible */
-    background-color: transparent; 
-    color: white;
-    /* Uses the SF Pro stack from Layout */
-    font-family: var(--font-sans); 
+    background-color: transparent;
+    color: var(--text);
+    font-family: var(--font-sans);
   }
 
   .content-wrapper {
@@ -79,28 +73,28 @@ const bio = {
   }
 
   /* --- HERO STYLING --- */
-  .about-hero { 
-    text-align: center; 
-    padding: 4rem 2rem; 
+  .about-hero {
+    text-align: center;
+    padding: 4rem 2rem;
   }
 
-  .about-hero h1 { 
-    font-size: clamp(3.5rem, 8vw, 5rem); 
-    font-weight: 800; 
-    letter-spacing: -0.04em; 
+  .about-hero h1 {
+    font-size: clamp(3.5rem, 8vw, 5rem);
+    font-weight: 600;
+    letter-spacing: -0.03em;
     margin-bottom: 0.5rem;
   }
 
-  .about-hero .subtitle { 
-    font-size: 1.2rem; 
-    color: rgba(255, 255, 255, 0.6); 
+  .about-hero .subtitle {
+    font-size: 1.2rem;
+    color: var(--text-secondary);
   }
 
   /* --- CONTENT STYLING --- */
-  .section { 
-    max-width: 1100px; 
-    margin: 0 auto; 
-    padding: 0 2rem; 
+  .section {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 2rem;
   }
 
   .bio-text-wrapper {
@@ -109,7 +103,7 @@ const bio = {
     gap: 1.5rem;
     font-size: 1.1rem;
     line-height: 1.7;
-    color: rgba(255, 255, 255, 0.8);
+    color: var(--text-secondary);
     text-align: left;
   }
 
@@ -132,13 +126,13 @@ const bio = {
     font-size: 0.75rem;
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    color: var(--accent-purple);
-    font-weight: 700;
+    color: var(--accent);
+    font-weight: 600;
   }
 
   .stat-value {
     font-size: 2rem;
-    font-weight: 800;
+    font-weight: 600;
   }
 
   .team-badges {
@@ -149,12 +143,14 @@ const bio = {
   .team-badges img {
     height: 40px;
     width: auto;
-    filter: grayscale(1) brightness(2);
-    transition: filter 0.3s ease;
+    filter: grayscale(1);
+    opacity: 0.6;
+    transition: filter 0.2s ease, opacity 0.2s ease;
   }
 
   .team-badges img:hover {
-    filter: grayscale(0) brightness(1);
+    filter: grayscale(0);
+    opacity: 1;
   }
 
   @media (max-width: 768px) {
