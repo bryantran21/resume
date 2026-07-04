@@ -61,8 +61,8 @@ const { Content } = await entry.render();
     position: fixed;
     top: 0;
     left: 0;
-    height: 4px;
-    background: var(--accent-purple);
+    height: 2px;
+    background: var(--accent);
     width: 0%;
     z-index: 1001;
     transition: width 0.1s ease;
@@ -80,56 +80,58 @@ const { Content } = await entry.render();
 
   .date {
     font-size: 0.9rem;
-    color: var(--accent-purple);
-    font-weight: 600;
+    color: var(--accent);
+    font-weight: 500;
     text-transform: uppercase;
   }
 
   .tag {
     font-size: 0.8rem;
-    color: rgba(255, 255, 255, 0.4);
+    color: var(--text-muted);
     margin-left: 0.8rem;
   }
 
   h1 {
     font-size: clamp(2.5rem, 5vw, 4rem);
-    font-weight: 800;
-    letter-spacing: -0.04em;
+    font-weight: 600;
+    letter-spacing: -0.03em;
     margin-bottom: 1.5rem;
     line-height: 1.1;
+    color: var(--text);
   }
 
   .description {
     font-size: 1.25rem;
-    color: rgba(255, 255, 255, 0.6);
+    color: var(--text-secondary);
     line-height: 1.6;
     font-style: italic;
   }
 
   .divider {
     border: 0;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-top: 1px solid var(--border);
     margin: 3rem 0;
   }
 
   /* STYLING YOUR MARKDOWN CONTENT */
   .markdown-content {
     line-height: 1.8;
-    font-size: 1.15rem; /* Matches your Bio size */
-    color: rgba(255, 255, 255, 0.85);
+    font-size: 1.15rem;
+    color: var(--text-secondary);
   }
 
   :global(.markdown-content h2) {
     font-size: 2rem;
-    color: white;
+    color: var(--text);
     margin: 3.5rem 0 1.5rem;
-    font-weight: 700;
+    font-weight: 600;
   }
 
   :global(.markdown-content h3) {
     font-size: 1.5rem;
-    color: var(--accent-purple);
+    color: var(--accent);
     margin: 2.5rem 0 1rem;
+    font-weight: 600;
   }
 
   :global(.markdown-content p) {
@@ -146,10 +148,10 @@ const { Content } = await entry.render();
   }
 
   :global(.markdown-content pre) {
-    background: #0a0a0a !important;
+    background: var(--surface) !important;
     padding: 1.5rem;
-    border-radius: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-card);
+    border: 1px solid var(--border);
     margin: 2.5rem 0;
     font-size: 0.95rem;
   }
