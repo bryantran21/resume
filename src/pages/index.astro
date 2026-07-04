@@ -253,7 +253,7 @@ const projects = [
     <div class="resume-hero">
       <h1>Resume</h1>
       <p class="subtitle">Full Stack Developer & Problem Solver</p>
-      <a href="/Bryan_Tran_Resume.pdf" download class="download-btn">
+      <a href="/Bryan_Tran_Resume.pdf" target="_blank" rel="noopener noreferrer" class="download-btn">
         <i class="fas fa-download"></i>
         Download PDF
       </a>
@@ -451,13 +451,13 @@ const projects = [
     align-items: center;
     justify-content: center;
     text-align: center;
-    height: 100vh;
-    padding: 2rem;
+    min-height: 78vh;
+    padding: 5rem 2rem;
   }
 
   .profile-photo {
-    width: 160px;
-    height: 160px;
+    width: 130px;
+    height: 130px;
     border-radius: 50%;
     border: 3px solid var(--border);
     object-fit: cover;
@@ -470,18 +470,18 @@ const projects = [
   }
 
   .name {
-    font-size: clamp(3.5rem, 8vw, 7rem);
+    font-size: clamp(2.75rem, 7vw, 5.5rem);
     font-weight: 600;
     letter-spacing: -0.03em;
     color: var(--text);
-    margin-top: 1rem;
+    margin-top: 0.75rem;
   }
 
   .tagline {
-    font-size: clamp(1rem, 2vw, 1.2rem);
+    font-size: clamp(1rem, 2vw, 1.15rem);
     font-weight: 400;
     max-width: 35rem;
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
     color: var(--text-secondary);
     text-wrap: balance;
   }
