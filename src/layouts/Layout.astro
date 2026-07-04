@@ -10,10 +10,10 @@ const {
 } = Astro.props;
 
 const navLinks = [
-  { label: 'About', href: '/about' },
-  { label: 'Resume', href: '/resume' },
-  { label: 'Projects', href: '/projects' },
-  { label: 'Blog', href: '/blog' },
+  { label: 'About', href: '/#about', section: 'about' },
+  { label: 'Resume', href: '/#resume', section: 'resume' },
+  { label: 'Projects', href: '/#projects', section: 'projects' },
+  { label: 'Blog', href: '/blog', section: null },
 ];
 
 const pathname = new URL(Astro.url).pathname;
@@ -47,7 +47,8 @@ const pathname = new URL(Astro.url).pathname;
       {navLinks.map(link => (
         <a
           href={link.href}
-          class={`nav-link ${pathname === link.href ? 'active' : ''}`}
+          class={`nav-link ${link.section === null && pathname.startsWith('/blog') ? 'active' : ''}`}
+          data-section={link.section}
         >
           {link.label}
         </a>
@@ -74,6 +75,45 @@ const pathname = new URL(Astro.url).pathname;
       sync();
     });
   </script>
+
+  <script is:inline>
+    if (matchMedia('(prefers-reduced-motion: no-preference)').matches) {
+      const sections = document.querySelectorAll('main section');
+      sections.forEach(el => el.classList.add('reveal'));
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in-view');
+            io.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -80px 0px' });
+      sections.forEach(el => io.observe(el));
+    }
+  </script>
+
+  <script is:inline>
+    if (location.pathname === '/') {
+      const navLinkEls = document.querySelectorAll('.nav-link[data-section]');
+      const spySections = Array.from(navLinkEls)
+        .map(l => l.dataset.section)
+        .filter(Boolean)
+        .map(id => document.getElementById(id))
+        .filter(Boolean);
+
+      const setActive = (id) => {
+        navLinkEls.forEach(l => l.classList.toggle('active', l.dataset.section === id));
+      };
+
+      const spy = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) setActive(entry.target.id);
+        });
+      }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
+
+      spySections.forEach(el => spy.observe(el));
+    }
+  </script>
 </body>
 </html>
 
@@ -81,6 +121,7 @@ const pathname = new URL(Astro.url).pathname;
   :root,
   :root[data-theme="light"] {
     --bg:              #FBFBF9;
+    --bg-alt:          #F2F1EC;
     --surface:         #FFFFFF;
     --text:            #141414;
     --text-secondary:  #5C5C5A;
@@ -95,6 +136,7 @@ const pathname = new URL(Astro.url).pathname;
 
   :root[data-theme="dark"] {
     --bg:              #0B0B0C;
+    --bg-alt:          #101012;
     --surface:         #141416;
     --text:            #FAFAFA;
     --text-secondary:  #8E8E93;
@@ -129,6 +171,12 @@ const pathname = new URL(Astro.url).pathname;
     color-scheme: dark;
   }
 
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+
   body {
     font-family: var(--font-sans);
     background-color: var(--bg);
@@ -150,6 +198,17 @@ const pathname = new URL(Astro.url).pathname;
   :focus-visible {
     outline: 2px solid var(--accent);
     outline-offset: 2px;
+  }
+
+  main section.reveal {
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+
+  main section.reveal.in-view {
+    opacity: 1;
+    transform: translateY(0);
   }
 
   .navbar {
