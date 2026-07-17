@@ -165,6 +165,26 @@ const projects = [
     liveUrl: 'https://gym.bhtran.com',
     githubUrl: 'https://github.com/bryantran21/fitness-tracker',
     featured: true,
+  },
+  {
+    id: 'rote',
+    title: 'Rote',
+    description: 'A spaced-repetition engine that drills Python syntax for coding interviews. Built on a Leitner scheduler and a local-first persistence layer — no accounts, no backend, every rep held in the browser.',
+    tech: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Dexie', 'Zustand'],
+    category: 'Learning Systems',
+    liveUrl: 'https://rote.bhtran.com',
+    githubUrl: 'https://github.com/bryantran21/rote',
+    featured: true,
+  },
+  {
+    id: 'quantdrill',
+    title: 'QuantDrill',
+    description: 'Randomized, timed practice for the aptitude assessments prop trading firms screen interns with — sequences, fast probability, orderbook arbitrage, and reflex games. Every generator is exact and every board brute-forced, so grading is unambiguous. Runs entirely in the browser.',
+    tech: ['React 19', 'Vite', 'TypeScript', 'Tailwind CSS', 'Vitest'],
+    category: 'Quant Tooling',
+    liveUrl: 'https://quant.bhtran.com',
+    githubUrl: 'https://github.com/bryantran21/quantdrill',
+    featured: true,
   }
 ];
 ---
@@ -373,6 +393,38 @@ const projects = [
                     ))}
                   </div>
                   <div class="heatmap-label">ACTIVITY_METRIC_v2.0</div>
+                </div>
+              ) : project.id === 'rote' ? (
+                <div class="leitner-container">
+                  <div class="leitner-row">
+                    {[
+                      { day: 0, fill: 5 },
+                      { day: 1, fill: 4 },
+                      { day: 3, fill: 3 },
+                      { day: 7, fill: 2 },
+                      { day: 16, fill: 1 },
+                    ].map((box, i) => (
+                      <div class="leitner-box">
+                        <div class={`leitner-stack ${i === 2 ? 'active' : ''}`}>
+                          {Array.from({ length: box.fill }).map(() => (
+                            <div class="leitner-card"></div>
+                          ))}
+                        </div>
+                        <span class="leitner-day">{box.day}d</span>
+                      </div>
+                    ))}
+                  </div>
+                  <div class="tile-label">LEITNER_SR_5BOX</div>
+                </div>
+              ) : project.id === 'quantdrill' ? (
+                <div class="seq-container">
+                  <div class="seq-row">
+                    {['2', '6', '14', '30'].map(term => (
+                      <span class="seq-term">{term}</span>
+                    ))}
+                    <span class="seq-term blank">?</span>
+                  </div>
+                  <div class="tile-label">SEQ_SOLVER_v1</div>
                 </div>
               ) : (
                 <div class="image-placeholder"></div>
@@ -726,6 +778,33 @@ const projects = [
   .heat-tile.level-2 { background: var(--accent); opacity: 0.7; }
   .heat-tile.level-3 { background: var(--accent); }
   .heatmap-label { font-family: var(--font-mono); font-size: 0.6rem; color: var(--accent); letter-spacing: 0.3em; opacity: 0.6; }
+
+  .tile-label { font-family: var(--font-mono); font-size: 0.6rem; color: var(--accent); letter-spacing: 0.3em; opacity: 0.6; }
+
+  /* Rote — Leitner boxes, card counts thinning as intervals lengthen */
+  .leitner-container { display: flex; flex-direction: column; align-items: center; gap: 1rem; padding: 2rem; }
+  .leitner-row { display: flex; align-items: flex-end; gap: 10px; }
+  .leitner-box { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+  .leitner-stack { display: flex; flex-direction: column-reverse; gap: 3px; padding: 4px; border: 1px solid var(--border); border-radius: 3px; }
+  .leitner-card { width: 18px; height: 4px; border-radius: 1px; background: var(--border); }
+  .leitner-stack.active { border-color: var(--accent); }
+  .leitner-stack.active .leitner-card { background: var(--accent); }
+  .leitner-day { font-family: var(--font-mono); font-size: 0.55rem; color: var(--text-secondary); opacity: 0.7; }
+
+  /* QuantDrill — a sequence drill mid-question */
+  .seq-container { display: flex; flex-direction: column; align-items: center; gap: 1rem; padding: 2rem; }
+  .seq-row { display: flex; align-items: center; gap: 8px; }
+  .seq-term {
+    min-width: 30px;
+    padding: 6px 4px;
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    text-align: center;
+  }
+  .seq-term.blank { border-color: var(--accent); color: var(--accent); }
 
   .image-placeholder {
     width: 100%;
