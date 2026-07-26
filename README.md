@@ -27,18 +27,18 @@ Hi! I’m **Bryan Tran**, a passionate developer focused on building **interacti
 
 ## 📂 Projects
 
-### 1. **Portfolio Optimizer**
+<!--### 1. **Portfolio Optimizer**
 - Simulates optimized investment portfolios using historical stock data
 - Features **Max Sharpe**, **Minimum Volatility**, and **Efficient Frontier** calculations
 - Built with **FastAPI**, **yfinance**, **React**, and **Next.js**
 
-<!-- ### 2. **AI Workout & Nutrition Planner**
+ ### 2. **AI Workout & Nutrition Planner**
 - Personalized workout and nutrition recommendations with plateau detection
-- Built using **Python**, **ML models**, and **interactive web frontend** -->
+- Built using **Python**, **ML models**, and **interactive web frontend** 
 
 ### 2. **Personal Finance Health Dashboard**
 - Tracks spending, budgets, and portfolio allocations
-- Built with **React**, **Chart.js**, and **FastAPI**
+- Built with **React**, **Chart.js**, and **FastAPI** -->
 
 ---
 
@@ -58,6 +58,3 @@ Hi! I’m **Bryan Tran**, a passionate developer focused on building **interacti
 
 ## ⚡ Notes
 
-- Fully responsive, mobile-friendly design  
-- Easy to update for future projects and skills  
-- Built to showcase both **technical expertise** and **personal branding**
