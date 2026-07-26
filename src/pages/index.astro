@@ -185,6 +185,16 @@ const projects = [
     liveUrl: 'https://quant.bhtran.com',
     githubUrl: 'https://github.com/bryantran21/quantdrill',
     featured: true,
+  },
+  {
+    id: 'sift',
+    title: 'Sift',
+    description: 'A self-hosted job radar that pulls postings straight from ATS JSON APIs, deduplicates fan-out reposts, scores each role for relevance, and surfaces a recency-sorted feed. Built for speed and signal — 45 curated sources, ~8,900 jobs, the noise aggressively hidden.',
+    tech: ['TypeScript', 'Next.js 15', 'Drizzle ORM', 'Postgres', 'Tailwind CSS'],
+    category: 'Data Pipelines',
+    liveUrl: 'https://sift.bhtran.com',
+    githubUrl: 'https://github.com/bryantran21/sift',
+    featured: true,
   }
 ];
 ---
@@ -425,6 +435,26 @@ const projects = [
                     <span class="seq-term blank">?</span>
                   </div>
                   <div class="tile-label">SEQ_SOLVER_v1</div>
+                </div>
+              ) : project.id === 'sift' ? (
+                <div class="feed-container">
+                  <div class="feed-rows">
+                    {[
+                      { score: 92, muted: false },
+                      { score: 78, muted: false },
+                      { score: 34, muted: true },
+                      { score: 21, muted: true },
+                    ].map((row, i) => (
+                      <div class={`feed-row ${row.muted ? 'muted' : ''} ${i === 0 ? 'top' : ''}`}>
+                        <span class="feed-dot"></span>
+                        <span class="feed-track">
+                          <span class="feed-fill" style={`width: ${row.score}%`}></span>
+                        </span>
+                        <span class="feed-score">{row.score}</span>
+                      </div>
+                    ))}
+                  </div>
+                  <div class="tile-label">RELEVANCE_FEED</div>
                 </div>
               ) : (
                 <div class="image-placeholder"></div>
@@ -805,6 +835,19 @@ const projects = [
     text-align: center;
   }
   .seq-term.blank { border-color: var(--accent); color: var(--accent); }
+
+  /* Sift — a relevance-scored job feed, low-signal rows dimmed */
+  .feed-container { display: flex; flex-direction: column; align-items: center; gap: 0.9rem; padding: 1.5rem; width: 100%; }
+  .feed-rows { display: flex; flex-direction: column; gap: 8px; width: 70%; max-width: 220px; }
+  .feed-row { display: flex; align-items: center; gap: 8px; }
+  .feed-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--text-secondary); flex-shrink: 0; opacity: 0.6; }
+  .feed-track { flex: 1; height: 6px; border-radius: 3px; background: var(--border); overflow: hidden; }
+  .feed-fill { display: block; height: 100%; border-radius: 3px; background: var(--text-secondary); opacity: 0.5; }
+  .feed-score { font-family: var(--font-mono); font-size: 0.55rem; color: var(--text-secondary); opacity: 0.7; flex-shrink: 0; width: 16px; text-align: right; }
+  .feed-row.top .feed-dot { background: var(--accent); opacity: 1; }
+  .feed-row.top .feed-fill { background: var(--accent); opacity: 1; }
+  .feed-row.top .feed-score { color: var(--accent); opacity: 1; }
+  .feed-row.muted { opacity: 0.35; }
 
   .image-placeholder {
     width: 100%;
