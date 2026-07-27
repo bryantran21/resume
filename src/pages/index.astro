@@ -239,26 +239,14 @@ const projects = [
 
     <section class="about-content">
       <BentoGrid>
-        <BentoCard title="My Story" size="full">
-          <div class="bio-text-wrapper">
-            <p>
-              I grew up always interested by tech. I went to LSU for my undergrad,
-              and I'm pursuing my Master's at Georgia Tech.
-            </p>
-            <p>
-              After my Master's, I'm hoping to gain research experience in AI/ML
-              and pursue either a PhD or gain experience at a big Tech Company!
-            </p>
-          </div>
-        </BentoCard>
+        <BentoCard
+          title="Read my Blog ✍️"
+          description="Thoughts, resources, and school notes →"
+          size="small"
+          href="/blog"
+        />
 
         <TravelCard client:only="react" />
-
-        <BentoCard
-          title="Resume Website 📝"
-          description="Side project to showcase my skills, projects, and experience."
-          size="small"
-        />
 
         <BentoCard title="Sports & Fitness" size="wide">
           <div class="stats-container">
@@ -273,7 +261,36 @@ const projects = [
             </div>
           </div>
         </BentoCard>
+
+        <div class="yt-card">
+          <h3>Straight from my Top 50 🎵</h3>
+          <p class="yt-sub">A random pick every time you visit</p>
+          <div class="yt-frame"><div id="yt-player"></div></div>
+        </div>
       </BentoGrid>
+
+      <script is:inline>
+        (function () {
+          var PLAYLIST = 'PLL1X_M4rQTFo';
+          window.onYouTubeIframeAPIReady = function () {
+            new YT.Player('yt-player', {
+              playerVars: { listType: 'playlist', list: PLAYLIST, rel: 0, modestbranding: 1 },
+              events: {
+                onReady: function (e) {
+                  var list = e.target.getPlaylist();
+                  if (list && list.length) {
+                    e.target.mute();
+                    e.target.playVideoAt(Math.floor(Math.random() * list.length));
+                  }
+                },
+              },
+            });
+          };
+          var tag = document.createElement('script');
+          tag.src = 'https://www.youtube.com/iframe_api';
+          document.head.appendChild(tag);
+        })();
+      </script>
     </section>
   </div>
 
@@ -608,15 +625,40 @@ const projects = [
 
   .about-content { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
 
-  .bio-text-wrapper {
+  /* YouTube "Top 50" card — spans 2 like a wide bento tile */
+  .yt-card {
+    grid-column: span 2;
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
-    font-size: 1.1rem;
-    line-height: 1.7;
-    color: var(--text-secondary);
-    text-align: left;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-card);
+    padding: 30px;
+    min-height: 220px;
+    transition: border-color 0.2s ease;
   }
+  .yt-card:hover { border-color: var(--border-strong); }
+  .yt-card h3 { font-size: 1.4rem; font-weight: 700; margin: 0; letter-spacing: -0.02em; }
+  .yt-sub { margin: 6px 0 0; color: var(--text-secondary); font-size: 0.95rem; }
+  .yt-frame {
+    margin-top: 16px;
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--bg);
+  }
+  .yt-frame :global(iframe) {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+  @media (max-width: 900px) { .yt-card { grid-column: span 2; } }
+  @media (max-width: 600px) { .yt-card { grid-column: span 1; } }
+
 
   .stats-container {
     display: flex;
