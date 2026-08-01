@@ -735,6 +735,7 @@ const projects = [
   /* TFT Ranked Overview card — spans 2, tracker.gg style */
   .tft-card {
     grid-column: span 2;
+    align-self: start;
     display: flex;
     flex-direction: column;
     gap: 18px;
@@ -742,7 +743,6 @@ const projects = [
     border: 1px solid var(--border);
     border-radius: var(--radius-card);
     padding: 30px;
-    min-height: 220px;
     text-decoration: none;
     color: var(--text);
     transition: border-color 0.2s ease;
@@ -773,7 +773,7 @@ const projects = [
   .tft-label.gold { color: var(--gold); }
   .tft-best-val { font-size: 0.82rem; font-weight: 600; }
 
-  .tft-prev { display: flex; align-items: center; gap: 8px; margin-top: auto; flex-wrap: wrap; }
+  .tft-prev { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
   .tft-prev-label { font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-secondary); }
   .tft-chip {
     font-size: 0.72rem; padding: 3px 8px; border-radius: 6px;
