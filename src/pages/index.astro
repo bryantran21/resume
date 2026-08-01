@@ -24,6 +24,12 @@ const tft = {
   trackerUrl: 'https://tracker.gg/tft/profile/riot/echo%23goobs/overview',
 };
 
+const games = [
+  { name: 'Valorant', rank: 'Platinum 3', tier: 'platinum', note: 'Main: Jett', emblem: '/logos/val-platinum.png', url: 'https://tracker.gg/valorant/profile/riot/echo%23goobs/overview' },
+  { name: 'Apex Legends', rank: 'Platinum', tier: 'platinum', emblem: '/logos/apex-platinum.png', url: 'https://apex.tracker.gg/apex/profile/origin/echoxlyte/overview' },
+  { name: 'Marvel Rivals', rank: 'Diamond', tier: 'diamond', note: 'Main: Psylocke', emblem: '/logos/mr-diamond.webp', url: 'https://tracker.gg/marvel-rivals/profile/ign/echolyte/overview' },
+];
+
 const name = "BRYAN";
 const tagline = "The future belongs to those who believe in the possibilities of tomorrow.";
 
@@ -287,6 +293,7 @@ const projects = [
           <div class="yt-frame"><div id="yt-player"></div></div>
         </div>
 
+        <div class="stack-col">
         <a class="tft-card" href={tft.trackerUrl} target="_blank" rel="noopener">
           <div class="tft-head">
             <div>
@@ -321,6 +328,20 @@ const projects = [
             ))}
           </div>
         </a>
+
+        <div class="games-card">
+          <div class="games-list">
+            {games.map(g => (
+              <a class="game-row" href={g.url} target="_blank" rel="noopener">
+                <img class="game-emblem" src={g.emblem} alt={`${g.name} ${g.rank}`} />
+                <span class="game-name">{g.name}</span>
+              </a>
+            ))}
+          </div>
+          <img class="games-hero jett" src="/logos/jett.png" alt="Jett — Valorant" />
+          <img class="games-hero psylocke" src="/logos/psylocke.webp" alt="Psylocke — Marvel Rivals" />
+        </div>
+        </div>
 
         <div class="lbxd-card">
           <div class="lbxd-head">
@@ -717,10 +738,11 @@ const projects = [
     margin-top: 16px;
     position: relative;
     width: 100%;
-    aspect-ratio: 16 / 9;
+    flex: 1;
+    min-height: 240px;
     border-radius: 12px;
     overflow: hidden;
-    background: var(--bg);
+    background: #000;
   }
   .yt-frame :global(iframe) {
     position: absolute;
@@ -732,10 +754,11 @@ const projects = [
   @media (max-width: 900px) { .yt-card { grid-column: span 2; } }
   @media (max-width: 600px) { .yt-card { grid-column: span 1; } }
 
-  /* TFT Ranked Overview card — spans 2, tracker.gg style */
+  /* Right column: TFT card on top, games card filling the rest */
+  .stack-col { grid-column: span 2; display: flex; flex-direction: column; gap: 16px; }
+
+  /* TFT Ranked Overview card — tracker.gg style */
   .tft-card {
-    grid-column: span 2;
-    align-self: start;
     display: flex;
     flex-direction: column;
     gap: 18px;
@@ -823,8 +846,47 @@ const projects = [
     color: #fff;
     background: rgba(0, 0, 0, 0.7);
   }
-  @media (max-width: 900px) { .tft-card { grid-column: span 2; } .lbxd-card { grid-column: span 2; } }
-  @media (max-width: 600px) { .tft-card { grid-column: span 1; } .lbxd-card { grid-column: span 1; } }
+  /* Games card — fills the space under the TFT card, Psylocke splash */
+  .games-card {
+    position: relative;
+    flex: 1;
+    min-height: 200px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-card);
+    padding: 24px 30px;
+    transition: border-color 0.2s ease;
+  }
+  .games-card:hover { border-color: var(--border-strong); }
+  .games-list { display: flex; flex-direction: column; gap: 6px; padding: 0 20px 0 90px; position: relative; z-index: 2; }
+  .game-row {
+    display: flex; align-items: center; gap: 11px;
+    padding: 8px 0; text-decoration: none; color: var(--text);
+    border-bottom: 1px solid var(--border);
+  }
+  .game-row:last-child { border-bottom: 0; }
+  .game-emblem { width: 32px; height: 32px; object-fit: contain; flex-shrink: 0; }
+  .game-name { font-size: 0.98rem; font-weight: 600; }
+  .games-hero { position: absolute; bottom: -30px; height: 205px; width: auto; pointer-events: none; z-index: 1; }
+  .games-hero.psylocke {
+    right: -24px;
+    -webkit-mask-image: linear-gradient(to left, #000 62%, transparent 93%);
+    mask-image: linear-gradient(to left, #000 62%, transparent 93%);
+    filter: drop-shadow(0 0 20px rgba(167,139,250,0.28));
+  }
+  .games-hero.jett {
+    left: -104px; bottom: -34px; height: 235px;
+    -webkit-mask-image: linear-gradient(to right, #000 52%, transparent 82%);
+    mask-image: linear-gradient(to right, #000 52%, transparent 82%);
+    filter: drop-shadow(0 0 20px rgba(95,201,214,0.28));
+  }
+
+  @media (max-width: 900px) { .stack-col { grid-column: span 2; } .lbxd-card { grid-column: span 2; } }
+  @media (max-width: 600px) { .stack-col { grid-column: span 1; } .lbxd-card { grid-column: span 1; } .games-hero { opacity: 0.7; } }
 
 
   .stats-container {
