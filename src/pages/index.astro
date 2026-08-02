@@ -6,7 +6,7 @@ import BentoGrid from '../components/BentoGrid.astro';
 import TravelCard from '../components/TravelCard';
 import { getRecentFilms } from '../lib/letterboxd';
 
-const films = await getRecentFilms(8);
+const films = await getRecentFilms(10);
 
 const tft = {
   riotId: 'echo#goobs',
@@ -871,7 +871,7 @@ const projects = [
   .game-row:last-child { border-bottom: 0; }
   .game-emblem { width: 32px; height: 32px; object-fit: contain; flex-shrink: 0; }
   .game-name { font-size: 0.98rem; font-weight: 600; }
-  .games-hero { position: absolute; bottom: -30px; height: 205px; width: auto; pointer-events: none; z-index: 1; }
+  .games-hero { position: absolute; bottom: -30px; height: 205px; width: auto; pointer-events: none; z-index: 3; }
   .games-hero.psylocke {
     right: -24px;
     -webkit-mask-image: linear-gradient(to left, #000 62%, transparent 93%);
@@ -879,9 +879,9 @@ const projects = [
     filter: drop-shadow(0 0 20px rgba(167,139,250,0.28));
   }
   .games-hero.jett {
-    left: -104px; bottom: -34px; height: 235px;
-    -webkit-mask-image: linear-gradient(to right, #000 52%, transparent 82%);
-    mask-image: linear-gradient(to right, #000 52%, transparent 82%);
+    left: -205px; bottom: -120px; height: 360px;
+    -webkit-mask-image: linear-gradient(to right, #000 66%, transparent 82%);
+    mask-image: linear-gradient(to right, #000 66%, transparent 82%);
     filter: drop-shadow(0 0 20px rgba(95,201,214,0.28));
   }
 
