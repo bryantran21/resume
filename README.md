@@ -42,41 +42,6 @@ A single page (`/`) with a sticky nav across **About · Resume · Projects**, pl
 
 ---
 
-## 📁 Structure
-
-```
-src/
-  pages/
-    index.astro          # hero + About / Resume / Projects (single page)
-    blog.astro           # blog index
-    blog/[...slug].astro # individual blog posts
-  layouts/
-    Layout.astro         # nav, theme tokens, shared shell
-  components/
-    BentoGrid.astro      # About-section grid
-    BentoCard.astro      # bento card
-    TravelCard.tsx       # interactive globe (React island)
-    SectionLabel.astro
-  content/blog/          # Markdown posts
-  lib/letterboxd.ts      # RSS fetch with snapshot fallback
-  data/letterboxd-snapshot.json
-public/                  # images, logos, rank & character art
-astro.config.mjs         # React integration + /about,/resume,/projects redirects
-```
-
----
-
-## 🚀 Getting Started
-
-```bash
-npm install
-npm run dev       # dev server at http://localhost:4321
-npm run build     # static build to dist/
-npm run preview   # serve the production build locally
-```
-
----
-
 ## 🔌 Data & Integrations
 
 - **Letterboxd** — recent films are fetched from the public RSS feed during the build (with a browser user-agent); if that request is blocked, it falls back to `src/data/letterboxd-snapshot.json`. Refresh the snapshot occasionally to keep the offline fallback current.
