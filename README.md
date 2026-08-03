@@ -1,60 +1,98 @@
-# Bryan Tran – Portfolio & Resume Website
+# Bryan Tran — Portfolio & Resume
 
-![Website](https://img.shields.io/badge/Website-Live-brightgreen) ![React](https://img.shields.io/badge/React-18-blue) ![Tailwind](https://img.shields.io/badge/Tailwind-3.5-blueviolet) ![TypeScript](https://img.shields.io/badge/TypeScript-5.2-blue)
+![Live](https://img.shields.io/badge/Live-bhtran.com-brightgreen)
+![Astro](https://img.shields.io/badge/Astro-5-ff5d01)
+![React](https://img.shields.io/badge/React-19-61dafb)
+![TypeScript](https://img.shields.io/badge/TypeScript-5-3178c6)
+![Vercel](https://img.shields.io/badge/Deployed-Vercel-000000)
 
-Welcome to my **personal portfolio website**, showcasing my skills, projects, and experience in **frontend, backend, and AI/ML development**.
-
----
-
-## 👋 About Me
-
-Hi! I’m **Bryan Tran**, a passionate developer focused on building **interactive web applications**, **data-driven dashboards**, and **AI-powered tools** that make information actionable and intuitive. I enjoy combining **clean design**, **efficient code**, and **data visualization** to create impactful experiences.
+My personal site at **[bhtran.com](https://bhtran.com)** — a single-page portfolio/resume plus a small blog. Built with **Astro** and hand-written CSS (no UI framework), with a few **React islands** for the interactive pieces. The whole thing builds to static files and deploys on Vercel.
 
 ---
 
-## 💻 Tech Stack
+## ✨ Highlights
 
-| Frontend          | Backend      | Tools & DevOps      | Other / Misc        |
-|------------------|-------------|-------------------|-------------------|
-| React             | Node.js     | Docker            | Power BI          |
-| Next.js           | Java        | Git               | Power Apps        |
-| TypeScript        | Spring Boot | AWS               | VS Code           |
-| Tailwind CSS      | Python      | Azure             | Figma             |
-| HTML / CSS        | MySQL       | Jira              | C#                |
-| Astro             |             |                   |                   |
+A single page (`/`) with a sticky nav across **About · Resume · Projects**, plus a separate **Blog**. Light/dark theming throughout via CSS custom properties.
 
----
+**About** is a "bento" grid of live, interactive cards:
+- 🌍 **Travel Globe** — an interactive 3D globe of places I've been (`react-globe.gl` / three.js)
+- 🎵 **Top 50** — cues a *random, shuffled* video from a YouTube playlist on every visit (YouTube IFrame API)
+- ⚔️ **TFT Ranked Overview** — a rank card styled after tracker.gg
+- 🎮 **Game ranks** — Valorant, Apex, and Marvel Rivals, framed by character splash art
+- 🎬 **Recently Watched** — my latest films, pulled from the **Letterboxd public RSS feed at build time**, with a committed snapshot fallback so the build never breaks if Letterboxd blocks the fetch
 
-## 📂 Projects
+**Projects** is a grid where each card has its own **custom-drawn animated preview tile** (a heatmap, a spaced-repetition box row, a sequence solver, a relevance feed) instead of a generic screenshot.
 
-<!--### 1. **Portfolio Optimizer**
-- Simulates optimized investment portfolios using historical stock data
-- Features **Max Sharpe**, **Minimum Volatility**, and **Efficient Frontier** calculations
-- Built with **FastAPI**, **yfinance**, **React**, and **Next.js**
+**Resume** covers experience, education, certifications, and a scrolling skills marquee.
 
- ### 2. **AI Workout & Nutrition Planner**
-- Personalized workout and nutrition recommendations with plateau detection
-- Built using **Python**, **ML models**, and **interactive web frontend** 
-
-### 2. **Personal Finance Health Dashboard**
-- Tracks spending, budgets, and portfolio allocations
-- Built with **React**, **Chart.js**, and **FastAPI** -->
+**Blog** posts are Markdown, managed with Astro content collections.
 
 ---
 
-## 🌐 Live Demo
+## 🧱 Tech Stack
 
-[Visit My Portfolio](https://bhtran.com)
+| Area | Choice |
+|------|--------|
+| Framework | Astro 5 (static output, islands architecture) |
+| Interactive UI | React 19 islands, Framer Motion |
+| 3D | react-globe.gl + three.js |
+| Language | TypeScript |
+| Styling | Hand-written scoped CSS with design tokens — **no CSS framework** |
+| Hosting | Vercel (`bhtran.com`) |
 
 ---
 
-## 📫 Contact Me
+## 📁 Structure
 
-- **Email:** bryantran21@gmail.com  
-- **LinkedIn:** [linkedin.com/in/bryan-huy-tran](https://linkedin.com/in/bryan-huy-tran)  
-- **GitHub:** [github.com/bryantran21](https://github.com/bryantran21)  
+```
+src/
+  pages/
+    index.astro          # hero + About / Resume / Projects (single page)
+    blog.astro           # blog index
+    blog/[...slug].astro # individual blog posts
+  layouts/
+    Layout.astro         # nav, theme tokens, shared shell
+  components/
+    BentoGrid.astro      # About-section grid
+    BentoCard.astro      # bento card
+    TravelCard.tsx       # interactive globe (React island)
+    SectionLabel.astro
+  content/blog/          # Markdown posts
+  lib/letterboxd.ts      # RSS fetch with snapshot fallback
+  data/letterboxd-snapshot.json
+public/                  # images, logos, rank & character art
+astro.config.mjs         # React integration + /about,/resume,/projects redirects
+```
 
 ---
 
-## ⚡ Notes
+## 🚀 Getting Started
 
+```bash
+npm install
+npm run dev       # dev server at http://localhost:4321
+npm run build     # static build to dist/
+npm run preview   # serve the production build locally
+```
+
+---
+
+## 🔌 Data & Integrations
+
+- **Letterboxd** — recent films are fetched from the public RSS feed during the build (with a browser user-agent); if that request is blocked, it falls back to `src/data/letterboxd-snapshot.json`. Refresh the snapshot occasionally to keep the offline fallback current.
+- **Game ranks** (TFT, Valorant, Apex, Marvel Rivals) — static; edit the `tft` / `games` arrays near the top of `src/pages/index.astro` when they change.
+- **YouTube Top 50** — a random video is cued client-side from a public playlist via the IFrame Player API.
+
+---
+
+## ☁️ Deployment
+
+Static build hosted on **Vercel**; production lives at **[bhtran.com](https://bhtran.com)**. Pushes to `main` trigger a production deploy automatically.
+
+---
+
+## 📫 Contact
+
+- **Email:** bryantran21@gmail.com
+- **LinkedIn:** [linkedin.com/in/bryan-huy-tran](https://linkedin.com/in/bryan-huy-tran)
+- **GitHub:** [github.com/bryantran21](https://github.com/bryantran21)
