@@ -339,7 +339,7 @@ const projects = [
               </a>
             ))}
           </div>
-          <img class="games-hero jett" src="/logos/jett.png" alt="Jett — Valorant" />
+          <div class="games-hero jett" role="img" aria-label="Jett — Valorant"></div>
           <img class="games-hero psylocke" src="/logos/psylocke.webp" alt="Psylocke — Marvel Rivals" />
         </div>
         </div>
@@ -880,9 +880,13 @@ const projects = [
     filter: drop-shadow(0 0 20px rgba(167,139,250,0.28));
   }
   .games-hero.jett {
-    left: -228px; top: -40px; bottom: auto; height: 430px;
-    -webkit-mask-image: linear-gradient(to right, #000 64%, transparent 80%);
-    mask-image: linear-gradient(to right, #000 64%, transparent 80%);
+    left: -30px; width: 159px; height: 205px;
+    background-image: url('/logos/jett.png');
+    background-size: 418px auto;
+    background-position: -150px -23px;
+    background-repeat: no-repeat;
+    -webkit-mask-image: linear-gradient(to right, #000 85%, transparent 100%);
+    mask-image: linear-gradient(to right, #000 85%, transparent 100%);
     filter: drop-shadow(0 0 20px rgba(95,201,214,0.28));
   }
 
