@@ -1,4 +1,4 @@
-# Bryan Tran — Portfolio & Resume
+# Bryan Tran — Portfolio Website
 
 ![Live](https://img.shields.io/badge/Live-bhtran.com-brightgreen)
 ![Astro](https://img.shields.io/badge/Astro-5-ff5d01)
