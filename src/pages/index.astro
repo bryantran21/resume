@@ -10,12 +10,8 @@ const films = await getRecentFilms(10);
 
 const tft = {
   riotId: 'echo#goobs',
-  matches: 65,
-  playtime: '38h',
   emblem: '/logos/tft-emerald.png',
-  current: { tier: 'Emerald IV', lp: 59 },
-  seasonBest: { tier: 'Emerald IV', lp: 59 },
-  allTimeBest: { tier: 'Emerald IV', lp: 59 },
+  peak: { tier: 'Emerald IV', lp: 59 },
   previous: [
     { season: 'S17', rank: 'E4', tier: 'emerald' },
     { season: 'S16', rank: 'P4', tier: 'platinum' },
@@ -297,28 +293,16 @@ const projects = [
         <div class="stack-col">
         <a class="tft-card" href={tft.trackerUrl} target="_blank" rel="noopener">
           <div class="tft-head">
-            <div>
-              <h3>Ranked Overview</h3>
-              <span class="tft-meta">{tft.matches} Matches · {tft.playtime} Played</span>
-            </div>
+            <h3>TFT · Ranked</h3>
             <span class="tft-id">{tft.riotId}</span>
           </div>
 
           <div class="tft-hero">
             <div class="tft-emblem"><img src={tft.emblem} alt="Emerald rank emblem" /></div>
             <div class="tft-hero-text">
-              <span class="tft-tier">{tft.current.tier}</span>
-              <span class="tft-lp">{tft.current.lp} LP</span>
-            </div>
-            <div class="tft-bests">
-              <div class="tft-best">
-                <span class="tft-label">Season Best</span>
-                <span class="tft-best-val">{tft.seasonBest.tier} · {tft.seasonBest.lp} LP</span>
-              </div>
-              <div class="tft-best">
-                <span class="tft-label gold">All-Time Best</span>
-                <span class="tft-best-val">{tft.allTimeBest.tier} · {tft.allTimeBest.lp} LP</span>
-              </div>
+              <span class="tft-label gold">All-Time Best</span>
+              <span class="tft-tier">{tft.peak.tier}</span>
+              <span class="tft-lp">{tft.peak.lp} LP</span>
             </div>
           </div>
 
@@ -775,9 +759,8 @@ const projects = [
     --gold: #e6b24a;
   }
   .tft-card:hover { border-color: var(--border-strong); }
-  .tft-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+  .tft-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
   .tft-head h3 { font-size: 1.4rem; font-weight: 700; margin: 0; letter-spacing: -0.02em; }
-  .tft-meta { display: block; margin-top: 4px; font-size: 0.78rem; color: var(--text-secondary); }
   .tft-id { font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-secondary); white-space: nowrap; }
 
   .tft-hero { display: flex; align-items: center; gap: 16px; }
@@ -788,14 +771,11 @@ const projects = [
     background: radial-gradient(circle at center, rgba(74,196,160,0.14), transparent 70%);
   }
   .tft-emblem img { width: 275px; max-width: none; height: auto; }
-  .tft-hero-text { display: flex; flex-direction: column; gap: 2px; }
+  .tft-hero-text { display: flex; flex-direction: column; gap: 3px; }
   .tft-tier { font-size: 1.6rem; font-weight: 600; line-height: 1.05; color: var(--emerald); }
   .tft-lp { font-size: 0.9rem; color: var(--text-secondary); }
-  .tft-bests { display: flex; flex-direction: column; gap: 8px; margin-left: auto; text-align: right; }
-  .tft-best { display: flex; flex-direction: column; gap: 2px; }
   .tft-label { font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600; color: var(--text-secondary); }
   .tft-label.gold { color: var(--gold); }
-  .tft-best-val { font-size: 0.82rem; font-weight: 600; }
 
   .tft-prev { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
   .tft-prev-label { font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-secondary); }
