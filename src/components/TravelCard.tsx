@@ -78,11 +78,7 @@ export default function TravelCard() {
           layoutId="globe-card"
           className="bento-card"
           onClick={() => setIsExpanded(true)}
-          whileHover={{ 
-            scale: 1.02,
-            borderColor: "rgba(159, 85, 255, 0.4)", // Purple border on hover
-            boxShadow: "0 20px 40px rgba(0,0,0,0.6), 0 0 20px rgba(159, 85, 255, 0.1)"
-          }}
+          whileHover={{ y: -3 }}
           transition={{ type: "spring", stiffness: 300, damping: 30 }}
         >
         <div className="card-header">
@@ -100,7 +96,7 @@ export default function TravelCard() {
             backgroundColor="rgba(0,0,0,0)"
             globeImageUrl="//unpkg.com/three-globe/example/img/earth-dark.jpg"
             showAtmosphere={true}
-            atmosphereColor="#9F55FF"            
+            atmosphereColor="#b8ada0"
             atmosphereDaylightAlpha={0.3}
           />
         </div>
@@ -129,7 +125,7 @@ export default function TravelCard() {
 
                     // POLYGON FIXES
                     polygonsData={geoData.features}
-                    polygonCapColor={d => VISITED_STATES.includes(d.properties.name) ? 'rgba(159, 85, 255, 0.7)' : 'rgba(255, 255, 255, 0.05)'}
+                    polygonCapColor={d => VISITED_STATES.includes(d.properties.name) ? 'rgba(244, 238, 225, 0.8)' : 'rgba(255, 255, 255, 0.05)'}
                     polygonSideColor={() => 'rgba(0, 0, 0, 0.2)'}
                     polygonStrokeColor={() => 'rgba(255, 255, 255, 0.2)'}
                     onPolygonClick={(polygon: any) => {
@@ -179,18 +175,14 @@ export default function TravelCard() {
         .bento-card {
           width: 350px;
           height: 220px;
-          background: var(--surface);
-          border-radius: 28px;
+          background: var(--panel);
+          border-radius: 0;
           padding: 24px;
           cursor: pointer;
           position: relative;
           overflow: hidden;
-          border: 1px solid var(--border);
-        }
-
-        .bento-card:hover {
-          transform: translateY(-6px) scale(1.02);
-          box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+          border: 1px solid var(--line);
+          box-shadow: 5px 5px 0 0 var(--shadow);
         }
 
         .expanded-view {
@@ -228,7 +220,7 @@ export default function TravelCard() {
        .back-link {
           background: none;
           border: none;
-          color: var(--accent);
+          color: #d8cdbe;
           cursor: pointer;
           margin-bottom: 20px;
           padding: 0;
@@ -250,7 +242,7 @@ export default function TravelCard() {
         .travel-place {
           font-size: 0.9rem;
           font-weight: 500;
-          color: var(--accent);
+          color: #e8dfd0;
         }
 
         .travel-place.has-image {
@@ -263,7 +255,7 @@ export default function TravelCard() {
           width: 100%;
           aspect-ratio: 4/3;
           object-fit: cover;
-          border-radius: 12px;
+          border-radius: 0;
           border: 1px solid rgba(255,255,255,0.1);
         }
 

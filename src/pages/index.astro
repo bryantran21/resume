@@ -1,6 +1,5 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import SectionLabel from '../components/SectionLabel.astro';
 import BentoCard from '../components/BentoCard.astro';
 import BentoGrid from '../components/BentoGrid.astro';
 import TravelCard from '../components/TravelCard';
@@ -26,8 +25,7 @@ const games = [
   { name: 'Marvel Rivals', rank: 'Diamond', tier: 'diamond', note: 'Main: Psylocke', emblem: '/logos/mr-diamond.webp', url: 'https://tracker.gg/marvel-rivals/profile/ign/echolyte/overview' },
 ];
 
-const name = "BRYAN";
-const tagline = "The future belongs to those who believe in the possibilities of tomorrow.";
+const name = "Bryan Tran";
 
 const socialLinks = [
   { label: 'GitHub', href: 'https://github.com/bryantran21', icon: 'fab fa-github' },
@@ -37,51 +35,19 @@ const socialLinks = [
   { label: 'Email', href: 'mailto:bryantran21@gmail.com', icon: 'fas fa-envelope' },
 ];
 
-const devicon = (slug: string, variant = 'original') =>
-  `https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/${slug}/${slug}-${variant}.svg`;
-
 const techCategories = [
   {
     name: 'Frontend',
-    items: [
-      { name: 'React', icon: devicon('react') },
-      { name: 'Angular', icon: devicon('angular') },
-      { name: 'Next.js', icon: devicon('nextjs') },
-      { name: 'TypeScript', icon: devicon('typescript') },
-      { name: 'Tailwind', icon: devicon('tailwindcss') },
-      { name: 'Astro', icon: devicon('astro') },
-      { name: 'Bootstrap', icon: devicon('bootstrap') },
-      { name: 'HTML5', icon: devicon('html5') },
-      { name: 'CSS3', icon: devicon('css3') },
-    ]
+    items: ['React', 'Angular', 'Next.js', 'TypeScript', 'Tailwind', 'Astro', 'Bootstrap', 'HTML5', 'CSS3'],
   },
   {
     name: 'Backend & Database',
-    items: [
-      { name: 'Java', icon: devicon('java') },
-      { name: 'Spring Boot', icon: devicon('spring') },
-      { name: 'Node.js', icon: devicon('nodejs') },
-      { name: 'Python', icon: devicon('python') },
-      { name: 'MySQL', icon: devicon('mysql') },
-      { name: 'MongoDB', icon: devicon('mongodb') },
-      { name: 'C#', icon: devicon('csharp') },
-      { name: 'PHP', icon: devicon('php') },
-      { name: 'Oracle', icon: devicon('oracle') },
-    ]
+    items: ['Java', 'Spring Boot', 'Node.js', 'Python', 'MySQL', 'MongoDB', 'C#', 'PHP', 'Oracle'],
   },
   {
     name: 'DevOps & Tools',
-    items: [
-      { name: 'AWS', icon: devicon('amazonwebservices', 'plain-wordmark') },
-      { name: 'Azure', icon: devicon('azure') },
-      { name: 'Docker', icon: devicon('docker') },
-      { name: 'Git', icon: devicon('git') },
-      { name: 'Jira', icon: devicon('jira') },
-      { name: 'Maven', icon: devicon('maven') },
-      { name: 'VS Code', icon: devicon('vscode') },
-      { name: 'Figma', icon: devicon('figma') },
-    ]
-  }
+    items: ['AWS', 'Azure', 'Docker', 'Git', 'Jira', 'Maven', 'VS Code', 'Figma'],
+  },
 ];
 
 const experiences = [
@@ -108,9 +74,9 @@ const experiences = [
     location: 'Baton Rouge, LA',
     period: 'May 2022 - May 2023',
     achievements: [
-        "Diagnosed and resolved application crashes through log analysis and DevOps tooling",
-        "Remodeled LSU's applications for WCAG accessibility using WAVE, HTML, and CSS",
-        "Migrated Java applications to Spring Boot by resolving complex Maven dependency conflicts"
+      "Diagnosed and resolved application crashes through log analysis and DevOps tooling",
+      "Remodeled LSU's applications for WCAG accessibility using WAVE, HTML, and CSS",
+      "Migrated Java applications to Spring Boot by resolving complex Maven dependency conflicts"
     ]
   },
   {
@@ -171,145 +137,125 @@ const projects = [
   {
     id: 'resume',
     title: 'Personal Resume Website',
-    description: 'A modern, interactive portfolio engineered to showcase technical depth. Built with a focus on high-performance SSR and custom-engineered UI components without the crutch of CSS frameworks.',
-    tech: ['Astro', 'TypeScript', 'CSS', 'Node.js'],
-    category: 'Interface Engineering',
+    description: 'This site — a static Astro portfolio with custom-built interactive cards and no CSS framework.',
+    tech: ['Astro', 'TypeScript', 'CSS'],
+    category: 'Interface',
     liveUrl: 'https://bhtran.com',
     githubUrl: 'https://github.com/bryantran21/resume',
-    featured: true,
   },
   {
     id: 'iron-log',
     title: 'Iron Log',
-    description: 'A high-performance fitness synchronization engine designed for mobile-first progressive overload tracking. Engineered with a focus on data integrity, real-time volume scoring, and an adaptive training split architecture.',
-    tech: ['Next.js 14', 'Supabase SSR', 'TypeScript', 'Tailwind CSS', 'Framer Motion'],
-    category: 'Systems Engineering',
+    description: 'A mobile-first progressive-overload tracker with real-time volume scoring and an adaptive training-split model.',
+    tech: ['Next.js 14', 'Supabase', 'Framer Motion'],
+    category: 'Systems',
     liveUrl: 'https://gym.bhtran.com',
     githubUrl: 'https://github.com/bryantran21/fitness-tracker',
-    featured: true,
   },
   {
     id: 'rote',
     title: 'Rote',
-    description: 'A spaced-repetition engine that drills Python syntax for coding interviews. Built on a Leitner scheduler and a local-first persistence layer — no accounts, no backend, every rep held in the browser.',
-    tech: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Dexie', 'Zustand'],
-    category: 'Learning Systems',
+    description: 'A spaced-repetition engine that drills Python syntax for coding interviews — Leitner scheduler, local-first, no backend.',
+    tech: ['Next.js', 'Dexie', 'Zustand'],
+    category: 'Learning',
     liveUrl: 'https://rote.bhtran.com',
     githubUrl: 'https://github.com/bryantran21/rote',
-    featured: true,
   },
   {
     id: 'quantdrill',
     title: 'QuantDrill',
-    description: 'Randomized, timed practice for the aptitude assessments prop trading firms screen interns with — sequences, fast probability, orderbook arbitrage, and reflex games. Every generator is exact and every board brute-forced, so grading is unambiguous. Runs entirely in the browser.',
-    tech: ['React 19', 'Vite', 'TypeScript', 'Tailwind CSS', 'Vitest'],
-    category: 'Quant Tooling',
+    description: 'Randomized, timed practice for prop-trading intern aptitude screens — sequences, probability, orderbook arbitrage. All in the browser.',
+    tech: ['React 19', 'Vite', 'Vitest'],
+    category: 'Quant',
     liveUrl: 'https://quant.bhtran.com',
     githubUrl: 'https://github.com/bryantran21/quantdrill',
-    featured: true,
   },
   {
     id: 'sift',
     title: 'Sift',
-    description: 'A self-hosted job radar that pulls postings straight from ATS JSON APIs, deduplicates fan-out reposts, scores each role for relevance, and surfaces a recency-sorted feed. Built for speed and signal — 45 curated sources, ~8,900 jobs, the noise aggressively hidden.',
-    tech: ['TypeScript', 'Next.js 15', 'Drizzle ORM', 'Postgres', 'Tailwind CSS'],
-    category: 'Data Pipelines',
+    description: 'A self-hosted job radar that pulls from ATS APIs, dedupes reposts, and scores each role for relevance — 45 sources, ~8,900 jobs.',
+    tech: ['TypeScript', 'Next.js 15', 'Drizzle', 'Postgres'],
+    category: 'Data',
     liveUrl: 'https://sift.bhtran.com',
     githubUrl: 'https://github.com/bryantran21/sift',
-    featured: true,
   }
 ];
 ---
 
-<Layout title={name} description="Personal website and portfolio">
-  <div class="hero-section">
-    <div class="hero">
-      <div class="profile-island">
-        <img
-          src="/profile.jpg"
-          alt="Profile photo"
-          class="profile-photo"
-          id="profile-photo"
-        />
-      </div>
-
-      <h1 class="name">{name}</h1>
-      <p class="tagline">{tagline}</p>
-
-      <div class="social-links">
+<Layout title={name} description="Bryan Tran — Application Developer & CS Master's student">
+  <!-- ============ INTRO ============ -->
+  <section class="intro-box">
+    <div class="intro-text">
+      <p class="intro-lead">
+        I'm an <strong>Application Developer at IBM</strong> and a Computer Science Master's
+        student at <strong>Georgia Tech</strong>, with a BS from <strong>LSU</strong>. I build
+        interactive web apps, data dashboards, and AI/ML tools — and I hold a
+        <strong>Top Secret</strong> clearance.
+      </p>
+      <p>
+        Off the clock I'm usually climbing the TFT ladder, in the gym chasing a PR, or logging
+        films on Letterboxd. Scroll down for the receipts.
+      </p>
+      <div class="intro-socials">
         {socialLinks.map(link => (
-          <a
-            href={link.href}
-            class="social-link"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+          <a class="btn btn-icon" href={link.href} target="_blank" rel="noopener" aria-label={link.label}>
             <i class={link.icon}></i>
           </a>
         ))}
       </div>
     </div>
-  </div>
-
-  <div class="divider"></div>
-
-  <div id="about" class="page-block alt">
-    <div class="about-hero">
-      <h1>About Me</h1>
-      <p class="subtitle">This was an excuse to showcase my hobbies</p>
+    <div class="intro-photo-wrap">
+      <img id="profile-photo" class="intro-photo" src="/profile.jpg" alt="Bryan Tran" />
     </div>
+  </section>
 
-    <section class="about-content">
-      <BentoGrid>
-        <BentoCard
-          title="Read my Blog ✍️"
-          description="Thoughts, resources, and school notes →"
-          size="small"
-          href="/blog"
-        />
+  <!-- ============ ABOUT / HOBBIES ============ -->
+  <h2 id="about" class="sec-head">About</h2>
+  <p class="sec-sub">An excuse to show off some hobbies.</p>
+  <div class="about-grid">
+    <BentoGrid>
+      <BentoCard title="Read my Blog ✍️" description="Thoughts, resources, and school notes →" size="small" href="/blog" />
 
-        <TravelCard client:only="react" />
+      <TravelCard client:only="react" />
 
-        <BentoCard title="Sports & Fitness" size="wide">
-          <div class="stats-container">
-            <div class="stat-item">
-              <span class="stat-label">Golf PB</span>
-              <span class="stat-value">99</span>
-            </div>
-            <div class="team-badges">
-              <img src="/logos/lsu_sports.png" alt="LSU" />
-              <img src="/logos/saints.png" alt="Saints" />
-              <img src="/logos/LA_Dodgers.png" alt="Dodgers" />
-            </div>
+      <BentoCard title="Sports & Fitness" size="wide">
+        <div class="stats-container">
+          <div class="stat-item">
+            <span class="stat-label">Golf PB</span>
+            <span class="stat-value">99</span>
           </div>
-        </BentoCard>
-
-        <div class="yt-card">
-          <h3>Straight from my Top 50 🎵</h3>
-          <p class="yt-sub">A random pick every time you visit</p>
-          <div class="yt-frame"><div id="yt-player"></div></div>
+          <div class="team-badges">
+            <img src="/logos/lsu_sports.png" alt="LSU" />
+            <img src="/logos/saints.png" alt="Saints" />
+            <img src="/logos/LA_Dodgers.png" alt="Dodgers" />
+          </div>
         </div>
+      </BentoCard>
 
-        <div class="stack-col">
+      <div class="yt-card">
+        <h3>Straight from my Top 50 🎵</h3>
+        <p class="yt-sub">A random pick every time you visit</p>
+        <div class="yt-frame"><div id="yt-player"></div></div>
+      </div>
+
+      <div class="stack-col">
         <a class="tft-card" href={tft.trackerUrl} target="_blank" rel="noopener">
           <div class="tft-head">
             <h3>TFT · Ranked</h3>
             <span class="tft-id">{tft.riotId}</span>
           </div>
-
           <div class="tft-hero">
             <div class="tft-emblem"><img src={tft.emblem} alt="Emerald rank emblem" /></div>
             <div class="tft-hero-text">
-              <span class="tft-label gold">All-Time Best</span>
+              <span class="tft-label">All-Time Best</span>
               <span class="tft-tier">{tft.peak.tier}</span>
               <span class="tft-lp">{tft.peak.lp} LP</span>
             </div>
           </div>
-
           <div class="tft-prev">
             <span class="tft-prev-label">Previous</span>
             {tft.previous.map(p => (
-              <span class={`tft-chip ${p.tier}`}>{p.season} <strong>{p.rank}</strong></span>
+              <span class="tft-chip">{p.season} <strong>{p.rank}</strong></span>
             ))}
           </div>
         </a>
@@ -326,852 +272,332 @@ const projects = [
           <div class="games-hero jett" role="img" aria-label="Jett — Valorant"></div>
           <img class="games-hero psylocke" src="/logos/psylocke.webp" alt="Psylocke — Marvel Rivals" />
         </div>
-        </div>
+      </div>
 
-        <div class="lbxd-card">
-          <div class="lbxd-head">
-            <h3>Recently Watched 🎬</h3>
-            <a href="https://letterboxd.com/bryantran21/" target="_blank" rel="noopener" class="lbxd-more">Letterboxd →</a>
-          </div>
-          <div class="lbxd-strip">
-            {films.map(film => (
-              <a class="lbxd-film" href={film.link} target="_blank" rel="noopener" title={`${film.title} (${film.year})${film.rating ? ` — ${film.rating}★` : ''}`}>
-                <img src={film.poster} alt={film.title} loading="lazy" />
-                {film.rating && <span class="lbxd-rating">{film.rating}★</span>}
-              </a>
-            ))}
-          </div>
+      <div class="lbxd-card">
+        <div class="lbxd-head">
+          <h3>Recently Watched 🎬</h3>
+          <a href="https://letterboxd.com/bryantran21/" target="_blank" rel="noopener" class="lbxd-more">Letterboxd →</a>
         </div>
-      </BentoGrid>
+        <div class="lbxd-strip">
+          {films.map(film => (
+            <a class="lbxd-film" href={film.link} target="_blank" rel="noopener" title={`${film.title} (${film.year})${film.rating ? ` — ${film.rating}★` : ''}`}>
+              <img src={film.poster} alt={film.title} loading="lazy" />
+              {film.rating && <span class="lbxd-rating">{film.rating}★</span>}
+            </a>
+          ))}
+        </div>
+      </div>
+    </BentoGrid>
 
-      <script is:inline>
-        (function () {
-          var PLAYLIST = 'PLL1X_M4rQTFo';
-          window.onYouTubeIframeAPIReady = function () {
-            new YT.Player('yt-player', {
-              playerVars: { listType: 'playlist', list: PLAYLIST, rel: 0, modestbranding: 1 },
-              events: {
-                onReady: function (e) {
-                  var list = e.target.getPlaylist();
-                  if (list && list.length) {
-                    e.target.setShuffle(true);
-                    e.target.cuePlaylist({
-                      listType: 'playlist',
-                      list: PLAYLIST,
-                      index: Math.floor(Math.random() * list.length),
-                    });
-                  }
-                },
+    <script is:inline>
+      (function () {
+        var PLAYLIST = 'PLL1X_M4rQTFo';
+        window.onYouTubeIframeAPIReady = function () {
+          new YT.Player('yt-player', {
+            playerVars: { listType: 'playlist', list: PLAYLIST, rel: 0, modestbranding: 1 },
+            events: {
+              onReady: function (e) {
+                var list = e.target.getPlaylist();
+                if (list && list.length) {
+                  e.target.setShuffle(true);
+                  e.target.cuePlaylist({ listType: 'playlist', list: PLAYLIST, index: Math.floor(Math.random() * list.length) });
+                }
               },
-            });
-          };
-          var tag = document.createElement('script');
-          tag.src = 'https://www.youtube.com/iframe_api';
-          document.head.appendChild(tag);
-        })();
-      </script>
-    </section>
+            },
+          });
+        };
+        var tag = document.createElement('script');
+        tag.src = 'https://www.youtube.com/iframe_api';
+        document.head.appendChild(tag);
+      })();
+    </script>
   </div>
 
-  <div class="divider"></div>
-
-  <div id="resume" class="page-block">
-    <div class="resume-hero">
-      <h1>Resume</h1>
-      <p class="subtitle">Full Stack Developer & Problem Solver</p>
-      <a href="/Bryan_Tran_Resume.pdf" target="_blank" rel="noopener noreferrer" class="download-btn">
-        <i class="fas fa-download"></i>
-        Download PDF
-      </a>
-    </div>
-
-    <section class="resume-section">
-      <SectionLabel num="01" label="Experience" />
-      <div class="timeline">
-        {experiences.map(exp => (
-          <div class="experience-card">
-            <div class="card-header">
-              <div class="company-info">
-                <div class="logo-wrapper"><img src={exp.logo} alt={exp.company} class="company-logo" /></div>
-                <div>
-                  <h3>{exp.role}</h3>
-                  <p class="company-name">{exp.company}</p>
-                </div>
-              </div>
-              <div class="meta">
-                <p class="period">{exp.period}</p>
-                <p class="location">{exp.location}</p>
-              </div>
-            </div>
-            <ul class="achievements">
-              {exp.achievements.map(achievement => <li>{achievement}</li>)}
-            </ul>
-          </div>
-        ))}
-      </div>
-    </section>
-
-    <section class="resume-section dual-grid">
-      <div class="edu-column">
-        <SectionLabel num="02" label="Education" />
-        <div class="edu-list">
-          {education.map(edu => (
-            <div class="interactive-edu-card">
-              <div class="edu-header">
-                  <img src={edu.logo} alt={edu.school} class="edu-logo-small" />
-                  <div class="edu-info">
-                    <h3>{edu.school}</h3>
-                    <p>{edu.degree} <span class="gpa-tag">GPA {edu.gpa}</span></p>
-                  </div>
-              </div>
-              <div class="edu-details">
-                <p class="edu-period">{edu.period}</p>
-                <div class="course-list">
-                    {edu.coursework.map(course => <span class="course-tag">{course}</span>)}
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      <div class="cert-column">
-        <SectionLabel num="03" label="Certifications" />
-        <div class="cert-list">
-          {certificates.map(cert => (
-            <div class="cert-item-minimal">
-              <div class="cert-icon-box">
-                {cert.logo ? (
-                  <img src={cert.logo} alt={cert.name} class="cert-img" />
-                ) : (
-                  <i class={cert.icon}></i>
-                )}
-              </div>
-              <div class="cert-text">
-                <h4>{cert.name}</h4>
-                <p>{cert.issuer}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-
-    <section class="resume-section">
-      <SectionLabel num="04" label="Technical arsenal" />
-
-      {techCategories.map(cat => (
-        <div class="tech-category">
-          <h3 class="tech-category-title">{cat.name}</h3>
-          <div class="tech-marquee">
-            <div class="tech-track">
-              {[...cat.items, ...cat.items].map(tech => (
-                <div class="tech-item">
-                  <div class="tech-icon-wrapper"><img src={tech.icon} alt={tech.name} /></div>
-                  <span>{tech.name}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      ))}
-    </section>
+  <!-- ============ RESUME ============ -->
+  <h2 id="resume" class="sec-head">Resume</h2>
+  <div class="resume-top">
+    <p class="sec-sub">Full-stack developer &amp; problem solver.</p>
+    <a class="btn" href="/Bryan_Tran_Resume.pdf" target="_blank" rel="noopener">
+      <i class="fas fa-download"></i><span>Download PDF</span>
+    </a>
   </div>
 
-  <div class="divider"></div>
-
-  <div id="projects" class="page-block alt">
-    <div class="projects-hero">
-      <h1>Projects</h1>
-      <p class="subtitle">A collection of systems, experiments, and research notes. 🚧 Currently expanding.</p>
-    </div>
-
-    <section class="projects-section">
-      <div class="projects-grid">
-        {projects.map(project => (
-          <div class="project-card">
-            <div class="project-image">
-              {project.id === 'iron-log' ? (
-                <div class="heatmap-container">
-                  <div class="heatmap-grid">
-                    {Array.from({ length: 40 }).map((_, i) => (
-                      <div class={`heat-tile level-${(i % 7 === 0 || i % 5 === 0) ? Math.floor(Math.random() * 3) + 1 : 0}`}></div>
-                    ))}
-                  </div>
-                  <div class="heatmap-label">ACTIVITY_METRIC_v2.0</div>
-                </div>
-              ) : project.id === 'rote' ? (
-                <div class="leitner-container">
-                  <div class="leitner-row">
-                    {[
-                      { day: 0, fill: 5 },
-                      { day: 1, fill: 4 },
-                      { day: 3, fill: 3 },
-                      { day: 7, fill: 2 },
-                      { day: 16, fill: 1 },
-                    ].map((box, i) => (
-                      <div class="leitner-box">
-                        <div class={`leitner-stack ${i === 2 ? 'active' : ''}`}>
-                          {Array.from({ length: box.fill }).map(() => (
-                            <div class="leitner-card"></div>
-                          ))}
-                        </div>
-                        <span class="leitner-day">{box.day}d</span>
-                      </div>
-                    ))}
-                  </div>
-                  <div class="tile-label">LEITNER_SR_5BOX</div>
-                </div>
-              ) : project.id === 'quantdrill' ? (
-                <div class="seq-container">
-                  <div class="seq-row">
-                    {['2', '6', '14', '30'].map(term => (
-                      <span class="seq-term">{term}</span>
-                    ))}
-                    <span class="seq-term blank">?</span>
-                  </div>
-                  <div class="tile-label">SEQ_SOLVER_v1</div>
-                </div>
-              ) : project.id === 'sift' ? (
-                <div class="feed-container">
-                  <div class="feed-rows">
-                    {[
-                      { score: 92, muted: false },
-                      { score: 78, muted: false },
-                      { score: 34, muted: true },
-                      { score: 21, muted: true },
-                    ].map((row, i) => (
-                      <div class={`feed-row ${row.muted ? 'muted' : ''} ${i === 0 ? 'top' : ''}`}>
-                        <span class="feed-dot"></span>
-                        <span class="feed-track">
-                          <span class="feed-fill" style={`width: ${row.score}%`}></span>
-                        </span>
-                        <span class="feed-score">{row.score}</span>
-                      </div>
-                    ))}
-                  </div>
-                  <div class="tile-label">RELEVANCE_FEED</div>
-                </div>
-              ) : (
-                <div class="image-placeholder"></div>
-              )}
-              <div class="project-category">{project.category}</div>
+  <h3 class="mini-label">// experience</h3>
+  <div class="timeline">
+    {experiences.map(exp => (
+      <div class="experience-card">
+        <div class="card-header">
+          <div class="company-info">
+            <div class="logo-wrapper"><img src={exp.logo} alt={exp.company} class="company-logo" /></div>
+            <div>
+              <h3>{exp.role}</h3>
+              <p class="company-name">{exp.company}</p>
             </div>
+          </div>
+          <div class="meta">
+            <p class="period">{exp.period}</p>
+            <p class="location">{exp.location}</p>
+          </div>
+        </div>
+        <ul class="achievements">
+          {exp.achievements.map(a => <li>{a}</li>)}
+        </ul>
+      </div>
+    ))}
+  </div>
 
-            <div class="project-content">
-              <h3>{project.title}</h3>
-              <p class="project-description">{project.description}</p>
-
-              <div class="tech-stack">
-                {project.tech.map(tech => (
-                  <span class="tech-badge">{tech}</span>
-                ))}
+  <div class="dual-grid">
+    <div>
+      <h3 class="mini-label">// education</h3>
+      <div class="edu-list">
+        {education.map(edu => (
+          <div class="interactive-edu-card">
+            <div class="edu-header">
+              <img src={edu.logo} alt={edu.school} class="edu-logo-small" />
+              <div class="edu-info">
+                <h3>{edu.school}</h3>
+                <p>{edu.degree} <span class="gpa-tag">GPA {edu.gpa}</span></p>
               </div>
-
-              <div class="project-links">
-                <a href={project.liveUrl} target="_blank" class="project-btn primary">
-                  <i class="fas fa-external-link-alt"></i>
-                  Live View
-                </a>
-                <a href={project.githubUrl} target="_blank" class="project-btn secondary">
-                  <i class="fab fa-github"></i>
-                  Source
-                </a>
-              </div>
+            </div>
+            <p class="edu-period">{edu.period}</p>
+            <div class="course-list">
+              {edu.coursework.map(c => <span class="course-tag">{c}</span>)}
             </div>
           </div>
         ))}
       </div>
-    </section>
+    </div>
 
-    <section class="cta-section">
-      <div class="cta-glass">
-        <h2>Interested in Research?</h2>
-        <p>I'm looking for opportunities to collaborate on AI/ML projects or Big Tech roles.</p>
-        <div class="cta-buttons">
-          <a href="mailto:bryantran21@gmail.com" class="cta-btn">
-            <i class="fas fa-envelope"></i>
-            Contact Me
-          </a>
-          <a href="https://github.com/bryantran21" target="_blank" class="cta-btn secondary">
-            <i class="fab fa-github"></i>
-            Open GitHub
-          </a>
+    <div>
+      <h3 class="mini-label">// certifications</h3>
+      <div class="cert-list">
+        {certificates.map(cert => (
+          <div class="cert-item-minimal">
+            <div class="cert-icon-box">
+              {cert.logo ? <img src={cert.logo} alt={cert.name} class="cert-img" /> : <i class={cert.icon}></i>}
+            </div>
+            <div class="cert-text">
+              <h4>{cert.name}</h4>
+              <p>{cert.issuer}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <h3 class="mini-label">// technical skills</h3>
+  <div class="skills-grid">
+    {techCategories.map(cat => (
+      <div class="skill-box">
+        <span class="skill-cat">{cat.name}</span>
+        <div class="skill-tags">
+          {cat.items.map(t => <span class="skill-tag">{t}</span>)}
         </div>
       </div>
-    </section>
+    ))}
   </div>
+
+  <!-- ============ PROJECTS ============ -->
+  <h2 id="projects" class="sec-head">Projects</h2>
+  <p class="sec-sub">Systems, experiments, and tools. 🚧 Always expanding.</p>
+  <div class="projects-grid">
+    {projects.map(project => (
+      <div class="project-card">
+        <a class="project-shot" href={project.liveUrl} target="_blank" rel="noopener" aria-label={`${project.title} — live`}>
+          <img src={`/projects/${project.id}.png`} alt={`${project.title} screenshot`} />
+          <span class="project-cat">{project.category}</span>
+        </a>
+        <div class="project-body">
+          <h3>{project.title}</h3>
+          <p class="project-desc">{project.description}</p>
+          <div class="tech-row">
+            {project.tech.map(t => <span class="tech-chip">{t}</span>)}
+          </div>
+          <div class="project-links">
+            <a href={project.liveUrl} target="_blank" rel="noopener" class="btn btn-sm"><i class="fas fa-external-link-alt"></i><span>Live</span></a>
+            <a href={project.githubUrl} target="_blank" rel="noopener" class="btn btn-sm"><i class="fab fa-github"></i><span>Source</span></a>
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+
+  <!-- ============ WRITING ============ -->
+  <h2 class="sec-head">Writing</h2>
+  <a class="box writing-box" href="/blog">
+    <div>
+      <h3>Library &amp; Notes</h3>
+      <p>Blog posts, school notes, and a running list of resources.</p>
+    </div>
+    <span class="writing-arrow">→</span>
+  </a>
 </Layout>
 
 <style>
-  /* Shared page-block rhythm for About / Resume / Projects */
-  .page-block {
-    padding: 6rem 0;
-    scroll-margin-top: 110px;
+  /* ---------- Intro box (bio + photo) ---------- */
+  .intro-box {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 32px;
+    padding: 32px;
+    margin-bottom: 8px;
+  }
+  .intro-text { display: flex; flex-direction: column; justify-content: center; gap: 16px; }
+  .intro-lead { font-size: 1.15rem; }
+  .intro-text p { color: var(--text); line-height: 1.65; }
+  .intro-text strong { font-weight: 600; }
+  .intro-socials { display: flex; gap: 10px; margin-top: 6px; flex-wrap: wrap; }
+  .intro-photo-wrap { display: flex; align-items: center; justify-content: center; }
+  .intro-photo {
+    width: 100%; max-width: 300px; aspect-ratio: 4 / 5; object-fit: cover;
+    border: 1px solid var(--line); box-shadow: 5px 5px 0 0 var(--shadow);
+    cursor: pointer; display: block;
   }
 
-  .page-block.alt {
-    background: var(--bg-alt);
+  /* ---------- section headings ---------- */
+  .mini-label {
+    font-family: var(--font-mono); font-size: 0.8rem; font-weight: 500;
+    color: var(--muted); margin: 32px 0 14px; letter-spacing: 0.02em;
   }
+  .resume-top { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: -10px; margin-bottom: 8px; flex-wrap: wrap; }
 
-  .divider {
-    width: 100%;
-    height: 1px;
-    background: var(--border);
-  }
+  /* ---------- About grid ---------- */
+  .about-grid :global(.bento-grid) { padding: 0; }
 
-  /* ---------- Hero ---------- */
-  .hero-section { position: relative; }
+  .yt-card { display: flex; flex-direction: column; padding: 24px; grid-column: span 2; min-height: 220px; }
+  .yt-card h3, .lbxd-head h3, .tft-head h3 { font-size: 1.1rem; font-weight: 700; margin: 0; }
+  .yt-sub { margin: 6px 0 0; color: var(--muted); font-size: 0.9rem; }
+  .yt-frame { margin-top: 14px; position: relative; width: 100%; flex: 1; min-height: 240px; overflow: hidden; background: #000; border: 1px solid var(--line); }
+  .yt-frame :global(iframe) { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
 
-  .hero {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    min-height: 78vh;
-    padding: 5rem 2rem;
-  }
-
-  .profile-photo {
-    width: 130px;
-    height: 130px;
-    border-radius: 50%;
-    border: 3px solid var(--border);
-    object-fit: cover;
-    cursor: pointer;
-    transition: border-color 0.2s ease;
-  }
-
-  .profile-photo:hover {
-    border-color: var(--accent);
-  }
-
-  .name {
-    font-size: clamp(2.75rem, 7vw, 5.5rem);
-    font-weight: 600;
-    letter-spacing: -0.03em;
-    color: var(--text);
-    margin-top: 0.75rem;
-  }
-
-  .tagline {
-    font-size: clamp(1rem, 2vw, 1.15rem);
-    font-weight: 400;
-    max-width: 35rem;
-    margin-bottom: 1.5rem;
-    color: var(--text-secondary);
-    text-wrap: balance;
-  }
-
-  .social-links {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    justify-content: center;
-  }
-
-  .social-link {
-    display: flex;
-    align-items: center;
-    color: var(--text);
-    padding: 0.8rem 1.2rem;
-    background: var(--surface);
-    border-radius: var(--radius-pill);
-    border: 1px solid var(--border);
-    transition: border-color 0.2s ease, background 0.2s ease;
-    text-decoration: none !important;
-  }
-
-  .social-link:hover {
-    background: var(--accent-soft);
-    border-color: var(--accent);
-  }
-
-  .spinning {
-    animation: spin360 0.7s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  @keyframes spin360 {
-    from { transform: rotate(0deg) }
-    to { transform: rotate(360deg) }
-  }
-
-  /* ---------- About ---------- */
-  .about-hero { text-align: center; padding: 0 2rem 3rem; }
-  .about-hero h1 { font-size: clamp(3rem, 7vw, 4.5rem); font-weight: 600; letter-spacing: -0.03em; margin-bottom: 0.5rem; }
-  .about-hero .subtitle { font-size: 1.2rem; color: var(--text-secondary); }
-
-  .about-content { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
-
-  /* YouTube "Top 50" card — spans 2 like a wide bento tile */
-  .yt-card {
-    grid-column: span 2;
-    display: flex;
-    flex-direction: column;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-card);
-    padding: 30px;
-    min-height: 220px;
-    transition: border-color 0.2s ease;
-  }
-  .yt-card:hover { border-color: var(--border-strong); }
-  .yt-card h3 { font-size: 1.4rem; font-weight: 700; margin: 0; letter-spacing: -0.02em; }
-  .yt-sub { margin: 6px 0 0; color: var(--text-secondary); font-size: 0.95rem; }
-  .yt-frame {
-    margin-top: 16px;
-    position: relative;
-    width: 100%;
-    flex: 1;
-    min-height: 240px;
-    border-radius: 12px;
-    overflow: hidden;
-    background: #000;
-  }
-  .yt-frame :global(iframe) {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    border: 0;
-  }
-  @media (max-width: 900px) { .yt-card { grid-column: span 2; } }
-  @media (max-width: 600px) { .yt-card { grid-column: span 1; } }
-
-  /* Right column: TFT card on top, games card filling the rest */
   .stack-col { grid-column: span 2; display: flex; flex-direction: column; gap: 16px; }
 
-  /* TFT Ranked Overview card — tracker.gg style */
-  .tft-card {
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-card);
-    padding: 30px;
-    text-decoration: none;
-    color: var(--text);
-    transition: border-color 0.2s ease;
-    --emerald: #4ac4a0;
-    --platinum: #5fc9d6;
-    --gold: #e6b24a;
-  }
-  .tft-card:hover { border-color: var(--border-strong); }
+  .tft-card { display: flex; flex-direction: column; gap: 16px; padding: 24px; text-decoration: none; color: var(--text); }
   .tft-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
-  .tft-head h3 { font-size: 1.4rem; font-weight: 700; margin: 0; letter-spacing: -0.02em; }
-  .tft-id { font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-secondary); white-space: nowrap; }
-
+  .tft-id { font-family: var(--font-mono); font-size: 0.78rem; color: var(--muted); white-space: nowrap; }
   .tft-hero { display: flex; align-items: center; gap: 16px; }
-  .tft-emblem {
-    width: 64px; height: 64px; flex-shrink: 0;
-    display: flex; align-items: center; justify-content: center;
-    overflow: hidden; border-radius: 12px;
-    background: radial-gradient(circle at center, rgba(74,196,160,0.14), transparent 70%);
-  }
-  .tft-emblem img { width: 275px; max-width: none; height: auto; }
+  .tft-emblem { width: 60px; height: 60px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+  .tft-emblem img { width: 258px; max-width: none; height: auto; }
   .tft-hero-text { display: flex; flex-direction: column; gap: 3px; }
-  .tft-tier { font-size: 1.6rem; font-weight: 600; line-height: 1.05; color: var(--emerald); }
-  .tft-lp { font-size: 0.9rem; color: var(--text-secondary); }
-  .tft-label { font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600; color: var(--text-secondary); }
-  .tft-label.gold { color: var(--gold); }
-
+  .tft-tier { font-size: 1.5rem; font-weight: 700; line-height: 1.05; }
+  .tft-lp { font-size: 0.85rem; color: var(--muted); }
+  .tft-label { font-family: var(--font-mono); font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 500; color: var(--muted); }
   .tft-prev { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
-  .tft-prev-label { font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-secondary); }
-  .tft-chip {
-    font-size: 0.72rem; padding: 3px 8px; border-radius: 6px;
-    background: var(--bg); border: 1px solid var(--border); color: var(--text-secondary);
-  }
-  .tft-chip strong { font-weight: 700; }
-  .tft-chip.emerald { border-color: rgba(74,196,160,0.5); }
-  .tft-chip.emerald strong { color: var(--emerald); }
-  .tft-chip.platinum { border-color: rgba(95,201,214,0.5); }
-  .tft-chip.platinum strong { color: var(--platinum); }
+  .tft-prev-label { font-family: var(--font-mono); font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); }
+  .tft-chip { font-family: var(--font-mono); font-size: 0.72rem; padding: 3px 8px; border: 1px solid var(--line); color: var(--muted); }
+  .tft-chip strong { font-weight: 700; color: var(--text); }
 
-  /* Letterboxd "Recently Watched" — full-width poster strip */
-  .lbxd-card {
-    grid-column: span 4;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-card);
-    padding: 30px;
-    transition: border-color 0.2s ease;
-  }
-  .lbxd-card:hover { border-color: var(--border-strong); }
-  .lbxd-head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 18px; }
-  .lbxd-head h3 { font-size: 1.4rem; font-weight: 700; margin: 0; letter-spacing: -0.02em; }
-  .lbxd-more { font-size: 0.85rem; color: var(--accent); text-decoration: none; }
-  .lbxd-more:hover { text-decoration: underline; }
-  .lbxd-strip { display: flex; gap: 12px; overflow-x: auto; padding: 8px 2px; }
-  .lbxd-film {
-    position: relative;
-    flex: 0 0 auto;
-    width: 92px;
-    aspect-ratio: 2 / 3;
-    border-radius: 8px;
-    overflow: hidden;
-    border: 1px solid var(--border);
-    transition: transform 0.15s ease, border-color 0.15s ease;
-  }
-  .lbxd-film:hover { transform: translateY(-4px); border-color: var(--accent); }
-  .lbxd-film img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .lbxd-rating {
-    position: absolute;
-    left: 5px;
-    bottom: 5px;
-    padding: 2px 5px;
-    border-radius: 5px;
-    font-size: 0.65rem;
-    font-weight: 600;
-    color: #fff;
-    background: rgba(0, 0, 0, 0.7);
-  }
-  /* Games card — fills the space under the TFT card, Psylocke splash */
-  .games-card {
-    position: relative;
-    flex: 1;
-    min-height: 200px;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-card);
-    padding: 24px 30px;
-    transition: border-color 0.2s ease;
-  }
-  .games-card:hover { border-color: var(--border-strong); }
+  .games-card { position: relative; flex: 1; min-height: 200px; overflow: hidden; display: flex; flex-direction: column; justify-content: center; padding: 24px 30px; }
   .games-list { display: flex; flex-direction: column; gap: 6px; padding: 0 20px 0 90px; position: relative; z-index: 2; }
-  .game-row {
-    display: flex; align-items: center; gap: 11px;
-    padding: 8px 0; text-decoration: none; color: var(--text);
-    border-bottom: 1px solid var(--border);
-  }
+  .game-row { display: flex; align-items: center; gap: 11px; padding: 8px 0; text-decoration: none; color: var(--text); border-bottom: 1px solid var(--line); }
   .game-row:last-child { border-bottom: 0; }
   .game-emblem { width: 32px; height: 32px; object-fit: contain; flex-shrink: 0; }
   .game-name { font-size: 0.98rem; font-weight: 600; }
   .games-hero { position: absolute; bottom: -30px; height: 205px; width: auto; pointer-events: none; z-index: 3; }
-  .games-hero.psylocke {
-    right: -24px; bottom: -44px;
-    -webkit-mask-image: linear-gradient(to left, #000 62%, transparent 93%);
-    mask-image: linear-gradient(to left, #000 62%, transparent 93%);
-    filter: drop-shadow(0 0 20px rgba(167,139,250,0.28));
-  }
-  .games-hero.jett {
-    left: -30px; width: 159px; height: 205px;
-    background-image: url('/logos/jett.png');
-    background-size: 418px auto;
-    background-position: -150px -23px;
-    background-repeat: no-repeat;
-    -webkit-mask-image: linear-gradient(to right, #000 85%, transparent 100%);
-    mask-image: linear-gradient(to right, #000 85%, transparent 100%);
-    filter: drop-shadow(0 0 20px rgba(95,201,214,0.28));
-  }
+  .games-hero.psylocke { right: -24px; bottom: -44px; -webkit-mask-image: linear-gradient(to left, #000 62%, transparent 93%); mask-image: linear-gradient(to left, #000 62%, transparent 93%); }
+  .games-hero.jett { left: -30px; width: 159px; height: 205px; background-image: url('/logos/jett.png'); background-size: 418px auto; background-position: -150px -23px; background-repeat: no-repeat; -webkit-mask-image: linear-gradient(to right, #000 85%, transparent 100%); mask-image: linear-gradient(to right, #000 85%, transparent 100%); }
 
-  @media (max-width: 900px) { .stack-col { grid-column: span 2; } .lbxd-card { grid-column: span 2; } }
-  @media (max-width: 600px) { .stack-col { grid-column: span 1; } .lbxd-card { grid-column: span 1; } .games-hero { opacity: 0.7; } }
+  .lbxd-card { grid-column: span 4; padding: 24px; }
+  .lbxd-head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 16px; }
+  .lbxd-more { font-family: var(--font-mono); font-size: 0.8rem; color: var(--text); text-decoration: underline; }
+  .lbxd-strip { display: flex; gap: 12px; overflow-x: auto; padding: 6px 2px; }
+  .lbxd-film { position: relative; flex: 0 0 auto; width: 92px; aspect-ratio: 2 / 3; overflow: hidden; border: 1px solid var(--line); transition: transform 0.15s ease; }
+  .lbxd-film:hover { transform: translate(-2px, -2px); box-shadow: 3px 3px 0 var(--shadow); }
+  .lbxd-film img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .lbxd-rating { position: absolute; left: 5px; bottom: 5px; padding: 2px 5px; font-family: var(--font-mono); font-size: 0.62rem; font-weight: 600; color: #fff; background: rgba(0,0,0,0.75); }
 
-
-  .stats-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    margin-top: 1rem;
-  }
-
+  .stats-container { display: flex; justify-content: space-between; align-items: center; width: 100%; margin-top: 1rem; }
   .stat-item { display: flex; flex-direction: column; gap: 0.2rem; }
-  .stat-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); font-weight: 600; }
-  .stat-value { font-size: 2rem; font-weight: 600; }
-
+  .stat-label { font-family: var(--font-mono); font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); font-weight: 500; }
+  .stat-value { font-size: 2rem; font-weight: 700; }
   .team-badges { display: flex; gap: 1rem; }
-  .team-badges img {
-    height: 40px;
-    width: auto;
-    filter: grayscale(1);
-    opacity: 0.6;
-    transition: filter 0.2s ease, opacity 0.2s ease;
-  }
+  .team-badges img { height: 40px; width: auto; filter: grayscale(1); opacity: 0.65; transition: filter 0.2s ease, opacity 0.2s ease; }
   .team-badges img:hover { filter: grayscale(0); opacity: 1; }
 
+  @media (max-width: 900px) { .stack-col, .lbxd-card { grid-column: span 2; } }
+  @media (max-width: 600px) { .stack-col, .lbxd-card, .yt-card { grid-column: span 1; } }
+
   /* ---------- Resume ---------- */
-  .resume-hero { text-align: center; padding: 0 2rem 3rem; }
-  .resume-hero h1 { font-size: clamp(3rem, 7vw, 4.5rem); font-weight: 600; letter-spacing: -0.03em; margin-bottom: 1rem; }
-  .resume-hero .subtitle { font-size: 1.5rem; color: var(--text-secondary); margin-bottom: 2.5rem; }
-
-  .download-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.75rem;
-    padding: 1rem 2.5rem;
-    background: var(--btn-bg);
-    color: var(--btn-fg);
-    border-radius: var(--radius-pill);
-    font-weight: 500;
-    text-decoration: none;
-    transition: opacity 0.2s ease;
-  }
-  .download-btn:hover { opacity: 0.85; }
-
-  .resume-section { max-width: 1000px; margin: 0 auto 6rem; padding: 0 2rem; }
-
-  .experience-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-card);
-    padding: 3rem;
-    margin-bottom: 2rem;
-    transition: border-color 0.2s ease;
-  }
-  .experience-card:hover { border-color: var(--border-strong); }
-  .card-header { display: flex; justify-content: space-between; margin-bottom: 2.5rem; }
-  .logo-wrapper { width: 54px; height: 54px; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; display: flex; align-items: center; justify-content: center; padding: 6px; }
+  .timeline { display: flex; flex-direction: column; gap: 18px; }
+  .experience-card { padding: 28px; }
+  .card-header { display: flex; justify-content: space-between; margin-bottom: 1.5rem; gap: 1rem; }
+  .logo-wrapper { width: 50px; height: 50px; background: var(--panel); border: 1px solid var(--line); display: flex; align-items: center; justify-content: center; padding: 6px; flex-shrink: 0; }
   .company-logo { width: 100%; height: auto; object-fit: contain; }
-  .company-info { display: flex; gap: 1.5rem; align-items: center; }
-  .company-info h3 { font-size: 1.6rem; font-weight: 600; margin: 0; letter-spacing: -0.01em; }
-  .company-name { color: var(--accent); font-weight: 500; font-size: 1.1rem; margin-top: 4px; }
+  .company-info { display: flex; gap: 1.25rem; align-items: center; }
+  .company-info h3 { font-size: 1.3rem; font-weight: 700; margin: 0; }
+  .company-name { font-family: var(--font-mono); font-weight: 500; font-size: 0.9rem; margin-top: 4px; color: var(--muted); }
   .meta { text-align: right; }
-  .period { font-weight: 500; margin: 0; }
-  .location { color: var(--text-secondary); font-size: 0.9rem; margin-top: 4px; }
+  .period { font-family: var(--font-mono); font-size: 0.85rem; font-weight: 500; margin: 0; }
+  .location { color: var(--muted); font-size: 0.85rem; margin-top: 4px; }
   .achievements { list-style: none; padding: 0; }
-  .achievements li { color: var(--text-secondary); margin-bottom: 1.25rem; line-height: 1.7; padding-left: 1.5rem; position: relative; font-size: 1.05rem; }
-  .achievements li::before { content: ""; position: absolute; left: 0; top: 0.6em; width: 5px; height: 5px; border-radius: 50%; background: var(--accent); }
+  .achievements li { color: var(--text); margin-bottom: 0.9rem; line-height: 1.6; padding-left: 1.4rem; position: relative; font-size: 0.95rem; }
+  .achievements li::before { content: "▪"; position: absolute; left: 0; top: 0; color: var(--text); }
 
-  /* Tech Marquee */
-  .tech-category-title { color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1.5rem; text-transform: uppercase; }
-  .tech-category { margin-bottom: 2.5rem; }
-
-  .tech-marquee {
-    overflow: hidden;
-    -webkit-mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent);
-    mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent);
-  }
-
-  .tech-track {
-    display: flex;
-    width: max-content;
-    gap: 1.25rem;
-    animation: tech-scroll 32s linear infinite;
-  }
-
-  .tech-category:nth-of-type(2) .tech-track { animation-duration: 38s; animation-direction: reverse; }
-  .tech-category:nth-of-type(3) .tech-track { animation-duration: 26s; }
-
-  .tech-marquee:hover .tech-track { animation-play-state: paused; }
-
-  @keyframes tech-scroll {
-    from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
-  }
-
-  .tech-item {
-    flex: 0 0 auto;
-    width: 120px;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-card);
-    padding: 1.5rem 1rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1.25rem;
-    transition: border-color 0.2s ease;
-  }
-  .tech-item:hover { border-color: var(--accent); }
-  .tech-icon-wrapper { width: 36px; height: 36px; }
-  .tech-icon-wrapper img { width: 100%; filter: grayscale(0.2); transition: filter 0.2s ease; }
-  .tech-item:hover img { filter: grayscale(0); }
-  .tech-item span { font-size: 0.8rem; color: var(--text-secondary); font-weight: 500; text-align: center; }
-  .tech-item:hover span { color: var(--text); }
-
-  @media (prefers-reduced-motion: reduce) {
-    .tech-track { animation: none; }
-  }
-
-  .dual-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 5rem; }
-  .interactive-edu-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-card);
-    padding: 2rem;
-    margin-bottom: 1.5rem;
-    transition: border-color 0.2s ease;
-  }
-  .interactive-edu-card:hover { border-color: var(--accent); }
-  .edu-header { display: flex; gap: 1.25rem; align-items: center; }
-  .edu-logo-small { width: 50px; height: 50px; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 6px; }
-  .gpa-tag { font-size: 0.7rem; background: var(--accent-soft); color: var(--accent); padding: 4px 10px; border-radius: 6px; font-weight: 600; display: inline-block; margin-top: 8px; }
-  .course-list { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 1.5rem; }
-  .course-tag { font-size: 0.75rem; background: var(--surface); color: var(--text-secondary); padding: 4px 12px; border-radius: var(--radius-pill); border: 1px solid var(--border); }
-  .edu-period { color: var(--text-secondary); font-size: 0.9rem; margin-top: 1rem; font-weight: 500; }
+  .dual-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 32px; align-items: start; }
+  .interactive-edu-card { padding: 20px; margin-bottom: 16px; }
+  .edu-header { display: flex; gap: 1rem; align-items: center; }
+  .edu-logo-small { width: 46px; height: 46px; background: var(--panel); border: 1px solid var(--line); padding: 6px; flex-shrink: 0; object-fit: contain; }
+  .edu-info h3 { font-size: 1.05rem; font-weight: 700; }
+  .edu-info p { font-size: 0.9rem; color: var(--muted); }
+  .gpa-tag { font-family: var(--font-mono); font-size: 0.68rem; border: 1px solid var(--line); color: var(--text); padding: 2px 8px; font-weight: 500; display: inline-block; margin-left: 6px; }
+  .course-list { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 1rem; }
+  .course-tag { font-family: var(--font-mono); font-size: 0.72rem; color: var(--muted); padding: 3px 10px; border: 1px solid var(--line); }
+  .edu-period { font-family: var(--font-mono); color: var(--muted); font-size: 0.8rem; margin-top: 0.9rem; }
 
   .cert-list { display: flex; flex-direction: column; gap: 12px; }
-  .cert-item-minimal {
-    display: flex;
-    align-items: center;
-    gap: 1.25rem;
-    padding: 1rem;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-card);
-    transition: border-color 0.2s ease;
-  }
-  .cert-icon-box { width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-  .cert-icon-box i { font-size: 1.2rem; color: var(--accent); }
-  .cert-img { width: 100%; height: 100%; object-fit: contain; filter: grayscale(0.2); transition: filter 0.2s ease; }
-  .cert-item-minimal:hover { border-color: var(--accent); }
-  .cert-item-minimal:hover .cert-img { filter: grayscale(0); }
-  .cert-text h4 { font-size: 1rem; font-weight: 600; margin: 0; color: var(--text); }
-  .cert-text p { font-size: 0.85rem; color: var(--text-secondary); margin: 2px 0 0; }
+  .cert-item-minimal { display: flex; align-items: center; gap: 1rem; padding: 14px 16px; }
+  .cert-icon-box { width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .cert-icon-box i { font-size: 1.2rem; color: var(--text); }
+  .cert-img { width: 100%; height: 100%; object-fit: contain; }
+  .cert-text h4 { font-size: 0.95rem; font-weight: 600; margin: 0; }
+  .cert-text p { font-family: var(--font-mono); font-size: 0.78rem; color: var(--muted); margin: 2px 0 0; }
 
-  /* ---------- Projects ---------- */
-  .projects-hero { text-align: left; max-width: 1100px; margin: 0 auto; padding: 0 2rem 3rem; }
-  .projects-hero h1 { font-size: clamp(3rem, 7vw, 4.5rem); font-weight: 600; letter-spacing: -0.03em; margin-bottom: 1rem; color: var(--text); }
-  .projects-hero .subtitle { font-size: 1.25rem; color: var(--text-secondary); max-width: 600px; line-height: 1.5; }
+  .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .skill-box { padding: 18px; display: flex; flex-direction: column; gap: 12px; }
+  .skill-cat { font-family: var(--font-mono); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); font-weight: 600; }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+  .skill-tag { font-family: var(--font-mono); font-size: 0.75rem; padding: 4px 9px; border: 1px solid var(--line); color: var(--text); }
 
-  .projects-section { max-width: 1150px; margin: 0 auto; padding: 0 2rem; }
-  .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 2rem; }
+  /* ---------- Projects (image cards) ---------- */
+  .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 22px; }
+  .project-card { display: flex; flex-direction: column; overflow: hidden; transition: transform 0.12s ease, box-shadow 0.12s ease; }
+  .project-card:hover { transform: translate(-2px, -2px); box-shadow: 8px 8px 0 0 var(--shadow); }
+  .project-shot { position: relative; display: block; aspect-ratio: 16 / 10; overflow: hidden; border-bottom: 1px solid var(--line); background: var(--bg); }
+  .project-shot img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; }
+  .project-cat { position: absolute; top: 10px; right: 10px; font-family: var(--font-mono); font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.06em; padding: 4px 8px; background: var(--panel); border: 1px solid var(--line); color: var(--text); }
+  .project-body { padding: 18px; display: flex; flex-direction: column; flex: 1; }
+  .project-body h3 { font-size: 1.15rem; font-weight: 700; margin-bottom: 6px; }
+  .project-desc { font-size: 0.88rem; line-height: 1.55; color: var(--muted); margin-bottom: 12px; }
+  .tech-row { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
+  .tech-chip { font-family: var(--font-mono); font-size: 0.68rem; padding: 2px 7px; border: 1px solid var(--line); color: var(--muted); }
+  .project-links { display: flex; gap: 8px; margin-top: auto; }
+  .btn-sm { padding: 6px 10px; font-size: 0.75rem; box-shadow: 2px 2px 0 0 var(--shadow); }
 
-  .project-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-card);
-    overflow: hidden;
-    transition: border-color 0.2s ease;
-    display: flex;
-    flex-direction: column;
-  }
-  .project-card:hover { border-color: var(--border-strong); }
+  /* ---------- Writing ---------- */
+  .writing-box { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 24px 28px; text-decoration: none; color: var(--text); }
+  .writing-box h3 { font-size: 1.1rem; font-weight: 700; }
+  .writing-box p { color: var(--muted); font-size: 0.9rem; margin-top: 4px; }
+  .writing-arrow { font-family: var(--font-mono); font-size: 1.6rem; }
 
-  .project-image {
-    position: relative;
-    width: 100%;
-    aspect-ratio: 2/1;
-    background: var(--bg);
-    border-bottom: 1px solid var(--border);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-  }
-
-  .heatmap-container { display: flex; flex-direction: column; align-items: center; gap: 1rem; padding: 2rem; }
-  .heatmap-grid { display: grid; grid-template-columns: repeat(10, 1fr); gap: 6px; }
-  .heat-tile { width: 12px; height: 12px; border-radius: 3px; background: var(--border); }
-  .heat-tile.level-1 { background: var(--accent); opacity: 0.4; }
-  .heat-tile.level-2 { background: var(--accent); opacity: 0.7; }
-  .heat-tile.level-3 { background: var(--accent); }
-  .heatmap-label { font-family: var(--font-mono); font-size: 0.6rem; color: var(--accent); letter-spacing: 0.3em; opacity: 0.6; }
-
-  .tile-label { font-family: var(--font-mono); font-size: 0.6rem; color: var(--accent); letter-spacing: 0.3em; opacity: 0.6; }
-
-  /* Rote — Leitner boxes, card counts thinning as intervals lengthen */
-  .leitner-container { display: flex; flex-direction: column; align-items: center; gap: 1rem; padding: 2rem; }
-  .leitner-row { display: flex; align-items: flex-end; gap: 10px; }
-  .leitner-box { display: flex; flex-direction: column; align-items: center; gap: 6px; }
-  .leitner-stack { display: flex; flex-direction: column-reverse; gap: 3px; padding: 4px; border: 1px solid var(--border); border-radius: 3px; }
-  .leitner-card { width: 18px; height: 4px; border-radius: 1px; background: var(--border); }
-  .leitner-stack.active { border-color: var(--accent); }
-  .leitner-stack.active .leitner-card { background: var(--accent); }
-  .leitner-day { font-family: var(--font-mono); font-size: 0.55rem; color: var(--text-secondary); opacity: 0.7; }
-
-  /* QuantDrill — a sequence drill mid-question */
-  .seq-container { display: flex; flex-direction: column; align-items: center; gap: 1rem; padding: 2rem; }
-  .seq-row { display: flex; align-items: center; gap: 8px; }
-  .seq-term {
-    min-width: 30px;
-    padding: 6px 4px;
-    border: 1px solid var(--border);
-    border-radius: 3px;
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    color: var(--text-secondary);
-    text-align: center;
-  }
-  .seq-term.blank { border-color: var(--accent); color: var(--accent); }
-
-  /* Sift — a relevance-scored job feed, low-signal rows dimmed */
-  .feed-container { display: flex; flex-direction: column; align-items: center; gap: 0.9rem; padding: 1.5rem; width: 100%; }
-  .feed-rows { display: flex; flex-direction: column; gap: 8px; width: 70%; max-width: 220px; }
-  .feed-row { display: flex; align-items: center; gap: 8px; }
-  .feed-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--text-secondary); flex-shrink: 0; opacity: 0.6; }
-  .feed-track { flex: 1; height: 6px; border-radius: 3px; background: var(--border); overflow: hidden; }
-  .feed-fill { display: block; height: 100%; border-radius: 3px; background: var(--text-secondary); opacity: 0.5; }
-  .feed-score { font-family: var(--font-mono); font-size: 0.55rem; color: var(--text-secondary); opacity: 0.7; flex-shrink: 0; width: 16px; text-align: right; }
-  .feed-row.top .feed-dot { background: var(--accent); opacity: 1; }
-  .feed-row.top .feed-fill { background: var(--accent); opacity: 1; }
-  .feed-row.top .feed-score { color: var(--accent); opacity: 1; }
-  .feed-row.muted { opacity: 0.35; }
-
-  .image-placeholder {
-    width: 100%;
-    height: 100%;
-    background-image:
-      linear-gradient(var(--border) 1px, transparent 1px),
-      linear-gradient(90deg, var(--border) 1px, transparent 1px);
-    background-size: 20px 20px;
-    position: relative;
-  }
-
-  .project-category {
-    position: absolute;
-    top: 1.25rem;
-    right: 1.25rem;
-    padding: 0.4rem 0.8rem;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-pill);
-    font-size: 0.7rem;
-    font-weight: 600;
-    color: var(--accent);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-  }
-
-  .project-content { padding: 1.75rem; flex: 1; display: flex; flex-direction: column; }
-  .project-content h3 { font-size: 1.4rem; font-weight: 600; margin-bottom: 0.75rem; color: var(--text); }
-  .project-description { font-size: 0.95rem; line-height: 1.6; color: var(--text-secondary); margin-bottom: 1.5rem; }
-
-  .tech-stack { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 1.5rem; }
-  .tech-badge { padding: 0.3rem 0.8rem; background: var(--accent-soft); border: none; border-radius: var(--radius-pill); font-size: 0.75rem; color: var(--accent); }
-
-  .project-links { display: flex; gap: 1rem; margin-top: auto; }
-  .project-btn { flex: 1; display: inline-flex; align-items: center; justify-content: center; gap: 0.75rem; padding: 0.8rem; border-radius: 12px; font-size: 0.85rem; font-weight: 500; text-decoration: none; transition: opacity 0.2s ease, background 0.2s ease; }
-  .project-btn.primary { background: var(--btn-bg); color: var(--btn-fg); }
-  .project-btn.primary:hover { opacity: 0.85; }
-  .project-btn.secondary { background: var(--surface); border: 1px solid var(--border); color: var(--text); }
-  .project-btn.secondary:hover { border-color: var(--border-strong); }
-
-  .cta-section { padding: 6rem 2rem; max-width: 900px; margin: 0 auto; }
-  .cta-glass { background: var(--surface); border: 1px solid var(--border); padding: 4rem; border-radius: 24px; text-align: center; }
-  .cta-glass h2 { font-size: 2.5rem; font-weight: 600; margin-bottom: 1rem; }
-  .cta-glass p { color: var(--text-secondary); font-size: 1.2rem; margin-bottom: 2.5rem; }
-  .cta-buttons { display: flex; gap: 1.5rem; justify-content: center; }
-  .cta-btn { display: flex; align-items: center; gap: 0.8rem; padding: 1rem 2rem; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-pill); color: var(--text); text-decoration: none; font-weight: 500; transition: border-color 0.2s ease; }
-  .cta-btn:hover { border-color: var(--accent); }
-
-  @media (max-width: 768px) {
-    .page-block { padding: 4rem 0; scroll-margin-top: 90px; }
+  @media (max-width: 780px) {
+    .intro-box { grid-template-columns: 1fr; }
+    .intro-photo-wrap { order: -1; }
+    .intro-photo { max-width: 220px; margin: 0 auto; }
     .dual-grid { grid-template-columns: 1fr; }
-    .card-header { flex-direction: column; gap: 1rem; }
+    .skills-grid { grid-template-columns: 1fr; }
+    .card-header { flex-direction: column; }
     .meta { text-align: left; }
-    .projects-grid { grid-template-columns: 1fr; }
-    .cta-buttons { flex-direction: column; }
-    .project-links { flex-direction: column; }
   }
 </style>
 
 <script>
   const themes = [{ profile: '/profile.jpg' }, { profile: '/profile2.jpg' }];
-  let currentThemeIndex = 0;
-  const profilePhoto = document.getElementById('profile-photo') as HTMLImageElement;
-
-  profilePhoto?.addEventListener('click', () => {
-    profilePhoto.classList.add('spinning');
-    currentThemeIndex = (currentThemeIndex + 1) % themes.length;
-    setTimeout(() => { profilePhoto.src = themes[currentThemeIndex].profile; }, 350);
-    setTimeout(() => { profilePhoto.classList.remove('spinning'); }, 700);
+  let i = 0;
+  const photo = document.getElementById('profile-photo') as HTMLImageElement | null;
+  photo?.addEventListener('click', () => {
+    i = (i + 1) % themes.length;
+    photo.src = themes[i].profile;
   });
 </script>

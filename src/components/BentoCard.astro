@@ -1,36 +1,29 @@
 ---
 const { title, description, size = "small", href } = Astro.props;
+const Tag = href ? 'a' : 'div';
 ---
 
-<a class={`card ${size}`} href={href}>
+<Tag class={`card ${size}`} href={href}>
   <div class="content">
     <div class="header-group">
       <h3>{title}</h3>
       {description && <p>{description}</p>}
     </div>
-
     <slot />
   </div>
-</a>
+</Tag>
 
 <style>
   .card {
     display: flex;
     flex-direction: column;
-    background: var(--surface);
+    background: var(--panel);
     color: var(--text);
-    border-radius: var(--radius-card);
-    padding: 30px;
+    padding: 24px;
     text-decoration: none;
     position: relative;
     overflow: hidden;
-    border: 1px solid var(--border);
-    min-height: 220px; /* Matched to TravelCard */
-    transition: border-color 0.2s ease;
-  }
-
-  .card:hover {
-    border-color: var(--border-strong);
+    min-height: 220px;
   }
 
   .content {
@@ -39,89 +32,30 @@ const { title, description, size = "small", href } = Astro.props;
     height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: space-between; /* This pushes title to top, stats to bottom */
+    justify-content: space-between;
   }
 
   .header-group h3 {
-    font-size: 1.4rem;
+    font-size: 1.1rem;
     font-weight: 700;
     margin: 0;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.01em;
   }
 
   .header-group p {
     margin: 6px 0 0;
-    color: rgba(255, 255, 255, 0.6);
-    font-size: 0.95rem;
+    color: var(--muted);
+    font-size: 0.9rem;
     line-height: 1.4;
   }
 
-  /* --- Stats Logic --- */
-  :global(.stats-container) {
-    margin-top: auto; /* Ensures it stays at the bottom */
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    padding-top: 1.5rem;
-  }
-
-  :global(.stat-item) {
-    display: flex;
-    flex-direction: column;
-  }
-
-  :global(.stat-label) {
-    font-size: 0.7rem;
-    color: var(--accent);
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    font-weight: 600;
-  }
-
-  :global(.stat-value) {
-    font-size: 2.8rem;
-    font-weight: 600;
-    color: var(--text);
-    line-height: 1;
-    margin-top: 4px;
-  }
-
-  :global(.team-badges) {
-    display: flex;
-    gap: 16px;
-    margin-bottom: 8px;
-  }
-
-:global(.team-badges img) {
-    width: 48px;
-    height: 48px;
-    object-fit: contain;
-    background: var(--bg);
-    padding: 6px;
-    border-radius: 12px;
-    border: 1px solid var(--border);
-    transition: border-color 0.2s ease, filter 0.2s ease, opacity 0.2s ease;
-  }
-
-  :global(.team-badges img:hover) {
-    border-color: var(--accent);
-  }
-
-  /* Size variants */
+  /* Size variants (4-col grid) */
   .small { grid-column: span 1; }
-  .wide { grid-column: span 2; }
-  .big { grid-column: span 2; grid-row: span 2; }
+  .wide  { grid-column: span 2; }
+  .big   { grid-column: span 2; grid-row: span 2; }
   .full  { grid-column: span 4; }
 
-  @media (max-width: 768px) {
-    .card { padding: 24px; min-height: 180px; }
-  }
-
-  @media (max-width: 900px) {
-    .full, .wide, .big { grid-column: span 2; }
-  }
-
-  @media (max-width: 600px) {
-    .full, .wide, .big { grid-column: span 1; }
-  }
+  @media (max-width: 768px) { .card { min-height: 180px; } }
+  @media (max-width: 900px) { .full, .wide, .big { grid-column: span 2; } }
+  @media (max-width: 600px) { .full, .wide, .big { grid-column: span 1; } }
 </style>
