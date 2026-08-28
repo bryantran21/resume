@@ -180,6 +180,15 @@ const projects = [
     githubUrl: 'https://github.com/bryantran21/sift',
   }
 ];
+
+// Photo gallery. Drop images in public/photos/ and add an entry here.
+// `caption` is optional.
+const photos = [
+  { src: '/photos/example-1.jpg', caption: 'Placeholder — swap me' },
+  { src: '/photos/example-2.jpg', caption: '' },
+  { src: '/photos/example-3.jpg', caption: '' },
+  { src: '/photos/example-4.jpg', caption: '' },
+];
 ---
 
 <Layout title={name} description="Bryan Tran — Application Developer & CS Master's student">
@@ -312,6 +321,18 @@ const projects = [
         document.head.appendChild(tag);
       })();
     </script>
+  </div>
+
+  <!-- ============ PHOTOS ============ -->
+  <h2 id="photos" class="sec-head">Photos</h2>
+  <p class="sec-sub">Travel, film, and everything in between.</p>
+  <div class="photo-grid">
+    {photos.map(photo => (
+      <figure class="photo-item">
+        <img src={photo.src} alt={photo.caption || 'Photo'} loading="lazy" />
+        {photo.caption && <figcaption>{photo.caption}</figcaption>}
+      </figure>
+    ))}
   </div>
 
   <!-- ============ RESUME ============ -->
@@ -581,7 +602,20 @@ const projects = [
   .writing-box p { color: var(--muted); font-size: 0.9rem; margin-top: 4px; }
   .writing-arrow { font-family: var(--font-mono); font-size: 1.6rem; }
 
+  /* ---------- Photos (masonry) ---------- */
+  .photo-grid { columns: 3 240px; column-gap: 16px; }
+  .photo-item {
+    break-inside: avoid; margin: 0 0 16px;
+    background: var(--panel); border: 1px solid var(--line);
+    box-shadow: 5px 5px 0 0 var(--shadow); overflow: hidden;
+    transition: transform 0.12s ease, box-shadow 0.12s ease;
+  }
+  .photo-item:hover { transform: translate(-2px, -2px); box-shadow: 8px 8px 0 0 var(--shadow); }
+  .photo-item img { width: 100%; display: block; }
+  .photo-item figcaption { padding: 8px 12px; font-family: var(--font-mono); font-size: 0.72rem; color: var(--muted); border-top: 1px solid var(--line); }
+
   @media (max-width: 780px) {
+    .photo-grid { columns: 2 150px; }
     .intro-box { grid-template-columns: 1fr; }
     .intro-photo-wrap { order: -1; }
     .intro-photo { max-width: 220px; margin: 0 auto; }

@@ -52,7 +52,24 @@ export default function TravelCard() {
   const [isExpanded, setIsExpanded] = useState(false);
   const [selectedLocation, setSelectedLocation] = useState<string | null>(null);
   const [geoData, setGeoData] = useState({ features: [] });
+  const [theme, setTheme] = useState<'light' | 'dark'>('light');
   const globeRef = useRef<any>();
+
+  // React to the site's light/dark theme
+  useEffect(() => {
+    const read = () =>
+      setTheme((document.documentElement.dataset.theme as 'light' | 'dark') || 'light');
+    read();
+    const obs = new MutationObserver(read);
+    obs.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+    return () => obs.disconnect();
+  }, []);
+
+  const globeImg =
+    theme === 'dark'
+      ? '//unpkg.com/three-globe/example/img/earth-dark.jpg'
+      : '//unpkg.com/three-globe/example/img/earth-day.jpg';
+  const atmoColor = theme === 'dark' ? '#b8ada0' : '#8ab4d8';
 
   // Load US States GeoJSON
   useEffect(() => {
@@ -94,9 +111,9 @@ export default function TravelCard() {
             width={280}
             height={280}
             backgroundColor="rgba(0,0,0,0)"
-            globeImageUrl="//unpkg.com/three-globe/example/img/earth-dark.jpg"
+            globeImageUrl={globeImg}
             showAtmosphere={true}
-            atmosphereColor="#b8ada0"
+            atmosphereColor={atmoColor}
             atmosphereDaylightAlpha={0.3}
           />
         </div>
@@ -121,7 +138,7 @@ export default function TravelCard() {
                     width={typeof window !== 'undefined' ? window.innerWidth : 1000}
                     height={typeof window !== 'undefined' ? window.innerHeight : 1000}
                     backgroundColor="rgba(0,0,0,0)"
-                    globeImageUrl="//unpkg.com/three-globe/example/img/earth-dark.jpg"
+                    globeImageUrl={globeImg}
 
                     // POLYGON FIXES
                     polygonsData={geoData.features}
