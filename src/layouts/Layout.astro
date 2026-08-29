@@ -35,17 +35,9 @@ const {
   <div class="page">
     <header class="site-header">
       <a href="/" class="brand">Bryan Tran</a>
-      <div class="header-actions">
-        <a class="btn btn-accent" href="https://linkedin.com/in/bryan-huy-tran" target="_blank" rel="noopener">
-          <i class="fab fa-linkedin"></i><span>LinkedIn</span>
-        </a>
-        <a class="btn" href="https://github.com/bryantran21" target="_blank" rel="noopener">
-          <i class="fab fa-github"></i><span>GitHub</span>
-        </a>
-        <button id="theme-toggle" class="btn btn-icon" aria-label="Toggle color theme">
-          <i class="fas fa-moon"></i>
-        </button>
-      </div>
+      <button id="theme-toggle" class="btn btn-icon" aria-label="Toggle color theme">
+        <i class="fas fa-moon"></i>
+      </button>
     </header>
 
     <main>
@@ -54,7 +46,9 @@ const {
 
     <footer class="site-footer">
       <span>© {new Date().getFullYear()} Bryan Tran</span>
-      <span class="foot-mono">built with Astro · deployed on Vercel</span>
+      <span class="foot-mono">
+        design inspired by <a href="https://github.com/sagarreddypatil/portfolio-website" target="_blank" rel="noopener">Sagar Patil</a> · built with Astro
+      </span>
     </footer>
   </div>
 
@@ -202,6 +196,7 @@ const {
     margin-top: 64px; padding: 20px 0 40px;
     font-family: var(--font-mono); font-size: 0.75rem; color: var(--muted);
   }
+  .site-footer a { color: var(--text); text-decoration: underline; text-underline-offset: 2px; }
 
   /* mono section headings used across pages */
   .sec-head {

@@ -231,6 +231,10 @@ export default function TravelCard() {
           overflow-y: auto;
         }
 
+        /* Fullscreen overlay is always dark — keep text light regardless of site theme */
+        .compendium-panel h2 { color: #f4efe1; margin: 0; }
+        .compendium-panel .subtitle { color: #b8ada0; margin: 4px 0 0; }
+
         .text-content h3 { color: var(--text); margin: 0; font-size: 1.4rem; }
         .text-content p { color: var(--text-secondary); margin: 4px 0; }
 

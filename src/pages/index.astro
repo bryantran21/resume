@@ -28,11 +28,11 @@ const games = [
 const name = "Bryan Tran";
 
 const socialLinks = [
-  { label: 'GitHub', href: 'https://github.com/bryantran21', icon: 'fab fa-github' },
-  { label: 'LinkedIn', href: 'https://linkedin.com/in/bryan-huy-tran', icon: 'fab fa-linkedin' },
-  { label: 'Twitter', href: 'https://twitter.com/bryantran21', icon: 'fab fa-twitter' },
-  { label: 'Instagram', href: 'https://instagram.com/bryan.tran', icon: 'fab fa-instagram' },
-  { label: 'Email', href: 'mailto:bryantran21@gmail.com', icon: 'fas fa-envelope' },
+  { label: 'GitHub', href: 'https://github.com/bryantran21', icon: 'fab fa-github', brand: '#181717' },
+  { label: 'LinkedIn', href: 'https://linkedin.com/in/bryan-huy-tran', icon: 'fab fa-linkedin', brand: '#0A66C2' },
+  { label: 'X', href: 'https://x.com/bryantran21', icon: 'fab fa-x-twitter', brand: '#000000' },
+  { label: 'Instagram', href: 'https://instagram.com/bryan.tran', icon: 'fab fa-instagram', brand: '#E4405F' },
+  { label: 'Email', href: 'mailto:bryantran21@gmail.com', icon: 'fas fa-envelope', brand: '#EA4335' },
 ];
 
 const techCategories = [
@@ -137,31 +137,13 @@ const certificates = [
 
 const projects = [
   {
-    id: 'resume',
-    title: 'Personal Resume Website',
-    description: 'This site — a static Astro portfolio with custom-built interactive cards and no CSS framework.',
-    tech: ['Astro', 'TypeScript', 'CSS'],
-    category: 'Interface',
-    liveUrl: 'https://bhtran.com',
-    githubUrl: 'https://github.com/bryantran21/resume',
-  },
-  {
-    id: 'iron-log',
-    title: 'Iron Log',
-    description: 'A mobile-first progressive-overload tracker with real-time volume scoring and an adaptive training-split model.',
-    tech: ['Next.js 14', 'Supabase', 'Framer Motion'],
-    category: 'Systems',
-    liveUrl: 'https://gym.bhtran.com',
-    githubUrl: 'https://github.com/bryantran21/fitness-tracker',
-  },
-  {
-    id: 'rote',
-    title: 'Rote',
-    description: 'A spaced-repetition engine that drills Python syntax for coding interviews — Leitner scheduler, local-first, no backend.',
-    tech: ['Next.js', 'Dexie', 'Zustand'],
-    category: 'Learning',
-    liveUrl: 'https://rote.bhtran.com',
-    githubUrl: 'https://github.com/bryantran21/rote',
+    id: 'sift',
+    title: 'Sift',
+    description: 'A self-hosted job radar that pulls from ATS APIs, dedupes reposts, and scores each role for relevance — 45 sources, ~8,900 jobs.',
+    tech: ['TypeScript', 'Next.js 15', 'Drizzle', 'Postgres'],
+    category: 'Data',
+    liveUrl: 'https://sift.bhtran.com',
+    githubUrl: 'https://github.com/bryantran21/sift',
   },
   {
     id: 'quantdrill',
@@ -173,13 +155,31 @@ const projects = [
     githubUrl: 'https://github.com/bryantran21/quantdrill',
   },
   {
-    id: 'sift',
-    title: 'Sift',
-    description: 'A self-hosted job radar that pulls from ATS APIs, dedupes reposts, and scores each role for relevance — 45 sources, ~8,900 jobs.',
-    tech: ['TypeScript', 'Next.js 15', 'Drizzle', 'Postgres'],
-    category: 'Data',
-    liveUrl: 'https://sift.bhtran.com',
-    githubUrl: 'https://github.com/bryantran21/sift',
+    id: 'rote',
+    title: 'Rote',
+    description: 'A spaced-repetition engine that drills Python syntax for coding interviews — Leitner scheduler, local-first, no backend.',
+    tech: ['Next.js', 'Dexie', 'Zustand'],
+    category: 'Learning',
+    liveUrl: 'https://rote.bhtran.com',
+    githubUrl: 'https://github.com/bryantran21/rote',
+  },
+  {
+    id: 'iron-log',
+    title: 'Iron Log',
+    description: 'A mobile-first progressive-overload tracker with real-time volume scoring and an adaptive training-split model.',
+    tech: ['Next.js 14', 'Supabase', 'Framer Motion'],
+    category: 'Systems',
+    liveUrl: 'https://gym.bhtran.com',
+    githubUrl: 'https://github.com/bryantran21/fitness-tracker',
+  },
+  {
+    id: 'resume',
+    title: 'Personal Resume Website',
+    description: 'This site — a static Astro portfolio with custom-built interactive cards and no CSS framework.',
+    tech: ['Astro', 'TypeScript', 'CSS'],
+    category: 'Interface',
+    liveUrl: 'https://bhtran.com',
+    githubUrl: 'https://github.com/bryantran21/resume',
   }
 ];
 
@@ -190,6 +190,12 @@ const photos = [
   { src: '/photos/example-2.jpg', caption: 'Add a caption per photo' },
   { src: '/photos/example-3.jpg', caption: 'Snowy somewhere' },
   { src: '/photos/example-4.jpg', caption: 'A concert, probably' },
+];
+
+// Friends — add your people: { name, url, blurb }
+const friends = [
+  { name: 'Sagar Patil', url: 'https://sagarpatil.me', blurb: 'design inspiration for this site' },
+  { name: 'Andy Vu', url: 'https://andrewvu.me', blurb: 'layout & lore inspiration' },
 ];
 ---
 
@@ -207,7 +213,7 @@ const photos = [
       </p>
       <div class="intro-socials">
         {socialLinks.map(link => (
-          <a class="btn btn-icon" href={link.href} target="_blank" rel="noopener" aria-label={link.label}>
+          <a class="btn btn-icon social" href={link.href} target="_blank" rel="noopener" aria-label={link.label} style={`--brand:${link.brand}`}>
             <i class={link.icon}></i>
           </a>
         ))}
@@ -224,6 +230,8 @@ const photos = [
   <div class="about-grid">
     <BentoGrid>
       <BentoCard title="Read my Blog ✍️" description="Thoughts, resources, and school notes →" size="small" href="/blog" />
+
+      <BentoCard title="Lore 😛" description="My life's FAQs — the questions people actually ask →" size="small" href="/lore" />
 
       <TravelCard client:only="react" />
 
@@ -332,6 +340,18 @@ const photos = [
         <img src={photo.src} alt={photo.caption || 'Photo'} loading="lazy" />
         {photo.caption && <figcaption class="photo-cap">{photo.caption}</figcaption>}
       </figure>
+    ))}
+  </div>
+
+  <!-- ============ FRIENDS ============ -->
+  <h2 id="friends" class="sec-head">Friends</h2>
+  <p class="sec-sub">Cool people with cool corners of the internet.</p>
+  <div class="friends-grid">
+    {friends.map(f => (
+      <a class="friend-card" href={f.url} target="_blank" rel="noopener">
+        <span class="friend-name">{f.name} <span class="friend-arrow">↗</span></span>
+        {f.blurb && <span class="friend-blurb">{f.blurb}</span>}
+      </a>
     ))}
   </div>
 
@@ -453,24 +473,15 @@ const photos = [
     ))}
   </div>
 
-  <!-- ============ MORE ============ -->
-  <h2 class="sec-head">More</h2>
-  <div class="end-links">
-    <a class="box writing-box" href="/blog">
-      <div>
-        <h3>Library &amp; Notes</h3>
-        <p>Blog posts, school notes, and a running list of resources.</p>
-      </div>
-      <span class="writing-arrow">→</span>
-    </a>
-    <a class="box writing-box" href="/lore">
-      <div>
-        <h3>Lore 😛</h3>
-        <p>My life's FAQs — the questions people actually ask.</p>
-      </div>
-      <span class="writing-arrow">→</span>
-    </a>
-  </div>
+  <!-- ============ WRITING ============ -->
+  <h2 class="sec-head">Writing</h2>
+  <a class="box writing-box" href="/blog">
+    <div>
+      <h3>Library &amp; Notes</h3>
+      <p>Blog posts, school notes, and a running list of resources.</p>
+    </div>
+    <span class="writing-arrow">→</span>
+  </a>
 </Layout>
 
 <style>
@@ -489,6 +500,7 @@ const photos = [
   .inline-link { color: var(--text); text-decoration: underline; text-underline-offset: 2px; font-weight: 600; }
   .inline-link:hover { color: var(--link-blue); }
   .intro-socials { display: flex; gap: 10px; margin-top: 6px; flex-wrap: wrap; }
+  .intro-socials .social:hover { background: var(--brand); color: #fff; border-color: var(--brand); }
   .intro-photo-wrap { display: flex; align-items: center; justify-content: center; }
   .intro-photo {
     width: 100%; max-width: 300px; aspect-ratio: 4 / 5; object-fit: cover;
@@ -628,7 +640,19 @@ const photos = [
   .writing-box h3 { font-size: 1.1rem; font-weight: 700; }
   .writing-box p { color: var(--muted); font-size: 0.9rem; margin-top: 4px; }
   .writing-arrow { font-family: var(--font-mono); font-size: 1.6rem; }
-  .end-links { display: flex; flex-direction: column; gap: 14px; }
+
+  /* ---------- Friends ---------- */
+  .friends-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; }
+  .friend-card {
+    display: flex; flex-direction: column; gap: 4px; padding: 16px 18px;
+    background: var(--panel); border: 1px solid var(--line); box-shadow: 5px 5px 0 0 var(--shadow);
+    text-decoration: none; color: var(--text);
+    transition: transform 0.12s ease, box-shadow 0.12s ease;
+  }
+  .friend-card:hover { transform: translate(-2px, -2px); box-shadow: 8px 8px 0 0 var(--shadow); }
+  .friend-name { font-weight: 700; font-size: 1rem; }
+  .friend-arrow { font-family: var(--font-mono); color: var(--muted); font-size: 0.85rem; }
+  .friend-blurb { font-size: 0.82rem; color: var(--muted); }
 
   /* ---------- Photos (masonry) ---------- */
   .photo-grid { columns: 3 240px; column-gap: 16px; }
