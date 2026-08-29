@@ -65,7 +65,9 @@ const experiences = [
       'Developed Angular pages with TypeScript featuring role-based access control and reusable UI components',
       'Created detailed wireframes of legacy applications to guide modernization efforts',
       'Developed backend services in Java with 90%+ code coverage using Mockito'
-    ]
+    ],
+    // Add images here to reveal a "pictures" toggle on this row (public/photos/...).
+    pictures: ['/photos/example-1.jpg', '/photos/example-3.jpg'],
   },
   {
     company: 'LSU Information Technology Services',
@@ -184,10 +186,10 @@ const projects = [
 // Photo gallery. Drop images in public/photos/ and add an entry here.
 // `caption` is optional.
 const photos = [
-  { src: '/photos/example-1.jpg', caption: 'Placeholder — swap me' },
-  { src: '/photos/example-2.jpg', caption: '' },
-  { src: '/photos/example-3.jpg', caption: '' },
-  { src: '/photos/example-4.jpg', caption: '' },
+  { src: '/photos/example-1.jpg', caption: 'Placeholder — hover shows this caption' },
+  { src: '/photos/example-2.jpg', caption: 'Add a caption per photo' },
+  { src: '/photos/example-3.jpg', caption: 'Snowy somewhere' },
+  { src: '/photos/example-4.jpg', caption: 'A concert, probably' },
 ];
 ---
 
@@ -196,14 +198,12 @@ const photos = [
   <section class="intro-box">
     <div class="intro-text">
       <p class="intro-lead">
-        I'm an <strong>Application Developer at IBM</strong> and a Computer Science Master's
-        student at <strong>Georgia Tech</strong>, with a BS from <strong>LSU</strong>. I build
-        interactive web apps, data dashboards, and AI/ML tools — and I hold a
-        <strong>Top Secret</strong> clearance.
+        Hi! I'm Bryan, a CS student at <strong>GTech</strong> and a Developer for <strong>IBM</strong>.
       </p>
+      <p>Most of my time goes into software, playing video games, and going to the gym.</p>
       <p>
-        Off the clock I'm usually climbing the TFT ladder, in the gym chasing a PR, or logging
-        films on Letterboxd. Scroll down for the receipts.
+        Feel free to reach out to me on
+        <a href="https://linkedin.com/in/bryan-huy-tran" target="_blank" rel="noopener" class="inline-link">LinkedIn</a>.
       </p>
       <div class="intro-socials">
         {socialLinks.map(link => (
@@ -330,7 +330,7 @@ const photos = [
     {photos.map(photo => (
       <figure class="photo-item">
         <img src={photo.src} alt={photo.caption || 'Photo'} loading="lazy" />
-        {photo.caption && <figcaption>{photo.caption}</figcaption>}
+        {photo.caption && <figcaption class="photo-cap">{photo.caption}</figcaption>}
       </figure>
     ))}
   </div>
@@ -364,6 +364,14 @@ const photos = [
         <ul class="achievements">
           {exp.achievements.map(a => <li>{a}</li>)}
         </ul>
+        {exp.pictures && exp.pictures.length > 0 && (
+          <details class="exp-pics">
+            <summary><i class="fas fa-images"></i> pictures</summary>
+            <div class="exp-pics-row">
+              {exp.pictures.map(src => <img src={src} alt="" loading="lazy" />)}
+            </div>
+          </details>
+        )}
       </div>
     ))}
   </div>
@@ -445,15 +453,24 @@ const photos = [
     ))}
   </div>
 
-  <!-- ============ WRITING ============ -->
-  <h2 class="sec-head">Writing</h2>
-  <a class="box writing-box" href="/blog">
-    <div>
-      <h3>Library &amp; Notes</h3>
-      <p>Blog posts, school notes, and a running list of resources.</p>
-    </div>
-    <span class="writing-arrow">→</span>
-  </a>
+  <!-- ============ MORE ============ -->
+  <h2 class="sec-head">More</h2>
+  <div class="end-links">
+    <a class="box writing-box" href="/blog">
+      <div>
+        <h3>Library &amp; Notes</h3>
+        <p>Blog posts, school notes, and a running list of resources.</p>
+      </div>
+      <span class="writing-arrow">→</span>
+    </a>
+    <a class="box writing-box" href="/lore">
+      <div>
+        <h3>Lore 😛</h3>
+        <p>My life's FAQs — the questions people actually ask.</p>
+      </div>
+      <span class="writing-arrow">→</span>
+    </a>
+  </div>
 </Layout>
 
 <style>
@@ -469,6 +486,8 @@ const photos = [
   .intro-lead { font-size: 1.15rem; }
   .intro-text p { color: var(--text); line-height: 1.65; }
   .intro-text strong { font-weight: 600; }
+  .inline-link { color: var(--text); text-decoration: underline; text-underline-offset: 2px; font-weight: 600; }
+  .inline-link:hover { color: var(--link-blue); }
   .intro-socials { display: flex; gap: 10px; margin-top: 6px; flex-wrap: wrap; }
   .intro-photo-wrap { display: flex; align-items: center; justify-content: center; }
   .intro-photo {
@@ -556,6 +575,14 @@ const photos = [
   .achievements li { color: var(--text); margin-bottom: 0.9rem; line-height: 1.6; padding-left: 1.4rem; position: relative; font-size: 0.95rem; }
   .achievements li::before { content: "▪"; position: absolute; left: 0; top: 0; color: var(--text); }
 
+  .exp-pics { margin-top: 16px; border-top: 1px solid var(--line); padding-top: 14px; }
+  .exp-pics summary { font-family: var(--font-mono); font-size: 0.8rem; color: var(--muted); cursor: pointer; list-style: none; display: inline-flex; align-items: center; gap: 7px; }
+  .exp-pics summary::-webkit-details-marker { display: none; }
+  .exp-pics summary:hover { color: var(--text); }
+  .exp-pics[open] summary { margin-bottom: 12px; color: var(--text); }
+  .exp-pics-row { display: flex; gap: 12px; flex-wrap: wrap; }
+  .exp-pics-row img { height: 130px; width: auto; border: 1px solid var(--line); box-shadow: 3px 3px 0 0 var(--shadow); object-fit: cover; }
+
   .dual-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 32px; align-items: start; }
   .interactive-edu-card { padding: 20px; margin-bottom: 16px; }
   .edu-header { display: flex; gap: 1rem; align-items: center; }
@@ -601,10 +628,12 @@ const photos = [
   .writing-box h3 { font-size: 1.1rem; font-weight: 700; }
   .writing-box p { color: var(--muted); font-size: 0.9rem; margin-top: 4px; }
   .writing-arrow { font-family: var(--font-mono); font-size: 1.6rem; }
+  .end-links { display: flex; flex-direction: column; gap: 14px; }
 
   /* ---------- Photos (masonry) ---------- */
   .photo-grid { columns: 3 240px; column-gap: 16px; }
   .photo-item {
+    position: relative;
     break-inside: avoid; margin: 0 0 16px;
     background: var(--panel); border: 1px solid var(--line);
     box-shadow: 5px 5px 0 0 var(--shadow); overflow: hidden;
@@ -612,7 +641,16 @@ const photos = [
   }
   .photo-item:hover { transform: translate(-2px, -2px); box-shadow: 8px 8px 0 0 var(--shadow); }
   .photo-item img { width: 100%; display: block; }
-  .photo-item figcaption { padding: 8px 12px; font-family: var(--font-mono); font-size: 0.72rem; color: var(--muted); border-top: 1px solid var(--line); }
+  .photo-cap {
+    position: absolute; left: 0; right: 0; bottom: 0;
+    padding: 22px 12px 10px;
+    font-family: var(--font-mono); font-size: 0.74rem; color: #fff;
+    background: linear-gradient(transparent, rgba(0,0,0,0.82));
+    opacity: 0; transform: translateY(8px);
+    transition: opacity 0.18s ease, transform 0.18s ease;
+    pointer-events: none;
+  }
+  .photo-item:hover .photo-cap { opacity: 1; transform: translateY(0); }
 
   @media (max-width: 780px) {
     .photo-grid { columns: 2 150px; }

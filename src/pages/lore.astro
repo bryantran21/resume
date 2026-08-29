@@ -1,0 +1,111 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+// Bryan's "lore" — a life FAQ. Edit answers freely; add/remove questions per group.
+// Answers marked TODO are placeholders waiting on Bryan.
+const lore = [
+  {
+    group: 'LIFE',
+    items: [
+      {
+        q: 'so tell me about yourself',
+        a: "Hey! I'm Bryan — a CS Master's student at Georgia Tech and an Application Developer at IBM (LSU alum, and yes, I hold a Top Secret clearance). I like building things people actually use, and the rest of my time goes to gaming and the gym.",
+      },
+      { q: 'why computer science?', a: 'TODO' },
+      { q: 'where do you see yourself in 5 years?', a: 'TODO' },
+      {
+        q: 'what do you do for fun?',
+        a: 'Software side projects, the ranked grind in TFT / Valorant / Apex / Marvel Rivals, the gym, and logging way too many films on Letterboxd.',
+      },
+    ],
+  },
+  {
+    group: 'GAMING',
+    items: [
+      {
+        q: 'what do you play?',
+        a: 'Mostly TFT (peaked Emerald), Valorant (Jett main, Platinum), Apex (Platinum), and Marvel Rivals (Diamond, Psylocke main).',
+      },
+      { q: "how'd you get into TFT?", a: 'TODO' },
+      { q: 'controller or mouse & keyboard?', a: 'TODO' },
+      { q: 'proudest gaming moment?', a: 'TODO' },
+    ],
+  },
+  {
+    group: 'BUILDING',
+    items: [
+      {
+        q: 'what are you working on right now?',
+        a: 'This site, plus a rotating cast of side projects — Sift (a job radar), Rote (interview drilling), QuantDrill. I have a bad habit of starting projects and leaving them unfinished.',
+      },
+      {
+        q: "what's your tech stack?",
+        a: 'TypeScript / React / Next.js / Astro on the front, Java / Spring Boot and Node / Python on the back, with AWS / Azure / Docker around it.',
+      },
+      { q: 'how do you learn new stuff?', a: 'TODO' },
+    ],
+  },
+  {
+    group: 'RANDOM',
+    items: [
+      { q: "what's your favorite movie?", a: 'TODO' },
+      { q: 'favorite food?', a: 'TODO' },
+      { q: 'coffee or energy drink?', a: 'TODO' },
+      { q: "gym — what's your split / a PR you're proud of?", a: 'TODO' },
+      { q: "what's your typing speed?", a: 'TODO' },
+    ],
+  },
+];
+---
+
+<Layout title="Bryan Tran | Lore" description="Bryan's life FAQ">
+  <section class="lore-page">
+    <h1 class="lore-title">Lore</h1>
+    <p class="lore-sub">(my life's FAQs — ask me anything, these are the ones people actually ask)</p>
+
+    {lore.map(group => (
+      <div class="lore-group">
+        <h2 class="lore-cat">{group.group}</h2>
+        <div class="lore-list">
+          {group.items.map(item => (
+            <details class="lore-item">
+              <summary>
+                <span class="lore-q">{item.q}</span>
+                <span class="lore-plus">+</span>
+              </summary>
+              <div class="lore-a">{item.a === 'TODO' ? '…coming soon' : item.a}</div>
+            </details>
+          ))}
+        </div>
+      </div>
+    ))}
+
+    <a class="lore-back" href="/">← back home</a>
+  </section>
+</Layout>
+
+<style>
+  .lore-page { max-width: 760px; margin: 0 auto; padding: 2rem 0 4rem; }
+  .lore-title { font-family: var(--font-mono); font-size: 2.6rem; font-weight: 700; letter-spacing: -0.02em; }
+  .lore-sub { color: var(--muted); font-size: 0.95rem; margin: 4px 0 2.5rem; }
+
+  .lore-group { margin-bottom: 2.5rem; }
+  .lore-cat { font-family: var(--font-mono); font-size: 0.8rem; letter-spacing: 0.12em; color: var(--muted); font-weight: 600; margin-bottom: 12px; }
+  .lore-list { display: flex; flex-direction: column; gap: 12px; }
+
+  .lore-item {
+    background: var(--panel); border: 1px solid var(--line);
+    box-shadow: 4px 4px 0 0 var(--shadow);
+  }
+  .lore-item summary {
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    padding: 14px 18px; cursor: pointer; list-style: none;
+  }
+  .lore-item summary::-webkit-details-marker { display: none; }
+  .lore-q { font-weight: 600; font-size: 1rem; }
+  .lore-plus { font-family: var(--font-mono); font-size: 1.3rem; color: var(--muted); transition: transform 0.15s ease; }
+  .lore-item[open] .lore-plus { transform: rotate(45deg); }
+  .lore-a { padding: 0 18px 16px; color: var(--muted); line-height: 1.65; }
+
+  .lore-back { display: inline-block; margin-top: 1rem; font-family: var(--font-mono); font-size: 0.85rem; color: var(--text); text-decoration: underline; }
+</style>
