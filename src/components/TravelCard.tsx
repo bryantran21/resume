@@ -190,8 +190,9 @@ export default function TravelCard() {
 
       <style>{`
         .bento-card {
-          width: 350px;
-          height: 220px;
+          grid-column: span 2;
+          width: auto;
+          min-height: 220px;
           background: var(--panel);
           border-radius: 0;
           padding: 24px;
@@ -201,6 +202,7 @@ export default function TravelCard() {
           border: 1px solid var(--line);
           box-shadow: 5px 5px 0 0 var(--shadow);
         }
+        @media (max-width: 600px) { .bento-card { grid-column: span 1; } }
 
         .expanded-view {
           position: fixed;

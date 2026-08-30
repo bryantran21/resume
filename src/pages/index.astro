@@ -192,10 +192,8 @@ const photos = [
   { src: '/photos/example-4.jpg', caption: 'A concert, probably' },
 ];
 
-// Friends — add your people: { name, url, blurb }
-const friends = [
-  { name: 'Sagar Patil', url: 'https://sagarpatil.me', blurb: 'design inspiration for this site' },
-  { name: 'Andy Vu', url: 'https://andrewvu.me', blurb: 'layout & lore inspiration' },
+// Friends — add your people: { name, url, note }  (note shows on hover)
+const friends: { name: string; url: string; note?: string }[] = [
 ];
 ---
 
@@ -233,8 +231,6 @@ const friends = [
 
       <BentoCard title="Lore 😛" description="My life's FAQs — the questions people actually ask →" size="small" href="/lore" />
 
-      <TravelCard client:only="react" />
-
       <BentoCard title="Sports & Fitness" size="wide">
         <div class="stats-container">
           <div class="stat-item">
@@ -249,46 +245,46 @@ const friends = [
         </div>
       </BentoCard>
 
+      <div class="travel-cell"><TravelCard client:only="react" /></div>
+
+      <a class="tft-card" href={tft.trackerUrl} target="_blank" rel="noopener">
+        <div class="tft-head">
+          <h3>TFT · Ranked</h3>
+          <span class="tft-id">{tft.riotId}</span>
+        </div>
+        <div class="tft-hero">
+          <div class="tft-emblem"><img src={tft.emblem} alt="Emerald rank emblem" /></div>
+          <div class="tft-hero-text">
+            <span class="tft-label">All-Time Best</span>
+            <span class="tft-tier">{tft.peak.tier}</span>
+            <span class="tft-lp">{tft.peak.lp} LP</span>
+          </div>
+        </div>
+        <div class="tft-prev">
+          <span class="tft-prev-label">Previous</span>
+          {tft.previous.map(p => (
+            <span class="tft-chip">{p.season} <strong>{p.rank}</strong></span>
+          ))}
+        </div>
+      </a>
+
       <div class="yt-card">
         <h3>Straight from my Top 50 🎵</h3>
         <p class="yt-sub">A random pick every time you visit</p>
         <div class="yt-frame"><div id="yt-player"></div></div>
       </div>
 
-      <div class="stack-col">
-        <a class="tft-card" href={tft.trackerUrl} target="_blank" rel="noopener">
-          <div class="tft-head">
-            <h3>TFT · Ranked</h3>
-            <span class="tft-id">{tft.riotId}</span>
-          </div>
-          <div class="tft-hero">
-            <div class="tft-emblem"><img src={tft.emblem} alt="Emerald rank emblem" /></div>
-            <div class="tft-hero-text">
-              <span class="tft-label">All-Time Best</span>
-              <span class="tft-tier">{tft.peak.tier}</span>
-              <span class="tft-lp">{tft.peak.lp} LP</span>
-            </div>
-          </div>
-          <div class="tft-prev">
-            <span class="tft-prev-label">Previous</span>
-            {tft.previous.map(p => (
-              <span class="tft-chip">{p.season} <strong>{p.rank}</strong></span>
-            ))}
-          </div>
-        </a>
-
-        <div class="games-card">
-          <div class="games-list">
-            {games.map(g => (
-              <a class="game-row" href={g.url} target="_blank" rel="noopener">
-                <img class="game-emblem" src={g.emblem} alt={`${g.name} ${g.rank}`} />
-                <span class="game-name">{g.name}</span>
-              </a>
-            ))}
-          </div>
-          <div class="games-hero jett" role="img" aria-label="Jett — Valorant"></div>
-          <img class="games-hero psylocke" src="/logos/psylocke.webp" alt="Psylocke — Marvel Rivals" />
+      <div class="games-card">
+        <div class="games-list">
+          {games.map(g => (
+            <a class="game-row" href={g.url} target="_blank" rel="noopener">
+              <img class="game-emblem" src={g.emblem} alt={`${g.name} ${g.rank}`} />
+              <span class="game-name">{g.name}</span>
+            </a>
+          ))}
         </div>
+        <div class="games-hero jett" role="img" aria-label="Jett — Valorant"></div>
+        <img class="games-hero psylocke" src="/logos/psylocke.webp" alt="Psylocke — Marvel Rivals" />
       </div>
 
       <div class="lbxd-card">
@@ -340,18 +336,6 @@ const friends = [
         <img src={photo.src} alt={photo.caption || 'Photo'} loading="lazy" />
         {photo.caption && <figcaption class="photo-cap">{photo.caption}</figcaption>}
       </figure>
-    ))}
-  </div>
-
-  <!-- ============ FRIENDS ============ -->
-  <h2 id="friends" class="sec-head">Friends</h2>
-  <p class="sec-sub">Cool people with cool corners of the internet.</p>
-  <div class="friends-grid">
-    {friends.map(f => (
-      <a class="friend-card" href={f.url} target="_blank" rel="noopener">
-        <span class="friend-name">{f.name} <span class="friend-arrow">↗</span></span>
-        {f.blurb && <span class="friend-blurb">{f.blurb}</span>}
-      </a>
     ))}
   </div>
 
@@ -473,6 +457,22 @@ const friends = [
     ))}
   </div>
 
+  <!-- ============ FRIENDS ============ -->
+  <h2 id="friends" class="sec-head">Friends</h2>
+  <p class="sec-sub">Cool people with cool corners of the internet. (hover for the note)</p>
+  {friends.length > 0 ? (
+    <ul class="friends-list">
+      {friends.map(f => (
+        <li class="friend-row">
+          <a class="friend-link" href={f.url} target="_blank" rel="noopener">{f.name}</a>
+          {f.note && <span class="friend-note">— {f.note}</span>}
+        </li>
+      ))}
+    </ul>
+  ) : (
+    <p class="friends-empty">// coming soon — compiling the list</p>
+  )}
+
   <!-- ============ WRITING ============ -->
   <h2 class="sec-head">Writing</h2>
   <a class="box writing-box" href="/blog">
@@ -517,6 +517,8 @@ const friends = [
 
   /* ---------- About grid ---------- */
   .about-grid :global(.bento-grid) { padding: 0; }
+  .travel-cell { grid-column: span 2; display: flex; }
+  .travel-cell :global(.bento-card) { width: 100%; }
 
   .yt-card { display: flex; flex-direction: column; padding: 24px; grid-column: span 2; min-height: 220px; }
   .yt-card h3, .lbxd-head h3, .tft-head h3 { font-size: 1.1rem; font-weight: 700; margin: 0; }
@@ -524,9 +526,8 @@ const friends = [
   .yt-frame { margin-top: 14px; position: relative; width: 100%; flex: 1; min-height: 240px; overflow: hidden; background: #000; border: 1px solid var(--line); }
   .yt-frame :global(iframe) { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
 
-  .stack-col { grid-column: span 2; display: flex; flex-direction: column; gap: 16px; }
 
-  .tft-card { display: flex; flex-direction: column; gap: 16px; padding: 24px; text-decoration: none; color: var(--text); }
+  .tft-card { grid-column: span 2; display: flex; flex-direction: column; gap: 16px; padding: 24px; text-decoration: none; color: var(--text); }
   .tft-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
   .tft-id { font-family: var(--font-mono); font-size: 0.78rem; color: var(--muted); white-space: nowrap; }
   .tft-hero { display: flex; align-items: center; gap: 16px; }
@@ -541,7 +542,7 @@ const friends = [
   .tft-chip { font-family: var(--font-mono); font-size: 0.72rem; padding: 3px 8px; border: 1px solid var(--line); color: var(--muted); }
   .tft-chip strong { font-weight: 700; color: var(--text); }
 
-  .games-card { position: relative; flex: 1; min-height: 200px; overflow: hidden; display: flex; flex-direction: column; justify-content: center; padding: 24px 30px; }
+  .games-card { grid-column: span 2; position: relative; min-height: 200px; overflow: hidden; display: flex; flex-direction: column; justify-content: center; padding: 24px 30px; }
   .games-list { display: flex; flex-direction: column; gap: 6px; padding: 0 20px 0 90px; position: relative; z-index: 2; }
   .game-row { display: flex; align-items: center; gap: 11px; padding: 8px 0; text-decoration: none; color: var(--text); border-bottom: 1px solid var(--line); }
   .game-row:last-child { border-bottom: 0; }
@@ -568,8 +569,8 @@ const friends = [
   .team-badges img { height: 40px; width: auto; filter: grayscale(1); opacity: 0.65; transition: filter 0.2s ease, opacity 0.2s ease; }
   .team-badges img:hover { filter: grayscale(0); opacity: 1; }
 
-  @media (max-width: 900px) { .stack-col, .lbxd-card { grid-column: span 2; } }
-  @media (max-width: 600px) { .stack-col, .lbxd-card, .yt-card { grid-column: span 1; } }
+  @media (max-width: 900px) { .tft-card, .games-card, .lbxd-card, .yt-card { grid-column: span 2; } }
+  @media (max-width: 600px) { .tft-card, .games-card, .lbxd-card, .yt-card { grid-column: span 1; } .games-hero { opacity: 0.7; } }
 
   /* ---------- Resume ---------- */
   .timeline { display: flex; flex-direction: column; gap: 18px; }
@@ -641,18 +642,15 @@ const friends = [
   .writing-box p { color: var(--muted); font-size: 0.9rem; margin-top: 4px; }
   .writing-arrow { font-family: var(--font-mono); font-size: 1.6rem; }
 
-  /* ---------- Friends ---------- */
-  .friends-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; }
-  .friend-card {
-    display: flex; flex-direction: column; gap: 4px; padding: 16px 18px;
-    background: var(--panel); border: 1px solid var(--line); box-shadow: 5px 5px 0 0 var(--shadow);
-    text-decoration: none; color: var(--text);
-    transition: transform 0.12s ease, box-shadow 0.12s ease;
-  }
-  .friend-card:hover { transform: translate(-2px, -2px); box-shadow: 8px 8px 0 0 var(--shadow); }
-  .friend-name { font-weight: 700; font-size: 1rem; }
-  .friend-arrow { font-family: var(--font-mono); color: var(--muted); font-size: 0.85rem; }
-  .friend-blurb { font-size: 0.82rem; color: var(--muted); }
+  /* ---------- Friends (list w/ hover note) ---------- */
+  .friends-list { list-style: none; display: flex; flex-direction: column; gap: 2px; max-width: 640px; }
+  .friend-row { display: flex; align-items: baseline; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--line); }
+  .friend-row:last-child { border-bottom: 0; }
+  .friend-link { font-family: var(--font-mono); font-weight: 600; font-size: 1.05rem; color: var(--text); text-decoration: underline; text-underline-offset: 3px; }
+  .friend-link:hover { color: var(--link-blue); }
+  .friend-note { color: var(--muted); font-size: 0.85rem; opacity: 0; transform: translateX(-4px); transition: opacity 0.15s ease, transform 0.15s ease; }
+  .friend-row:hover .friend-note { opacity: 1; transform: translateX(0); }
+  .friends-empty { font-family: var(--font-mono); color: var(--muted); font-size: 0.9rem; }
 
   /* ---------- Photos (masonry) ---------- */
   .photo-grid { columns: 3 240px; column-gap: 16px; }
