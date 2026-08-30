@@ -527,6 +527,9 @@ const friends: { name: string; url: string; note?: string }[] = [
 
   /* ---------- About grid ---------- */
   .about-grid :global(.bento-grid) { padding: 0; }
+  /* let grid items shrink below their content so the lbxd scroll-strip doesn't
+     force the whole single-column grid (and page) wide on mobile */
+  .about-grid :global(.bento-grid) > * { min-width: 0; }
   .travel-cell { grid-column: span 2; display: flex; }
   .travel-cell :global(.bento-card) { width: 100%; }
 
