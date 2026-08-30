@@ -580,7 +580,11 @@ const friends: { name: string; url: string; note?: string }[] = [
   .team-badges img:hover { filter: grayscale(0); opacity: 1; }
 
   @media (max-width: 900px) { .tft-card, .games-card, .lbxd-card, .yt-card { grid-column: span 2; } }
-  @media (max-width: 600px) { .tft-card, .games-card, .lbxd-card, .yt-card { grid-column: span 1; } .games-hero { opacity: 0.7; } }
+  @media (max-width: 600px) {
+    .tft-card, .games-card, .lbxd-card, .yt-card, .travel-cell { grid-column: span 1; }
+    .games-list { padding: 0; }
+    .games-hero { opacity: 0.16; }
+  }
 
   /* ---------- Resume ---------- */
   .timeline { display: flex; flex-direction: column; gap: 18px; }
