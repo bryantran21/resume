@@ -228,7 +228,7 @@ const friends: { name: string; url: string; note?: string }[] = [
       </div>
     </div>
     <div class="intro-photo-wrap">
-      <img id="profile-photo" class="intro-photo" src="/profile.jpg" alt="Bryan Tran" />
+      <img class="intro-photo" src="/headshot.jpg" alt="Bryan Tran" />
     </div>
   </section>
 
@@ -513,9 +513,9 @@ const friends: { name: string; url: string; note?: string }[] = [
   .intro-socials .social:hover { background: var(--brand); color: #fff; border-color: var(--brand); }
   .intro-photo-wrap { display: flex; align-items: center; justify-content: center; }
   .intro-photo {
-    width: 100%; max-width: 300px; aspect-ratio: 4 / 5; object-fit: cover;
+    width: 100%; max-width: 300px; aspect-ratio: 4 / 5; object-fit: cover; object-position: center;
     border: 1px solid var(--line); box-shadow: 5px 5px 0 0 var(--shadow);
-    cursor: pointer; display: block;
+    display: block;
   }
 
   /* ---------- section headings ---------- */
@@ -695,13 +695,3 @@ const friends: { name: string; url: string; note?: string }[] = [
     .meta { text-align: left; }
   }
 </style>
-
-<script>
-  const themes = [{ profile: '/profile.jpg' }, { profile: '/profile2.jpg' }];
-  let i = 0;
-  const photo = document.getElementById('profile-photo') as HTMLImageElement | null;
-  photo?.addEventListener('click', () => {
-    i = (i + 1) % themes.length;
-    photo.src = themes[i].profile;
-  });
-</script>
