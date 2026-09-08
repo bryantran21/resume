@@ -65,10 +65,8 @@ export default function TravelCard() {
     return () => obs.disconnect();
   }, []);
 
-  const globeImg =
-    theme === 'dark'
-      ? '//unpkg.com/three-globe/example/img/earth-dark.jpg'
-      : '//unpkg.com/three-globe/example/img/earth-day.jpg';
+  // always the colored day globe, in light and dark mode alike
+  const globeImg = '//unpkg.com/three-globe/example/img/earth-day.jpg';
   const atmoColor = theme === 'dark' ? '#b8ada0' : '#8ab4d8';
 
   // Load US States GeoJSON
