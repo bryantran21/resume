@@ -37,16 +37,20 @@ const socialLinks = [
 
 const techCategories = [
   {
-    name: 'Frontend',
-    items: ['React', 'Angular', 'Next.js', 'TypeScript', 'Tailwind', 'Astro', 'Bootstrap', 'HTML5', 'CSS3'],
+    name: 'Languages',
+    items: ['Python', 'TypeScript', 'Java', 'C#', 'JavaScript', 'SQL', 'PHP', 'HTML/CSS'],
   },
   {
-    name: 'Backend & Database',
-    items: ['Java', 'Spring Boot', 'Node.js', 'Python', 'MySQL', 'MongoDB', 'C#', 'PHP', 'Oracle'],
+    name: 'Frameworks & Libraries',
+    items: ['Next.js', 'React', 'Angular', 'Streamlit', 'Spring Boot', 'FastAPI', 'Node.js', 'NumPy', 'Pandas', 'PyTorch', 'Hugging Face', 'Vite', 'Tailwind CSS', 'Drizzle ORM'],
   },
   {
-    name: 'DevOps & Tools',
-    items: ['AWS', 'Azure', 'Docker', 'Git', 'Jira', 'Maven', 'VS Code', 'Figma'],
+    name: 'Cloud & Databases',
+    items: ['AWS', 'Azure', 'Docker', 'PostgreSQL', 'MySQL', 'Oracle', 'Vercel', 'Supabase'],
+  },
+  {
+    name: 'Architecture & Tools',
+    items: ['REST APIs', 'Temporal', 'Git/GitLab', 'GitHub Actions', 'Postman', 'JUnit', 'Mockito', 'Vitest', 'Maven', 'Jira'],
   },
 ];
 
@@ -58,16 +62,25 @@ const experiences = [
     location: 'Baton Rouge, LA',
     period: 'June 2023 - Present',
     achievements: [
-      'Managed Help Desk tickets using Jira, streamlining issue tracking and communication between developers and end users',
-      'Spearheaded the integration of Zephyr for Jira to standardize and document QA test cases for new ADE features',
-      'Initiated migration from IL2 to IL4, helping leadership align on long-term security and compliance goals',
-      'Built a Helpdesk Documentation tab within the internal "Helpdesk Toolbox" to centralize SOPs, troubleshooting steps, and triage workflows',
-      'Developed Angular pages with TypeScript featuring role-based access control and reusable UI components',
-      'Created detailed wireframes of legacy applications to guide modernization efforts',
-      'Developed backend services in Java with 90%+ code coverage using Mockito'
+      'Used Amazon Bedrock (Claude) to cross-reference legacy XGen logic against DMN/DRL rules — engineering prompts and debugging AI-generated Java tests, then leading KT sessions to standardize the resulting validation framework across the team',
+      'Reverse-engineered legacy VBA business logic and multi-condition eligibility rules from a Microsoft Access application, translating them into a layered Angular + Spring Boot + Oracle architecture while preserving existing behavior',
+      'Designed a REST API preview/validation layer (Spring Boot, JDBC Template) surfacing eligible-record and key-violation counts ahead of batch database operations, replacing an opaque legacy Access confirmation flow',
+      'Modernized a DFAS enterprise payroll application with an Angular + TypeScript frontend and REST API integration, improving data-retrieval speed over the legacy Access workflow',
+      'Developed backend services in Java with custom Mockito unit tests, achieving 90% code coverage on JaCoCo reports',
+      'Debugged full-stack integration issues across the request path — HTTP 401 auth failures, HTTP 200 responses that failed JSON parsing, and TypeScript/API contract mismatches between Spring Boot DTOs and Angular interfaces'
     ],
     // Add images here to reveal a "pictures" toggle on this row (public/photos/...).
     pictures: ['/photos/ibm-team.jpg', '/photos/ibm-team2.jpg'],
+  },
+  {
+    company: 'Algoverse',
+    icon: 'fas fa-brain',
+    role: 'AI Safety Research Fellow',
+    location: 'Remote',
+    period: 'July 2026 - Aug 2026',
+    achievements: [
+      'Researching how vision-language models (VLMs) lose information when interpreting images, and tracing where that lost information propagates within the model'
+    ]
   },
   {
     company: 'LSU Information Technology Services',
@@ -76,34 +89,9 @@ const experiences = [
     location: 'Baton Rouge, LA',
     period: 'May 2022 - May 2023',
     achievements: [
-      "Diagnosed and resolved application crashes through log analysis and DevOps tooling",
-      "Remodeled LSU's applications for WCAG accessibility using WAVE, HTML, and CSS",
-      "Migrated Java applications to Spring Boot by resolving complex Maven dependency conflicts"
-    ]
-  },
-  {
-    company: 'TAG Data Solutions',
-    logo: '/logos/tag.jpg',
-    role: 'Full Stack Web Developer',
-    location: 'Remote',
-    period: 'January 2022 - May 2022',
-    achievements: [
-      'Conceptualized custom software functionality for laboratory animal clinics',
-      'Developed user interfaces using standard HTML/CSS/PHP/Javascript practices',
-      'Designed relational database schemas and applied front-end requirements via BackboneJS'
-    ]
-  },
-  {
-    company: 'MAPP',
-    logo: '/logos/mapp.jpg',
-    role: 'IT Intern',
-    location: 'Baton Rouge, LA',
-    period: 'March 2021 - Dec 2021',
-    achievements: [
-      'Provided technical support and hardware configuration for cross-departmental users',
-      "Architected Power BI dashboards to visualize contract growth and bid data",
-      'Built internal workflow applications using the Microsoft Power Platform',
-      'Managed enterprise user data and security protocols as an IT Administrator'
+      "Diagnosed and resolved production failures for LSU's enterprise application (GROK) through log analysis, system walkthroughs, and proactive error tracing",
+      'Hardened application security by migrating legacy Java applications to Spring Boot, updating Maven builds, and reconfiguring CSRF tokens to resolve deployment blockers',
+      'Optimized accessibility and responsive design layouts across university applications using HTML, CSS, and modern web dependencies'
     ]
   }
 ];
@@ -364,7 +352,11 @@ const friends: { name: string; url: string; note?: string }[] = [
       <div class="experience-card">
         <div class="card-header">
           <div class="company-info">
-            <div class="logo-wrapper"><img src={exp.logo} alt={exp.company} class="company-logo" /></div>
+            <div class="logo-wrapper">
+              {exp.logo
+                ? <img src={exp.logo} alt={exp.company} class="company-logo" />
+                : <i class={exp.icon || 'fas fa-briefcase'}></i>}
+            </div>
             <div>
               <h3>{exp.role}</h3>
               <p class="company-name">{exp.company}</p>
