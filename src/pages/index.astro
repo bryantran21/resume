@@ -73,8 +73,8 @@ const experiences = [
     pictures: ['/photos/ibm-team.jpg', '/photos/ibm-team2.jpg'],
   },
   {
-    company: 'Algoverse',
-    icon: 'fas fa-brain',
+    company: 'Algoverse AI Research',
+    logo: '/logos/algoverse.jpg',
     role: 'AI Safety Research Fellow',
     location: 'Remote',
     period: 'July 2026 - Aug 2026',
@@ -169,6 +169,19 @@ const projects = [
     liveUrl: 'https://bhtran.com',
     githubUrl: 'https://github.com/bryantran21/resume',
   }
+];
+
+// Research / publications. Each entry renders a badged paper card in the Research section.
+const publications = [
+  {
+    title: 'Read but Unused: Dissociating Perception from Readout in Vision-Language Models',
+    authors: 'Bryan Tran et al.',
+    venue: 'VLM4RWD Workshop',
+    org: 'Algoverse AI Research',
+    status: 'Published',
+    summary: 'Shows that vision-language models often encode visual details they then fail to use downstream — the information is read but unused — dissociating what the model perceives from what it reads out.',
+    url: 'https://openreview.net/forum?id=I4GqunWCBq',
+  },
 ];
 
 // Photo gallery. Drop images in public/photos/ and add an entry here.
@@ -459,6 +472,25 @@ const friends: { name: string; url: string; note?: string }[] = [
     ))}
   </div>
 
+  <!-- ============ RESEARCH ============ -->
+  {publications.length > 0 && (
+    <>
+      <h2 id="research" class="sec-head">Research</h2>
+      <p class="sec-sub">Peer-reviewed work. 📄</p>
+      <div class="pub-list">
+        {publications.map(pub => (
+          <a class="pub-card box" href={pub.url} target="_blank" rel="noopener">
+            <span class="pub-badge">{pub.status}</span>
+            <h3 class="pub-title">{pub.title}</h3>
+            <p class="pub-meta">{pub.authors} · <span class="pub-venue">{pub.venue}</span>{pub.org ? ` · ${pub.org}` : ''}</p>
+            <p class="pub-summary">{pub.summary}</p>
+            <span class="pub-link"><i class="fas fa-file-lines"></i> Read the paper <i class="fas fa-arrow-right"></i></span>
+          </a>
+        ))}
+      </div>
+    </>
+  )}
+
   <!-- ============ FRIENDS ============ -->
   <h2 id="friends" class="sec-head">Friends</h2>
   <p class="sec-sub">Cool people with cool corners of the internet. (hover for the note)</p>
@@ -644,6 +676,17 @@ const friends: { name: string; url: string; note?: string }[] = [
   .tech-chip { font-family: var(--font-mono); font-size: 0.68rem; padding: 2px 7px; border: 1px solid var(--line); color: var(--muted); }
   .project-links { display: flex; gap: 8px; margin-top: auto; }
   .btn-sm { padding: 6px 10px; font-size: 0.75rem; box-shadow: 2px 2px 0 0 var(--shadow); }
+
+  /* ---------- Research (publication cards) ---------- */
+  .pub-list { display: flex; flex-direction: column; gap: 18px; }
+  .pub-card { position: relative; display: block; padding: 24px 28px; text-decoration: none; color: var(--text); transition: transform 0.12s ease, box-shadow 0.12s ease; }
+  .pub-card:hover { transform: translate(-2px, -2px); box-shadow: 8px 8px 0 0 var(--shadow) !important; }
+  .pub-badge { position: absolute; top: 0; right: 24px; transform: translateY(-50%); font-family: var(--font-mono); font-size: 0.62rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; padding: 5px 10px; background: var(--text); color: var(--bg); border: 1px solid var(--line); }
+  .pub-title { font-size: 1.15rem; font-weight: 700; line-height: 1.35; margin: 4px 60px 0 0; }
+  .pub-meta { font-family: var(--font-mono); font-size: 0.78rem; color: var(--muted); margin-top: 10px; }
+  .pub-venue { color: var(--text); font-weight: 600; }
+  .pub-summary { font-size: 0.9rem; line-height: 1.6; color: var(--muted); margin-top: 12px; }
+  .pub-link { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 0.82rem; font-weight: 500; color: var(--text); margin-top: 16px; text-decoration: underline; text-underline-offset: 3px; }
 
   /* ---------- Writing ---------- */
   .writing-box { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 24px 28px; text-decoration: none; color: var(--text); }
