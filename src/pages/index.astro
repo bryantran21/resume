@@ -80,7 +80,13 @@ const experiences = [
     period: 'July 2026 - Aug 2026',
     achievements: [
       'Researching how vision-language models (VLMs) lose information when interpreting images, and tracing where that lost information propagates within the model'
-    ]
+    ],
+    paper: {
+      title: 'Read but Unused: Dissociating Perception from Readout in Vision-Language Models',
+      venue: 'VLM4RWD Workshop',
+      status: 'Published',
+      url: 'https://openreview.net/forum?id=I4GqunWCBq',
+    },
   },
   {
     company: 'LSU Information Technology Services',
@@ -169,19 +175,6 @@ const projects = [
     liveUrl: 'https://bhtran.com',
     githubUrl: 'https://github.com/bryantran21/resume',
   }
-];
-
-// Research / publications. Each entry renders a badged paper card in the Research section.
-const publications = [
-  {
-    title: 'Read but Unused: Dissociating Perception from Readout in Vision-Language Models',
-    authors: 'Bryan Tran et al.',
-    venue: 'VLM4RWD Workshop',
-    org: 'Algoverse AI Research',
-    status: 'Published',
-    summary: 'Shows that vision-language models often encode visual details they then fail to use downstream — the information is read but unused — dissociating what the model perceives from what it reads out.',
-    url: 'https://openreview.net/forum?id=I4GqunWCBq',
-  },
 ];
 
 // Photo gallery. Drop images in public/photos/ and add an entry here.
@@ -383,6 +376,15 @@ const friends: { name: string; url: string; note?: string }[] = [
         <ul class="achievements">
           {exp.achievements.map(a => <li>{a}</li>)}
         </ul>
+        {exp.paper && (
+          <a class="exp-paper" href={exp.paper.url} target="_blank" rel="noopener">
+            <span class="exp-paper-badge">{exp.paper.status}</span>
+            <span class="exp-paper-body">
+              <span class="exp-paper-title">{exp.paper.title}</span>
+              <span class="exp-paper-venue">{exp.paper.venue} · Read the paper <i class="fas fa-arrow-right"></i></span>
+            </span>
+          </a>
+        )}
         {exp.pictures && exp.pictures.length > 0 && (
           <details class="exp-pics">
             <summary><i class="fas fa-images"></i> pictures</summary>
@@ -471,25 +473,6 @@ const friends: { name: string; url: string; note?: string }[] = [
       </div>
     ))}
   </div>
-
-  <!-- ============ RESEARCH ============ -->
-  {publications.length > 0 && (
-    <>
-      <h2 id="research" class="sec-head">Research</h2>
-      <p class="sec-sub">Peer-reviewed work. 📄</p>
-      <div class="pub-list">
-        {publications.map(pub => (
-          <a class="pub-card box" href={pub.url} target="_blank" rel="noopener">
-            <span class="pub-badge">{pub.status}</span>
-            <h3 class="pub-title">{pub.title}</h3>
-            <p class="pub-meta">{pub.authors} · <span class="pub-venue">{pub.venue}</span>{pub.org ? ` · ${pub.org}` : ''}</p>
-            <p class="pub-summary">{pub.summary}</p>
-            <span class="pub-link"><i class="fas fa-file-lines"></i> Read the paper <i class="fas fa-arrow-right"></i></span>
-          </a>
-        ))}
-      </div>
-    </>
-  )}
 
   <!-- ============ FRIENDS ============ -->
   <h2 id="friends" class="sec-head">Friends</h2>
@@ -677,16 +660,13 @@ const friends: { name: string; url: string; note?: string }[] = [
   .project-links { display: flex; gap: 8px; margin-top: auto; }
   .btn-sm { padding: 6px 10px; font-size: 0.75rem; box-shadow: 2px 2px 0 0 var(--shadow); }
 
-  /* ---------- Research (publication cards) ---------- */
-  .pub-list { display: flex; flex-direction: column; gap: 18px; }
-  .pub-card { position: relative; display: block; padding: 24px 28px; text-decoration: none; color: var(--text); transition: transform 0.12s ease, box-shadow 0.12s ease; }
-  .pub-card:hover { transform: translate(-2px, -2px); box-shadow: 8px 8px 0 0 var(--shadow) !important; }
-  .pub-badge { position: absolute; top: 0; right: 24px; transform: translateY(-50%); font-family: var(--font-mono); font-size: 0.62rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; padding: 5px 10px; background: var(--text); color: var(--bg); border: 1px solid var(--line); }
-  .pub-title { font-size: 1.15rem; font-weight: 700; line-height: 1.35; margin: 4px 60px 0 0; }
-  .pub-meta { font-family: var(--font-mono); font-size: 0.78rem; color: var(--muted); margin-top: 10px; }
-  .pub-venue { color: var(--text); font-weight: 600; }
-  .pub-summary { font-size: 0.9rem; line-height: 1.6; color: var(--muted); margin-top: 12px; }
-  .pub-link { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 0.82rem; font-weight: 500; color: var(--text); margin-top: 16px; text-decoration: underline; text-underline-offset: 3px; }
+  /* ---------- Published paper (inside an experience card) ---------- */
+  .exp-paper { display: flex; align-items: center; gap: 14px; margin-top: 18px; padding: 14px 16px; border: 1px solid var(--line); background: var(--accent-soft); text-decoration: none; color: var(--text); transition: transform 0.12s ease, box-shadow 0.12s ease; }
+  .exp-paper:hover { transform: translate(-2px, -2px); box-shadow: 4px 4px 0 0 var(--shadow); }
+  .exp-paper-badge { flex-shrink: 0; font-family: var(--font-mono); font-size: 0.6rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; padding: 5px 9px; background: var(--text); color: var(--bg); border: 1px solid var(--line); }
+  .exp-paper-body { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+  .exp-paper-title { font-size: 0.92rem; font-weight: 600; line-height: 1.4; }
+  .exp-paper-venue { font-family: var(--font-mono); font-size: 0.74rem; color: var(--muted); }
 
   /* ---------- Writing ---------- */
   .writing-box { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 24px 28px; text-decoration: none; color: var(--text); }
