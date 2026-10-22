@@ -83,7 +83,8 @@ const experiences = [
     ],
     paper: {
       title: 'Read but Unused: Dissociating Perception from Readout in Vision-Language Models',
-      venue: 'VLM4RWD Workshop',
+      authors: 'Bryan Tran, Farhan',
+      venue: 'VLM4RWD Workshop @ NeurIPS 2026',
       status: 'Published',
       url: 'https://openreview.net/forum?id=I4GqunWCBq',
     },
@@ -381,7 +382,9 @@ const friends: { name: string; url: string; note?: string }[] = [
             <span class="exp-paper-badge">{exp.paper.status}</span>
             <span class="exp-paper-body">
               <span class="exp-paper-title">{exp.paper.title}</span>
-              <span class="exp-paper-venue">{exp.paper.venue} · Read the paper <i class="fas fa-arrow-right"></i></span>
+              <span class="exp-paper-venue">
+                {exp.paper.authors ? `${exp.paper.authors} · ` : ''}{exp.paper.venue} · Read the paper <i class="fas fa-arrow-right"></i>
+              </span>
             </span>
           </a>
         )}
