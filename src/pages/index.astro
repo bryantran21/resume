@@ -50,7 +50,7 @@ const techCategories = [
   },
   {
     name: 'Architecture & Tools',
-    items: ['REST APIs', 'Temporal', 'Git/GitLab', 'GitHub Actions', 'Postman', 'JUnit', 'Mockito', 'Vitest', 'Maven', 'Jira'],
+    items: ['REST APIs', 'Temporal', 'Git/GitLab', 'GitHub Actions', 'JUnit', 'Mockito', 'Vitest', 'Maven', 'Jira'],
   },
 ];
 
@@ -79,12 +79,12 @@ const experiences = [
     location: 'Remote',
     period: 'July 2026 - Aug 2026',
     achievements: [
-      'Researching how vision-language models (VLMs) lose information when interpreting images, and tracing where that lost information propagates within the model'
+      'First author. Used activation patching and logit lens to show Qwen2.5-VL-7B reads rendered text (0.98 transcription accuracy) but fails to use it, localizing the failure to layers 18–20 and recovering 21 accuracy points via training-free logit calibration'
     ],
     paper: {
       title: 'Read but Unused: Dissociating Perception from Readout in Vision-Language Models',
-      authors: 'Bryan Tran, Farhan',
-      venue: 'VLM4RWD Workshop @ NeurIPS 2026',
+      authors: 'B. H. Tran, M. F. Ishmam',
+      venue: 'NeurIPS 2026 Workshop on VLM4RWD (Poster)',
       status: 'Published',
       url: 'https://openreview.net/forum?id=I4GqunWCBq',
     },
@@ -348,8 +348,8 @@ const friends: { name: string; url: string; note?: string }[] = [
   <h2 id="resume" class="sec-head">Resume</h2>
   <div class="resume-top">
     <p class="sec-sub">Full-stack developer &amp; problem solver.</p>
-    <a class="btn" href="/Bryan_Tran_Resume.pdf" target="_blank" rel="noopener">
-      <i class="fas fa-download"></i><span>Download PDF</span>
+    <a class="btn" href="/Bryan_Tran_Resume.pdf" target="_blank" rel="noopener" data-resume-open>
+      <i class="fas fa-file-lines"></i><span>View Resume</span>
     </a>
   </div>
 
@@ -502,7 +502,50 @@ const friends: { name: string; url: string; note?: string }[] = [
     </div>
     <span class="writing-arrow">→</span>
   </a>
+
+  <!-- ============ RESUME VIEWER (modal) ============ -->
+  <dialog id="resume-modal" class="resume-modal" aria-label="Resume">
+    <div class="resume-modal-bar">
+      <div>
+        <p class="resume-modal-title">Bryan Tran — Resume</p>
+        <p class="resume-modal-sub">PDF · ONE PAGE</p>
+      </div>
+      <div class="resume-modal-actions">
+        <a class="btn" href="/Bryan_Tran_Resume.pdf" download="Bryan_Tran_Resume.pdf">
+          <i class="fas fa-download"></i><span>Download</span>
+        </a>
+        <button class="btn btn-icon" type="button" data-resume-close aria-label="Close">
+          <i class="fas fa-xmark"></i>
+        </button>
+      </div>
+    </div>
+    <iframe class="resume-modal-frame" title="Bryan Tran resume (PDF)"></iframe>
+  </dialog>
 </Layout>
+
+<script>
+  // Open the resume PDF in an in-page modal using the browser's built-in PDF viewer.
+  // Browsers without an inline viewer (e.g. Android Chrome) report pdfViewerEnabled=false,
+  // so we leave the link alone and it opens the PDF in a new tab as before.
+  const modal = document.getElementById('resume-modal') as HTMLDialogElement | null;
+  const frame = modal?.querySelector('iframe');
+  const PDF_SRC = '/Bryan_Tran_Resume.pdf#toolbar=0&navpanes=0&view=FitH';
+
+  if (modal && frame && navigator.pdfViewerEnabled && typeof modal.showModal === 'function') {
+    document.querySelectorAll<HTMLAnchorElement>('[data-resume-open]').forEach(link => {
+      link.addEventListener('click', e => {
+        e.preventDefault();
+        if (!frame.getAttribute('src')) frame.setAttribute('src', PDF_SRC); // lazy-load on first open
+        modal.showModal();
+        document.documentElement.style.overflow = 'hidden';
+      });
+    });
+    modal.querySelector('[data-resume-close]')?.addEventListener('click', () => modal.close());
+    // click on the backdrop (outside the panel) closes it
+    modal.addEventListener('click', e => { if (e.target === modal) modal.close(); });
+    modal.addEventListener('close', () => { document.documentElement.style.overflow = ''; });
+  }
+</script>
 
 <style>
   /* ---------- Intro box (bio + photo) ---------- */
@@ -533,6 +576,24 @@ const friends: { name: string; url: string; note?: string }[] = [
     font-family: var(--font-mono); font-size: 0.8rem; font-weight: 500;
     color: var(--muted); margin: 32px 0 14px; letter-spacing: 0.02em;
   }
+  /* ---------- Resume viewer modal ---------- */
+  .resume-modal {
+    width: min(860px, 94vw); height: min(1120px, 92vh); max-width: none; max-height: none;
+    margin: auto; padding: 0; display: none; flex-direction: column;
+    background: var(--panel); color: var(--text);
+    border: 1px solid var(--line); box-shadow: 8px 8px 0 0 var(--shadow);
+  }
+  .resume-modal[open] { display: flex; }
+  .resume-modal::backdrop { background: rgba(10, 9, 6, 0.6); backdrop-filter: blur(4px); }
+  .resume-modal-bar {
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    padding: 12px 16px; border-bottom: 1px solid var(--line); flex-shrink: 0;
+  }
+  .resume-modal-title { font-family: var(--font-mono); font-weight: 700; font-size: 0.95rem; }
+  .resume-modal-sub { font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.1em; color: var(--muted); margin-top: 2px; }
+  .resume-modal-actions { display: flex; gap: 10px; }
+  .resume-modal-frame { flex: 1; width: 100%; border: 0; background: #525659; }
+
   .resume-top { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: -10px; margin-bottom: 8px; flex-wrap: wrap; }
 
   /* ---------- About grid ---------- */
